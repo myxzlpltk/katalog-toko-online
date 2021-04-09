@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('admin/')->name('admin.')->group(function (){
+    Route::get('dashboard', [Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('profile', [Admin\ProfileController::class, 'index'])->name('profile');
 });

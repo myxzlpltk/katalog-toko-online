@@ -1,4 +1,4 @@
-<header class="header @if(!\Illuminate\Support\Facades\Route::is('home')) header--normal @endif">
+<header class="header @sectionMissing('header-transparent') header--normal @endif">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-3 col-md-3">

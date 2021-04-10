@@ -49,7 +49,7 @@ class Shop extends Model{
 		$open = $this->getAttribute($this->dates[$dayWeek*2]);
 		$close = $this->getAttribute($this->dates[$dayWeek*2+1]);
 
-		return $now->gte($open) && $now->lte($close);
+		return $open && $close && $now->gte($open) && $now->lte($close);
 	}
 
 	public function getPriceRangeAttribute(){

@@ -5,6 +5,8 @@
 @section('stylesheets')
 @endsection
 
+@section('header-transparent', true)
+
 @section('content')
 	<section class="hero set-bg" data-setbg="img/hero/hero-bg.jpg">
 		<div class="container">
@@ -73,7 +75,7 @@
 										</div>
 										<div class="listing__item__text">
 											<div class="listing__item__text__inside">
-												<a href="#">
+												<a href="{{ route('shop.view', $shop) }}">
 													<h5>{{ $shop->name }}</h5>
 													<div class="listing__item__text__rating">
 														<div class="listing__item__rating__star">

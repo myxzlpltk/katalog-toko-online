@@ -29,9 +29,16 @@ class Shop extends Model{
         return $this->hasMany(Photo::class);
     }
 
-    public function reviews(){
-        return $this->hasMany(Review::class);
-    }
+	public function reviews(){
+		return $this->hasMany(Review::class);
+	}
+
+	public function public_reviews(){
+		return $this->hasMany(Review::class)
+			->where('published_at', '!=', null)
+			->orderByDesc('created_at')
+			->orderByDesc('rating');
+	}
 
     public function getLogoPathAttribute(){
     	if($this->logo){

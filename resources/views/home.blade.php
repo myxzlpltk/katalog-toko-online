@@ -79,7 +79,7 @@
 													<h5>{{ $shop->name }}</h5>
 													<div class="listing__item__text__rating">
 														<div class="listing__item__rating__star">
-															{!! \App\Helpers\Helper::rating($shop->reviews_avg_rating) !!}
+															{!! \App\Helpers\Helper::rating($shop->public_reviews_avg_rating) !!}
 														</div>
 														<h6>{{ $shop->price_range }}</h6>
 													</div>

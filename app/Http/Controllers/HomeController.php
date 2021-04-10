@@ -11,11 +11,11 @@ class HomeController extends Controller{
 		$categories = Category::all();
 		$categories->each(function ($category){
 			$category->favoriteShops = $category->shops()
-				->withCount('reviews')
+				->withCount('public_reviews')
 				->withMax('photos', 'file')
-				->withAvg('reviews', 'rating')
-				->orderByDesc('reviews_count')
-				->orderByDesc('reviews_avg_rating')
+				->withAvg('public_reviews', 'rating')
+				->orderByDesc('public_reviews_count')
+				->orderByDesc('public_reviews_avg_rating')
 				->limit(3)
 				->get();
 		});

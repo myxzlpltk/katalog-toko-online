@@ -18,9 +18,9 @@
 					<h2>{{ $shop->name }}</h2>
 					<div class="listing__hero__widget">
 						<div class="listing__hero__widget__rating">
-							{!! \App\Helpers\Helper::rating($shop->reviews_avg_rating) !!}
+							{!! \App\Helpers\Helper::rating($shop->public_reviews_avg_rating) !!}
 						</div>
-						<div>{{ $shop->reviews_count }} Review</div>
+						<div>{{ $shop->public_reviews_count }} Review</div>
 					</div>
 					<p><span class="icon_pin_alt"></span> {{ $shop->address }}</p>
 				</div>
@@ -60,27 +60,27 @@
 						<div class="listing__details__rating">
 							<h4>Nilai</h4>
 							<div class="listing__details__rating__overall">
-								<h2>{{ bcdiv($shop->reviews_avg_rating, 1, 1) }}</h2>
+								<h2>{{ bcdiv($shop->public_reviews_avg_rating, 1, 1) }}</h2>
 								<div class="listing__details__rating__star">
-									{!! \App\Helpers\Helper::rating($shop->reviews_avg_rating) !!}
+									{!! \App\Helpers\Helper::rating($shop->public_reviews_avg_rating) !!}
 								</div>
-								<span>({{ $shop->reviews_count }} Rating)</span>
+								<span>({{ $shop->public_reviews_count }} Rating)</span>
 							</div>
 							<div class="listing__details__rating__bar">
 								@for($i=5; $i>0; $i--)
 								<div class="listing__details__rating__bar__item">
 									<span>{{ $i }} <span class="icon_star"></span></span>
 									<div id="bar{{ $i }}" class="barfiller">
-										<span class="fill" data-percentage="{{ round($shop->reviews->where('rating', $i)->count() / max($shop->reviews_count, 1) * 100) }}"></span>
+										<span class="fill" data-percentage="{{ round($shop->public_reviews->where('rating', $i)->count() / max($shop->public_reviews_count, 1) * 100) }}"></span>
 									</div>
-									<span class="right">{{ $shop->reviews->where('rating', $i)->count() }} Review</span>
+									<span class="right">{{ $shop->public_reviews->where('rating', $i)->count() }} Review</span>
 								</div>
 								@endfor
 							</div>
 						</div>
 						<div class="listing__details__comment">
 							<h4>Komentar</h4>
-							@foreach($shop->reviews->where('published_at', '!=', null)->sortByDesc('created_at')->sortByDesc('rating')->take(request()->get('review') ? null : 3) as $review)
+							@foreach($shop->public_reviews->take(request()->get('review') ? null : 3) as $review)
 							<div class="listing__details__comment__item">
 								<div class="listing__details__comment__item__text">
 									<div class="listing__details__comment__item__rating">
@@ -93,7 +93,7 @@
 							</div>
 							@endforeach
 
-							@if($shop->reviews_count > 3 && !request()->get('review'))
+							@if($shop->public_reviews_count > 3 && !request()->get('review'))
 								<div class="mb-4 text-center">
 									<a href="{{ route('shop.view', [$shop, 'review' => true]) }}" class="site-btn">Lihat Semua Review</a>
 								</div>

@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 class ShopController extends Controller{
 
 	public function view(Shop $shop){
-		$shop->loadCount('reviews')
+		$shop->loadCount('public_reviews')
 			->loadMax('photos', 'file')
-			->loadAvg('reviews', 'rating');
+			->loadAvg('public_reviews', 'rating');
 
 		return view('shops.view', compact('shop'));
 	}
@@ -40,19 +40,19 @@ class ShopController extends Controller{
 					$builder->orWhere('max_price', '=', 0);
 				}
 			})
-			->withCount('reviews')
+			->withCount('public_reviews')
 			->withMax('photos', 'file')
-			->withAvg('reviews', 'rating')
+			->withAvg('public_reviews', 'rating')
 			->with('category')
 			->has('category');
 
 		if($request->get('sort_rating') == 'asc'){
-			$builder->orderBy('reviews_count');
-			$builder->orderBy('reviews_avg_rating');
+			$builder->orderBy('public_reviews_count');
+			$builder->orderBy('public_reviews_avg_rating');
 		}
 		else{
-			$builder->orderByDesc('reviews_count');
-			$builder->orderByDesc('reviews_avg_rating');
+			$builder->orderByDesc('public_reviews_count');
+			$builder->orderByDesc('public_reviews_avg_rating');
 		}
 
 		$min_price = max($builder->clone()->max('min_price'), 0);

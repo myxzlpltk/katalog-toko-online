@@ -1,6 +1,6 @@
 @extends('layouts.public.app')
 
-@section('title', 'Contoh Halaman')
+@section('title', 'Selamat Datang')
 
 @section('stylesheets')
 @endsection

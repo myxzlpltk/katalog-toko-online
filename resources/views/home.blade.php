@@ -89,7 +89,11 @@
 											</div>
 											<div class="listing__item__text__info">
 												<div class="listing__item__text__info__left">Jam Buka</div>
+												@if($shop->is_open)
 												<div class="listing__item__text__info__right">Buka Sekarang</div>
+												@else
+												<div class="listing__item__text__info__right text-danger">Tutup</div>
+												@endif
 											</div>
 										</div>
 									</div>

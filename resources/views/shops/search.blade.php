@@ -5,6 +5,11 @@
 @section('hide-footer', true)
 
 @section('stylesheets')
+	<style>
+		.filter__price .price-input:after{
+			display: none;
+		}
+	</style>
 @endsection
 
 @section('content')
@@ -35,6 +40,7 @@
 					<div class="range-slider">
 						<div class="price-input">
 							<input type="text" id="min_price" name="min_price" value="{{ floor($min_price/1000) }}K">
+							<span class="text-danger"> - </span>
 							<input type="text" id="max_price" value="{{ ceil($max_price/1000) }}K">
 						</div>
 					</div>

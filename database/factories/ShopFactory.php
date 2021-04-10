@@ -27,7 +27,7 @@ class ShopFactory extends Factory
             'description' => $this->faker->text,
             'logo' => $this->faker->file(
                 storage_path('faker/logos'),
-                storage_path('app/public/logos'),
+                public_path('storage/logos'),
                 false
             ),
             'address' => $this->faker->address,

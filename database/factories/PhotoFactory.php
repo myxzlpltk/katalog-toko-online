@@ -24,7 +24,7 @@ class PhotoFactory extends Factory
         return [
             'file' => $this->faker->file(
                 storage_path('faker/photos'),
-                storage_path('app/public/photos'),
+                public_path('storage/photos'),
                 false
             ),
         ];

@@ -28,7 +28,7 @@
 	@yield('stylesheets')
 
 </head>
-<body>
+<body class="@yield('bodyClass')">
 
 @if(\Illuminate\Support\Facades\App::environment('production'))
 	<div id="preloder">
@@ -40,7 +40,9 @@
 
 @yield('content')
 
-@include('layouts.public.footer')
+@sectionMissing('hide-footer')
+	@include('layouts.public.footer')
+@endif
 
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>

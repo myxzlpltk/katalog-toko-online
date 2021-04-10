@@ -18,8 +18,9 @@
 							<li>
 								<a href="#">Kategori</a>
 								<ul class="dropdown">
-									<li><a href="#">Tradisional</a></li>
-									<li><a href="#">Oleh-Oleh</a></li>
+									@foreach(\App\Models\Category::all() as $category)
+									<li><a href="{{ route('shop.search', ['category_id' => $category->id]) }}">{{ $category->name }}</a></li>
+									@endforeach
 								</ul>
 							</li>
 							<li><a href="#">Contact</a></li>

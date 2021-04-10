@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('toko/pencarian', [ShopController::class, 'search'])->name('shop.search');
 Route::get('toko/{shop}', [ShopController::class, 'view'])->name('shop.view');
 
 Route::prefix('admin/')->name('admin.')->group(function (){

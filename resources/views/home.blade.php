@@ -20,11 +20,11 @@
 							<p>1000+ Toko dengan pelayanan terbaiknya menunggu anda </p>
 						</div>
 						<div class="hero__search__form">
-							<form action="#">
-								<input type="text" placeholder="Search..." name="query">
+							<form action="{{ route('shop.search') }}" method="get">
+								<input type="text" placeholder="Pencarian..." name="query">
 								<div class="select__option">
 									<select name="category_id">
-										<option value="">Choose Categories</option>
+										<option value="">Semua Kategori</option>
 										@foreach($categories as $category)
 											<option value="{{ $category->id }}">{{ $category->name }}</option>
 										@endforeach

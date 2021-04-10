@@ -112,7 +112,7 @@
 		</div>
 
 		<div class="mb-4 d-flex justify-content-center">
-			{{ $shops->links() }}
+			{{ $shops->links('layouts.public.pagination') }}
 		</div>
 	</section>
 @endsection

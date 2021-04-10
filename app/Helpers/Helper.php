@@ -6,6 +6,8 @@ class Helper{
 
 	public static function rating($rating){
 		$rating = floor($rating*2)/2;
+		if(!$rating) return 'Belum ada rating';
+
 		$html = '';
 		for ($i=1; $i<=5; $i++) $html .= self::_rating($rating, $i);
 		return $html;

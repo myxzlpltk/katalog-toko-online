@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Review;
 use App\Observers\ReviewObserver;
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,5 +30,8 @@ class AppServiceProvider extends ServiceProvider
         /* Setup Locale ID */
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
+
+        /* Pagination */
+		Paginator::useBootstrap();
     }
 }

@@ -9,7 +9,7 @@
 
 @section('content')
 	<form action="{{ route('shop.search') }}" method="get">
-		<input type="hidden" name="sort-rating" value="{{ request('sort-rating') }}">
+		<input type="hidden" name="sort_rating" value="{{ request('sort_rating') }}">
 		<div class="filter nice-scroll">
 			<div class="filter__title">
 				<h5><i class="fa fa-filter"></i> Filter</h5>
@@ -57,10 +57,10 @@
 				<form action="{{ route('shop.search') }}">
 					<input type="hidden" name="query" value="{{ request('query') }}">
 					<input type="hidden" name="category_id" value="{{ request('category_id') }}">
-					<input type="hidden" name="sort-rating" value="{{ request('sort-rating') == 'asc' ? 'desc' : 'asc' }}">
+					<input type="hidden" name="sort_rating" value="{{ request('sort_rating') == 'asc' ? 'desc' : 'asc' }}">
 					<button type="submit" class="btn btn-link text-dark text-decoration-none">
 						Rating
-						@if(request('sort-rating') == 'asc')
+						@if(request('sort_rating') == 'asc')
 							<i class="fa fa-sort-amount-asc"></i>
 						@else
 							<i class="fa fa-sort-amount-desc"></i>
@@ -103,6 +103,10 @@
 				</div>
 			</div>
 			@endforeach
+		</div>
+
+		<div class="mb-4 d-flex justify-content-center">
+			{{ $shops->links() }}
 		</div>
 	</section>
 @endsection

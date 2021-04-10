@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         Category::query()->create(['name' => 'Tradisional']);
         Category::query()->create(['name' => 'Oleh-Oleh']);
 
-        Shop::factory(10)
+        Shop::factory()->count(50)
             ->has(Review::factory()->count(15))
             ->has(Photo::factory()->count(10))
             ->create();

@@ -46,7 +46,7 @@ class ShopController extends Controller{
 			->with('category')
 			->has('category');
 
-		if($request->get('sort-rating') == 'asc'){
+		if($request->get('sort_rating') == 'asc'){
 			$builder->orderBy('reviews_count');
 			$builder->orderBy('reviews_avg_rating');
 		}
@@ -63,6 +63,12 @@ class ShopController extends Controller{
 		}
 
 		$shops = $builder->paginate(24);
+		$shops->appends([
+			'query' => $request->get('query'),
+			'category_id' => $request->get('category_id'),
+			'sort_rating' => $request->get('sort_rating'),
+			'min_price' => $request->get('min_price'),
+		]);
 		$categories = Category::all();
 
 		return view('shops.search', compact('shops', 'categories', 'min_price', 'max_price'));

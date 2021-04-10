@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Review;
+use App\Observers\ReviewObserver;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 

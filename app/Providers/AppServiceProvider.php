@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Observers\ReviewObserver;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,5 +34,10 @@ class AppServiceProvider extends ServiceProvider
 
         /* Pagination */
 		Paginator::useBootstrap();
+
+		/* Blade */
+		Blade::directive('confirmation', function (){
+			return 'onclick="return window.confirm(\'Apakah anda yakin?\')"';
+		});
     }
 }

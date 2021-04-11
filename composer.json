@@ -14,7 +14,8 @@
         "laravel/fortify": "^1.7",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "yajra/laravel-datatables": "^1.5"
+        "yajra/laravel-datatables": "^1.5",
+		"ext-gd": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Shop extends Model{
 
@@ -69,5 +70,20 @@ class Shop extends Model{
 		elseif($this->min_price && !$this->max_price){
 			return "Mulai ".Helper::idr($this->min_price);
 		}
+	}
+
+	public function countLuminance(){
+    	$this->loadAvg('public_reviews', 'rating');
+
+		if($this->photo_max_file && Storage::get("photos/$this->photo_max_file")){
+			$this->luminance_class = Helper::get_avg_luminance(Storage::get("photos/$this->photo_max_file")) > 170 ? 'text-dark' : 'text-light';
+		}
+		else{
+			$this->luminance_class = 'text-dark';
+		}
+
+		$this->save();
+
+		return $this->luminance_class;
 	}
 }

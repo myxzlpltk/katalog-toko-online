@@ -16,20 +16,20 @@
 					<img src="{{ $shop->logo_path }}" alt="" style="height: 60px;width: 60px;">
 				</div>
 				<div class="listing__hero__text">
-					<h2 class="{{ $luminance_class }}">{{ $shop->name }}</h2>
+					<h2 class="{{ $shop->luminance_class }}">{{ $shop->name }}</h2>
 					<div class="listing__hero__widget">
 						@if($shop->public_reviews_avg_rating)
-						<div class="listing__hero__widget__rating {{ $luminance_class }}">
+						<div class="listing__hero__widget__rating {{ $shop->luminance_class }}">
 							{!! \App\Helpers\Helper::rating($shop->public_reviews_avg_rating) !!}
 						</div>
-						<div class="{{ $luminance_class }}">{{ $shop->public_reviews_count }} Review</div>
+						<div class="{{ $shop->luminance_class }}">{{ $shop->public_reviews_count }} Review</div>
 						@else
-							<p class="{{ $luminance_class }}">Belum ada rating</p>
+							<p class="{{ $shop->luminance_class }}">Belum ada rating</p>
 						@endif
 					</div>
-					<p class="{{ $luminance_class }}">
-						<span class="icon_pin_alt {{ $luminance_class }}"></span> {{ $shop->address }}<br>
-						<span class="icon_currency {{ $luminance_class }}"></span> {{ $shop->price_range }}
+					<p class="{{ $shop->luminance_class }}">
+						<span class="icon_pin_alt {{ $shop->luminance_class }}"></span> {{ $shop->address }}<br>
+						<span class="icon_currency {{ $shop->luminance_class }}"></span> {{ $shop->price_range }}
 					</p>
 				</div>
 			</div>

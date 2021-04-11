@@ -14,7 +14,7 @@ class PhotoObserver{
      * @return void
      */
     public function created(Photo $photo){
-        //
+		$photo->shop->countLuminance();
     }
 
     /**
@@ -24,7 +24,7 @@ class PhotoObserver{
      * @return void
      */
     public function updated(Photo $photo){
-        //
+		//
     }
 
     /**
@@ -37,6 +37,8 @@ class PhotoObserver{
         if(Storage::exists("photos/{$photo->file}")){
 			Storage::delete("photos/{$photo->file}");
 		}
+
+        $photo->shop->countLuminance();
     }
 
     /**

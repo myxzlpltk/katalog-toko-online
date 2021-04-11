@@ -18,14 +18,7 @@ class ShopController extends Controller{
 			->loadMax('photos', 'file')
 			->loadAvg('public_reviews', 'rating');
 
-		if($shop->photos_max_file && Storage::get("photos/$shop->photos_max_file")){
-			$luminance_class = Helper::get_avg_luminance(Storage::get("photos/$shop->photos_max_file")) > 170 ? 'text-dark' : 'text-light';
-		}
-		else{
-			$luminance_class = 'text-dark';
-		}
-
-		return view('shops.view', compact('shop', 'luminance_class'));
+		return view('shops.view', compact('shop'));
 	}
 
 	public function search(Request $request){

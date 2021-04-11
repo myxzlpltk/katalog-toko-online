@@ -37,6 +37,7 @@ class CreateShopsTable extends Migration
             $table->time('saturday_close')->nullable();
             $table->time('sunday_open')->nullable();
             $table->time('sunday_close')->nullable();
+            $table->string('luminance_class')->default('text-dark');
             $table->timestamps();
         });
     }

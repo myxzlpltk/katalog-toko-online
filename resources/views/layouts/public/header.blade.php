@@ -28,7 +28,7 @@
 						</ul>
 					</nav>
 					<div class="header__menu__right">
-						<a href="#" class="login-btn"><i class="fa fa-user"></i></a>
+						<a href="{{ route('admin.dashboard') }}" class="login-btn"><i class="fa fa-user"></i></a>
 					</div>
 				</div>
 			</div>

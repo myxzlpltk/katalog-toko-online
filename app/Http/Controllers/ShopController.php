@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Review;
 use App\Models\Shop;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ShopController extends Controller{
 
@@ -72,5 +74,26 @@ class ShopController extends Controller{
 		$categories = Category::all();
 
 		return view('shops.search', compact('shops', 'categories', 'min_price', 'max_price'));
+	}
+
+	public function addReview(Shop $shop, Request $request){
+		$request->validate([
+			'name' => 'required|string|max:255',
+			'email' => [
+				'required','string','max:255',
+				Rule::unique(Review::class)->where('shop_id', $shop->id)
+			],
+			'review_text' => 'required|string',
+			'rating' => 'required|integer|min:1,max:5',
+		]);
+
+		$review = new Review();
+		$review->name = $request->name;
+		$review->email = $request->email;
+		$review->review_text = $request->review_text;
+		$review->rating = $request->rating;
+		$shop->reviews()->save($review);
+
+		return redirect()->route('shop.view', $shop);
 	}
 }

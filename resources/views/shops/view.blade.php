@@ -3,6 +3,7 @@
 @section('title', $shop->name)
 
 @section('stylesheets')
+	<link rel="stylesheet" href="{{ asset('vendor/jquery-bar-rating/themes/fontawesome-stars.css') }}">
 @endsection
 
 @section('header-transparent', true)
@@ -101,10 +102,19 @@
 						</div>
 						<div class="listing__details__review">
 							<h4>Tambah Review</h4>
-							<form action="#">
-								<input type="text" placeholder="Nama">
-								<input type="text" placeholder="Email">
-								<textarea placeholder="Review"></textarea>
+							<form action="{{ route('shop.add-review', $shop) }}" method="post">
+								@csrf
+								<input type="text" name="name" value="{{ old('name') }}" placeholder="Nama" required>
+								<input type="text" name="email" value="{{ old('email') }}" placeholder="Email" required>
+								<textarea name="review_text" placeholder="Review" required></textarea>
+								<div class="mb-3">
+									<p>Rating : </p>
+									<select id="rating" name="rating" class="d-none" required>
+										@for($i=1; $i<=5; $i++)
+											<option value="{{ $i }}" @if(old('rating', 5) == $i) selected @endif>{{ $i }}</option>
+										@endfor
+									</select>
+								</div>
 								<button type="submit" class="site-btn">Submit</button>
 							</form>
 						</div>
@@ -147,4 +157,11 @@
 @endsection
 
 @section('scripts')
+	<script src="{{ asset('vendor/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
+	<script>
+		$('#rating').barrating({
+			theme: 'fontawesome-stars',
+			initialRating: 5,
+		});
+	</script>
 @endsection

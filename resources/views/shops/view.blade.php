@@ -18,10 +18,14 @@
 				<div class="listing__hero__text">
 					<h2>{{ $shop->name }}</h2>
 					<div class="listing__hero__widget">
+						@if($shop->public_reviews_avg_rating)
 						<div class="listing__hero__widget__rating">
 							{!! \App\Helpers\Helper::rating($shop->public_reviews_avg_rating) !!}
 						</div>
 						<div>{{ $shop->public_reviews_count }} Review</div>
+						@else
+							<p>Belum ada rating</p>
+						@endif
 					</div>
 					<p>
 						<span class="icon_pin_alt"></span> {{ $shop->address }}<br>
@@ -65,10 +69,12 @@
 							<h4>Nilai</h4>
 							<div class="listing__details__rating__overall">
 								<h2>{{ round($shop->public_reviews_avg_rating, 1) }}</h2>
+								@if($shop->public_reviews_avg_rating)
 								<div class="listing__details__rating__star">
 									{!! \App\Helpers\Helper::rating($shop->public_reviews_avg_rating) !!}
 								</div>
-									<span>({{ $shop->public_reviews_count }} Rating)</span>
+								<span>({{ $shop->public_reviews_count }} Rating)</span>
+								@endif
 							</div>
 							<div class="listing__details__rating__bar">
 								@for($i=5; $i>0; $i--)
@@ -84,7 +90,7 @@
 						</div>
 						<div class="listing__details__comment">
 							<h4>Komentar</h4>
-							@foreach($shop->public_reviews->take(request()->get('review') ? null : 3) as $review)
+							@forelse($shop->public_reviews->take(request()->get('review') ? null : 3) as $review)
 							<div class="listing__details__comment__item">
 								<div class="listing__details__comment__item__text">
 									<div class="listing__details__comment__item__rating">
@@ -95,7 +101,9 @@
 									<p>{{ $review->review_text }}</p>
 								</div>
 							</div>
-							@endforeach
+							@empty
+							<p>Belum ada komentar</p>
+							@endforelse
 
 							@if($shop->public_reviews_count > 3 && !request()->get('review'))
 								<div class="mb-4 text-center">
@@ -117,6 +125,7 @@
 											<option value="{{ $i }}" @if(old('rating', 5) == $i) selected @endif>{{ $i }}</option>
 										@endfor
 									</select>
+									<small>Bintang <span id="rating-count">{{ old('rating', 5) }}</span></small>
 								</div>
 								<button type="submit" class="site-btn">Submit</button>
 							</form>
@@ -165,6 +174,10 @@
 		$('#rating').barrating({
 			theme: 'fontawesome-stars',
 			initialRating: 5,
+		});
+
+		$('#rating').change(function (){
+			$('#rating-count').text($(this).val())
 		});
 	</script>
 @endsection

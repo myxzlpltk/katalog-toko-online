@@ -13,7 +13,7 @@
 		<div class="container">
 			<div class="listing__hero__option">
 				<div class="listing__hero__icon">
-					<img src="{{ $shop->logo_path }}" alt="">
+					<img src="{{ $shop->logo_path }}" alt="" style="height: 60px;width: 60px;">
 				</div>
 				<div class="listing__hero__text">
 					<h2>{{ $shop->name }}</h2>
@@ -68,7 +68,7 @@
 								<div class="listing__details__rating__star">
 									{!! \App\Helpers\Helper::rating($shop->public_reviews_avg_rating) !!}
 								</div>
-								<span>({{ $shop->public_reviews_count }} Rating)</span>
+									<span>({{ $shop->public_reviews_count }} Rating)</span>
 							</div>
 							<div class="listing__details__rating__bar">
 								@for($i=5; $i>0; $i--)

@@ -70,7 +70,7 @@
 								<div class="col-lg-4 col-md-6">
 									<div class="listing__item">
 										<div class="listing__item__pic set-bg" data-setbg="{{ asset("storage/photos/{$shop->photos_max_file}") }}">
-											<img src="{{ $shop->logo_path }}" alt="">
+											<img src="{{ $shop->logo_path }}" alt="" style="height: 60px;width: 60px;">
 											<div class="listing__item__pic__tag">Populer</div>
 										</div>
 										<div class="listing__item__text">

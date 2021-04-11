@@ -20,7 +20,7 @@
 							<p>1000+ Toko dengan pelayanan terbaiknya menunggu anda </p>
 						</div>
 						<div class="hero__search__form">
-							<form action="{{ route('shop.search') }}" method="get">
+							<form action="{{ route('shops.search') }}" method="get">
 								<input type="text" placeholder="Pencarian..." name="query">
 								<div class="select__option">
 									<select name="category_id">
@@ -75,7 +75,7 @@
 										</div>
 										<div class="listing__item__text">
 											<div class="listing__item__text__inside">
-												<a href="{{ route('shop.view', $shop) }}">
+												<a href="{{ route('shops.view', $shop) }}">
 													<h5>{{ $shop->name }}</h5>
 													<div class="listing__item__text__rating">
 														<div class="listing__item__rating__star">

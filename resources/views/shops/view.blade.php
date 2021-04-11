@@ -23,7 +23,10 @@
 						</div>
 						<div>{{ $shop->public_reviews_count }} Review</div>
 					</div>
-					<p><span class="icon_pin_alt"></span> {{ $shop->address }}</p>
+					<p>
+						<span class="icon_pin_alt"></span> {{ $shop->address }}<br>
+						<span class="icon_currency"></span> {{ $shop->price_range }}
+					</p>
 				</div>
 			</div>
 		</div>
@@ -96,13 +99,13 @@
 
 							@if($shop->public_reviews_count > 3 && !request()->get('review'))
 								<div class="mb-4 text-center">
-									<a href="{{ route('shop.view', [$shop, 'review' => true]) }}" class="site-btn">Lihat Semua Review</a>
+									<a href="{{ route('shops.view', [$shop, 'review' => true]) }}" class="site-btn">Lihat Semua Review</a>
 								</div>
 							@endif
 						</div>
 						<div class="listing__details__review">
 							<h4>Tambah Review</h4>
-							<form action="{{ route('shop.add-review', $shop) }}" method="post">
+							<form action="{{ route('shops.add-review', $shop) }}" method="post">
 								@csrf
 								<input type="text" name="name" value="{{ old('name') }}" placeholder="Nama" required>
 								<input type="text" name="email" value="{{ old('email') }}" placeholder="Email" required>

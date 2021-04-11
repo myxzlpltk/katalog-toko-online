@@ -2,12 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Review;
-use Illuminate\Support\Facades\Route;
+use App\Models\Shop;
+use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ReviewDataTable extends DataTable{
+class ShopDataTable extends DataTable{
 
 	/**
 	 * Build DataTable class.
@@ -19,28 +21,22 @@ class ReviewDataTable extends DataTable{
 		return datatables()
 			->eloquent($query)
 			->addIndexColumn()
-			->editColumn('created_at', function (Review $review){
-				return $review->created_at->translatedFormat('d F Y');
+			->editColumn('category', function (Shop $shop){
+				return $shop->category->name;
 			})
-			->filterColumn('created_at', function ($query, $keyword) {
-				$query->whereRaw("DATE_FORMAT(reviews.created_at,'%d %M %Y') like ?", ["%$keyword%"]);
-			})
-			->editColumn('shop', function (Review $review){
-				return $review->shop->name;
-			})
-			->addColumn('action', 'admin.reviews.action');
+			->addColumn('action', 'admin.shops.action');
 	}
 
 	/**
 	 * Get query source of dataTable.
 	 *
-	 * @param \App\Models\Review $model
+	 * @param \App\Models\Shop $model
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
-	public function query(Review $model){
+	public function query(Shop $model){
 		return $model->newQuery()
-			->has('shop')
-			->with('shop');
+			->has('category')
+			->with('category');
 	}
 
 	/**
@@ -50,7 +46,7 @@ class ReviewDataTable extends DataTable{
 	 */
 	public function html(){
 		return $this->builder()
-			->setTableId('review-table')
+			->setTableId('shop-table')
 			->columns($this->getColumns())
 			->minifiedAjax()
 			->orderBy(1, 'asc')
@@ -69,11 +65,9 @@ class ReviewDataTable extends DataTable{
 	protected function getColumns(){
 		return [
 			Column::computed('DT_RowIndex')->title('No.'),
-			Column::make('created_at')->title('Tanggal'),
-			Column::make('shop', 'shop.name')->title('Toko')->visible(!Route::is('admin.shops.show')),
-			Column::make('name')->title('Nama'),
-			Column::make('rating')->title('Rating'),
-			Column::make('review_text')->title('Review'),
+			Column::make('name')->title('Nama Toko'),
+			Column::make('category', 'category.name')->title('Kategori'),
+			Column::make('address')->title('Alamat'),
 			Column::computed('action')->title('Aksi'),
 		];
 	}
@@ -84,6 +78,6 @@ class ReviewDataTable extends DataTable{
 	 * @return string
 	 */
 	protected function filename(){
-		return 'Review_' . date('YmdHis');
+		return 'Shop_' . date('YmdHis');
 	}
 }

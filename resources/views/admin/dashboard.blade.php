@@ -77,7 +77,12 @@
 	<div class="card shadow mb-3">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 			<h6 class="m-0 font-weight-bold text-primary">Review Belum Dipublish</h6>
-			<a href="#" class="btn btn-primary btn-sm" @confirmation>Publish Semua</a>
+			<form action="{{ route('admin.reviews.publish-all') }}" class="d-inline" method="POST">
+				@csrf
+				@method('PATCH')
+
+				<button type="submit" class="btn btn-primary btn-sm" @confirmation>Publish Semua</button>
+			</form>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">{{ $dataTable->table() }}</div>

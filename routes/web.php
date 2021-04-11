@@ -16,12 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('toko/pencarian', [ShopController::class, 'search'])->name('shop.search');
-Route::get('toko/{shop}', [ShopController::class, 'view'])->name('shop.view');
-Route::post('toko/{shop}/add-review', [ShopController::class, 'addReview'])->name('shop.add-review');
+Route::get('toko/pencarian', [ShopController::class, 'search'])->name('shops.search');
+Route::get('toko/{shop}', [ShopController::class, 'view'])->name('shops.view');
+Route::post('toko/{shop}/add-review', [ShopController::class, 'addReview'])->name('shops.add-review');
 
 Route::prefix('admin/')->middleware('auth')->group(function (){
-    Route::get('dashboard', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('profile', [Admin\ProfileController::class, 'index'])->name('admin.profile');
+	Route::redirect('/', 'dasbor');
+    Route::get('dasbor', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('profil', [Admin\ProfileController::class, 'index'])->name('admin.profile');
 
+    Route::resource('shops', Admin\ShopController::class, ['as' => 'admin']);
+
+	Route::resource('categories', Admin\CategoryController::class, ['as' => 'admin'])->except('show');
+
+	Route::patch('shops.reviews/publish-all', [Admin\ReviewController::class, 'publishAll'])->name('admin.reviews.publish-all');
+    Route::patch('shops.reviews/{review}/publish', [Admin\ReviewController::class, 'publish'])->name('admin.reviews.publish');
+    Route::resource('shops.reviews', Admin\ReviewController::class, ['as' => 'admin'])->only('destroy')->shallow();
+
+    Route::resource('shops.photos', Admin\PhotoController::class, ['as' => 'admin'])->only('create', 'store', 'destroy')->shallow();
 });

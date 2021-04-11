@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Photo;
 use App\Models\Review;
+use App\Models\Shop;
+use App\Observers\PhotoObserver;
 use App\Observers\ReviewObserver;
+use App\Observers\ShopObserver;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -39,5 +43,10 @@ class AppServiceProvider extends ServiceProvider
 		Blade::directive('confirmation', function (){
 			return 'onclick="return window.confirm(\'Apakah anda yakin?\')"';
 		});
+
+		/* Observer */
+		Photo::observe(PhotoObserver::class);
+		Review::observe(ReviewObserver::class);
+		Shop::observe(ShopObserver::class);
     }
 }

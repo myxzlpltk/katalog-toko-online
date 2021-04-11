@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-	<form action="{{ route('shop.search') }}" method="get">
+	<form action="{{ route('shops.search') }}" method="get">
 		<input type="hidden" name="sort_rating" value="{{ request('sort_rating') }}">
 		<div class="filter nice-scroll">
 			<div class="filter__title">
@@ -48,7 +48,7 @@
 			</div>
 			<div class="filter__btns">
 				<button type="submit">Filter Hasil</button>
-				<button type="button" class="filter__reset"><a href="{{ route('shop.search') }}" class="text-dark">Reset Filter</a></button>
+				<button type="button" class="filter__reset"><a href="{{ route('shops.search') }}" class="text-dark">Reset Filter</a></button>
 			</div>
 		</div>
 	</form>
@@ -60,7 +60,7 @@
 				<span>{{ $shops->total() }} Ditemukan</span>
 			</div>
 			<div class="listing__text__top__right">
-				<form action="{{ route('shop.search') }}">
+				<form action="{{ route('shops.search') }}">
 					<input type="hidden" name="query" value="{{ request('query') }}">
 					<input type="hidden" name="category_id" value="{{ request('category_id') }}">
 					<input type="hidden" name="sort_rating" value="{{ request('sort_rating') == 'asc' ? 'desc' : 'asc' }}">
@@ -84,7 +84,7 @@
 				</div>
 				<div class="listing__item__text">
 					<div class="listing__item__text__inside">
-						<a href="{{ route('shop.view', $shop) }}">
+						<a href="{{ route('shops.view', $shop) }}">
 							<h5>{{ $shop->name }}</h5>
 							<div class="listing__item__text__rating">
 								<div class="listing__item__rating__star">

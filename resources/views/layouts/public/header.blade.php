@@ -19,7 +19,7 @@
 								<a href="#">Kategori</a>
 								<ul class="dropdown">
 									@foreach(\App\Models\Category::all() as $category)
-									<li><a href="{{ route('shop.search', ['category_id' => $category->id]) }}">{{ $category->name }}</a></li>
+									<li><a href="{{ route('shops.search', ['category_id' => $category->id]) }}">{{ $category->name }}</a></li>
 									@endforeach
 								</ul>
 							</li>

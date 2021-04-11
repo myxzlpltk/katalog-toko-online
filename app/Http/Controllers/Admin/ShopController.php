@@ -192,8 +192,8 @@ class ShopController extends Controller{
 			$image = Image::make($request->file('logo'));
 			$dim = min($image->width(), $image->height(), 500);
 
-			$shop->logo = Str::random(64).'.jpg';
-			Storage::put("logos/$shop->logo", $image->fit($dim)->encode('jpg', 80));
+			$shop->logo = Str::random(64).'.png';
+			Storage::put("logos/$shop->logo", $image->fit($dim)->encode('png', 80));
 		}
 
 		$shop->save();

@@ -64,7 +64,7 @@
 						<div class="listing__details__rating">
 							<h4>Nilai</h4>
 							<div class="listing__details__rating__overall">
-								<h2>{{ bcdiv($shop->public_reviews_avg_rating, 1, 1) }}</h2>
+								<h2>{{ round($shop->public_reviews_avg_rating, 1) }}</h2>
 								<div class="listing__details__rating__star">
 									{!! \App\Helpers\Helper::rating($shop->public_reviews_avg_rating) !!}
 								</div>

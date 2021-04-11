@@ -20,7 +20,7 @@ Route::get('toko/pencarian', [ShopController::class, 'search'])->name('shop.sear
 Route::get('toko/{shop}', [ShopController::class, 'view'])->name('shop.view');
 Route::post('toko/{shop}/add-review', [ShopController::class, 'addReview'])->name('shop.add-review');
 
-Route::prefix('admin/')->name('admin.')->group(function (){
-    Route::get('dashboard', [Admin\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('profile', [Admin\ProfileController::class, 'index'])->name('profile');
+Route::prefix('admin/')->middleware('auth')->group(function (){
+    Route::get('dashboard', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('profile', [Admin\ProfileController::class, 'index'])->name('admin.profile');
 });

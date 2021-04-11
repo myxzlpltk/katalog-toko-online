@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Category;
 use App\Models\Review;
 use App\Models\Shop;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ShopController extends Controller{
@@ -16,7 +18,14 @@ class ShopController extends Controller{
 			->loadMax('photos', 'file')
 			->loadAvg('public_reviews', 'rating');
 
-		return view('shops.view', compact('shop'));
+		if($shop->photos_max_file && Storage::get("photos/$shop->photos_max_file")){
+			$luminance_class = Helper::get_avg_luminance(Storage::get("photos/$shop->photos_max_file")) > 170 ? 'text-dark' : 'text-light';
+		}
+		else{
+			$luminance_class = 'text-dark';
+		}
+
+		return view('shops.view', compact('shop', 'luminance_class'));
 	}
 
 	public function search(Request $request){

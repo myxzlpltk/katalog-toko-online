@@ -23,4 +23,5 @@ Route::post('toko/{shop}/add-review', [ShopController::class, 'addReview'])->nam
 Route::prefix('admin/')->middleware('auth')->group(function (){
     Route::get('dashboard', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('profile', [Admin\ProfileController::class, 'index'])->name('admin.profile');
+
 });

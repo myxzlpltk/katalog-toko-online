@@ -103,7 +103,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="monday_open">Jam Buka Hari Senin</label>
-							<input type="time" name="monday_open" id="monday_open" class="form-control @error('monday_open') is-invalid @enderror" value="{{ old('monday_open', $shop->monday_open->format('H:i')) }}">
+							<input type="time" name="monday_open" id="monday_open" class="form-control @error('monday_open') is-invalid @enderror" value="{{ old('monday_open', $shop->monday_open ? $shop->monday_open->format('H:i') : null ) }}">
 							@error('monday_open')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -112,7 +112,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="monday_close">Jam Tutup Hari Senin</label>
-							<input type="time" name="monday_close" id="monday_close" class="form-control @error('monday_close') is-invalid @enderror" value="{{ old('monday_close', $shop->monday_close->format('H:i')) }}">
+							<input type="time" name="monday_close" id="monday_close" class="form-control @error('monday_close') is-invalid @enderror" value="{{ old('monday_close', $shop->monday_close ? $shop->monday_close->format('H:i') : null ) }}">
 							@error('monday_close')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -121,7 +121,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="tuesday_open">Jam Buka Hari Selasa</label>
-							<input type="time" name="tuesday_open" id="tuesday_open" class="form-control @error('tuesday_open') is-invalid @enderror" value="{{ old('tuesday_open', $shop->tuesday_open->format('H:i')) }}">
+							<input type="time" name="tuesday_open" id="tuesday_open" class="form-control @error('tuesday_open') is-invalid @enderror" value="{{ old('tuesday_open', $shop->tuesday_open ? $shop->tuesday_open->format('H:i') : null ) }}">
 							@error('tuesday_open')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -130,7 +130,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="tuesday_close">Jam Tutup Hari Selasa</label>
-							<input type="time" name="tuesday_close" id="tuesday_close" class="form-control @error('tuesday_close') is-invalid @enderror" value="{{ old('tuesday_close', $shop->tuesday_close->format('H:i')) }}">
+							<input type="time" name="tuesday_close" id="tuesday_close" class="form-control @error('tuesday_close') is-invalid @enderror" value="{{ old('tuesday_close', $shop->tuesday_close ? $shop->tuesday_close->format('H:i') : null ) }}">
 							@error('tuesday_close')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -139,7 +139,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="wednesday_open">Jam Buka Hari Rabu</label>
-							<input type="time" name="wednesday_open" id="wednesday_open" class="form-control @error('wednesday_open') is-invalid @enderror" value="{{ old('wednesday_open', $shop->wednesday_open->format('H:i')) }}">
+							<input type="time" name="wednesday_open" id="wednesday_open" class="form-control @error('wednesday_open') is-invalid @enderror" value="{{ old('wednesday_open', $shop->wednesday_open ? $shop->wednesday_open->format('H:i') : null ) }}">
 							@error('wednesday_open')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -148,7 +148,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="wednesday_close">Jam Tutup Hari Rabu</label>
-							<input type="time" name="wednesday_close" id="wednesday_close" class="form-control @error('wednesday_close') is-invalid @enderror" value="{{ old('wednesday_close', $shop->wednesday_close->format('H:i')) }}">
+							<input type="time" name="wednesday_close" id="wednesday_close" class="form-control @error('wednesday_close') is-invalid @enderror" value="{{ old('wednesday_close', $shop->wednesday_close ? $shop->wednesday_close->format('H:i') : null ) }}">
 							@error('wednesday_close')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -157,7 +157,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="thursday_open">Jam Buka Hari Kamis</label>
-							<input type="time" name="thursday_open" id="thursday_open" class="form-control @error('thursday_open') is-invalid @enderror" value="{{ old('thursday_open', $shop->thursday_open->format('H:i')) }}">
+							<input type="time" name="thursday_open" id="thursday_open" class="form-control @error('thursday_open') is-invalid @enderror" value="{{ old('thursday_open', $shop->thursday_open ? $shop->thursday_open->format('H:i') : null ) }}">
 							@error('thursday_open')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -166,7 +166,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="thursday_close">Jam Tutup Hari Kamis</label>
-							<input type="time" name="thursday_close" id="thursday_close" class="form-control @error('thursday_close') is-invalid @enderror" value="{{ old('thursday_close', $shop->thursday_close->format('H:i')) }}">
+							<input type="time" name="thursday_close" id="thursday_close" class="form-control @error('thursday_close') is-invalid @enderror" value="{{ old('thursday_close', $shop->thursday_close ? $shop->thursday_close->format('H:i') : null ) }}">
 							@error('thursday_close')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -175,7 +175,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="friday_open">Jam Buka Hari Jumat</label>
-							<input type="time" name="friday_open" id="friday_open" class="form-control @error('friday_open') is-invalid @enderror" value="{{ old('friday_open', $shop->friday_open->format('H:i')) }}">
+							<input type="time" name="friday_open" id="friday_open" class="form-control @error('friday_open') is-invalid @enderror" value="{{ old('friday_open', $shop->friday_open ? $shop->friday_open->format('H:i') : null ) }}">
 							@error('friday_open')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -184,7 +184,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="friday_close">Jam Tutup Hari Jumat</label>
-							<input type="time" name="friday_close" id="friday_close" class="form-control @error('friday_close') is-invalid @enderror" value="{{ old('friday_close', $shop->friday_close->format('H:i')) }}">
+							<input type="time" name="friday_close" id="friday_close" class="form-control @error('friday_close') is-invalid @enderror" value="{{ old('friday_close', $shop->friday_close ? $shop->friday_close->format('H:i') : null ) }}">
 							@error('friday_close')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -193,7 +193,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="saturday_open">Jam Buka Hari Sabtu</label>
-							<input type="time" name="saturday_open" id="saturday_open" class="form-control @error('saturday_open') is-invalid @enderror" value="{{ old('saturday_open', $shop->saturday_open->format('H:i')) }}">
+							<input type="time" name="saturday_open" id="saturday_open" class="form-control @error('saturday_open') is-invalid @enderror" value="{{ old('saturday_open', $shop->saturday_open ? $shop->saturday_open->format('H:i') : null ) }}">
 							@error('saturday_open')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -202,7 +202,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="saturday_close">Jam Tutup Hari Sabtu</label>
-							<input type="time" name="saturday_close" id="saturday_close" class="form-control @error('saturday_close') is-invalid @enderror" value="{{ old('saturday_close', $shop->saturday_close->format('H:i')) }}">
+							<input type="time" name="saturday_close" id="saturday_close" class="form-control @error('saturday_close') is-invalid @enderror" value="{{ old('saturday_close', $shop->saturday_close ? $shop->saturday_close->format('H:i') : null ) }}">
 							@error('saturday_close')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -211,7 +211,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="sunday_open">Jam Buka Hari Minggu</label>
-							<input type="time" name="sunday_open" id="sunday_open" class="form-control @error('sunday_open') is-invalid @enderror" value="{{ old('sunday_open', $shop->sunday_open->format('H:i')) }}">
+							<input type="time" name="sunday_open" id="sunday_open" class="form-control @error('sunday_open') is-invalid @enderror" value="{{ old('sunday_open', $shop->sunday_open ? $shop->sunday_open->format('H:i') : null ) }}">
 							@error('sunday_open')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
@@ -220,7 +220,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="sunday_close">Jam Tutup Hari Minggu</label>
-							<input type="time" name="sunday_close" id="sunday_close" class="form-control @error('sunday_close') is-invalid @enderror" value="{{ old('sunday_close', $shop->sunday_close->format('H:i')) }}">
+							<input type="time" name="sunday_close" id="sunday_close" class="form-control @error('sunday_close') is-invalid @enderror" value="{{ old('sunday_close', $shop->sunday_close ? $shop->sunday_close->format('H:i') : null ) }}">
 							@error('sunday_close')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror

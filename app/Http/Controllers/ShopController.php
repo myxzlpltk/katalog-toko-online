@@ -35,15 +35,6 @@ class ShopController extends Controller{
 					$builder->where('category_id', '=', $request->category_id);
 				}
 			})
-			->where(function (Builder $builder) use ($request){
-				if($request->min_price){
-					$min_price = intval($request->min_price)*1000;
-
-					$builder->where('max_price', '>=', $min_price);
-					$builder->orWhereNull('max_price');
-					$builder->orWhere('max_price', '=', 0);
-				}
-			})
 			->withCount('public_reviews')
 			->withMax('photos', 'file')
 			->withAvg('public_reviews', 'rating')
@@ -61,6 +52,16 @@ class ShopController extends Controller{
 
 		$min_price = max($builder->clone()->max('min_price'), 0);
 		$max_price = max($builder->clone()->max('max_price'), 0, $min_price);
+
+		$builder->where(function (Builder $builder) use ($request){
+			if($request->min_price){
+				$min_price = intval($request->min_price)*1000;
+
+				$builder->where('max_price', '>=', $min_price);
+				$builder->orWhereNull('max_price');
+				$builder->orWhere('max_price', '=', 0);
+			}
+		});
 
 		if($request->min_price && ($request->min_price > $max_price || $request->min_price < $min_price)){
 			$request->min_price = $min_price;

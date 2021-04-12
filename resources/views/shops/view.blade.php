@@ -29,7 +29,7 @@
 					</div>
 					<p class="text-light">
 						<span class="icon_pin_alt text-light"></span> {{ $shop->address }}<br>
-						<span class="icon_currency text-light"></span> {{ $shop->price_range }}
+						<span class="icon_currency text-light"></span> {{ $shop->price_range ?? 'Tidak ada data harga' }}
 					</p>
 				</div>
 			</div>

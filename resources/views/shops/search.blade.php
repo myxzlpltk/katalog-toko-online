@@ -64,6 +64,7 @@
 					<input type="hidden" name="query" value="{{ request('query') }}">
 					<input type="hidden" name="category_id" value="{{ request('category_id') }}">
 					<input type="hidden" name="sort_rating" value="{{ request('sort_rating') == 'asc' ? 'desc' : 'asc' }}">
+					<input type="hidden" name="min_price" value="{{ request('min_price') }}">
 					<button type="submit" class="btn btn-link text-dark text-decoration-none">
 						Rating
 						@if(request('sort_rating') == 'asc')

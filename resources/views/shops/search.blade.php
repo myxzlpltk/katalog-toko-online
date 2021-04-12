@@ -126,7 +126,7 @@
 			min: {{ floor($min_price/1000) }},
 			max: {{ ceil($max_price/1000) }},
 			value: {{ max(floor($min_price/1000), intval(request('min_price', 0))) }},
-			step: {{ max(1, round(ceil($max_price)/1000-floor($min_price/1000))/20) }},
+			step: {{ max(1, round((ceil($max_price)/1000-floor($min_price/1000))/20)) }},
 			slide: function (event, ui) {
 				min_price.val(ui.value + 'K');
 			}

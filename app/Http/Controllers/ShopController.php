@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use App\Models\Category;
 use App\Models\Review;
 use App\Models\Shop;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ShopController extends Controller{
@@ -17,6 +16,18 @@ class ShopController extends Controller{
 		$shop->loadCount('public_reviews')
 			->loadMax('photos', 'file')
 			->loadAvg('public_reviews', 'rating');
+
+		SEOTools::setDescription("Informasi toko {$shop->name}");
+
+		SEOTools::opengraph()->addProperty('type', 'shops');
+		SEOTools::opengraph()->setTitle($shop->name);
+		SEOTools::opengraph()->addImage(asset("storage/photos/{$shop->photos_max_file}"));
+
+		SEOTools::twitter()->setTitle($shop->name);
+		SEOTools::twitter()->setImage(asset("storage/photos/{$shop->photos_max_file}"));
+
+		SEOTools::jsonLd()->setTitle($shop->name);
+		SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
 
 		return view('shops.view', compact('shop'));
 	}

@@ -22,6 +22,7 @@
 			<div class="card shadow mb-3">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-info-circle fa-fw"></i> Informasi Data</h6>
+					<a href="{{ route('shops.view', $shop) }}" class="btn btn-primary btn-sm" target="_blank">Lihat</a>
 				</div>
 				<div class="card-body">
 					<table class="table table-borderless table-sm">

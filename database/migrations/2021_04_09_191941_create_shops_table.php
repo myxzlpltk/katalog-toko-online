@@ -17,6 +17,7 @@ class CreateShopsTable extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->string('name');
+            $table->string('slug')->nullable()->unique();
             $table->longText('description');
             $table->string('logo')->nullable();
             $table->string('address');

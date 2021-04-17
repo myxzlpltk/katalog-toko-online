@@ -6,6 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Katalog Online">
 	<meta name="author" content="Wahyu Nur Hidayat">
+	<link rel="icon" href="https://um.ac.id/wp-content/uploads/2020/08/cropped-Lambang-UM-32x32.png" sizes="32x32" />
+	<link rel="icon" href="https://um.ac.id/wp-content/uploads/2020/08/cropped-Lambang-UM-192x192.png" sizes="192x192" />
+	<link rel="apple-touch-icon" href="https://um.ac.id/wp-content/uploads/2020/08/cropped-Lambang-UM-180x180.png" />
+	<meta name="msapplication-TileImage" content="https://um.ac.id/wp-content/uploads/2020/08/cropped-Lambang-UM-270x270.png" />
 
 	<title>{{ config('app.name') }} - @yield('title', 'Halaman Kosong')</title>
 

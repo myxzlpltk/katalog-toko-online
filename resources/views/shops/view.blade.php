@@ -171,12 +171,13 @@
 @section('scripts')
 	<script src="{{ asset('vendor/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
 	<script>
-		$('#rating').barrating({
+		var rating = $('#rating');
+		rating.barrating({
 			theme: 'fontawesome-stars',
 			initialRating: 5,
 		});
 
-		$('#rating').change(function (){
+		rating.change(function (){
 			$('#rating-count').text($(this).val())
 		});
 

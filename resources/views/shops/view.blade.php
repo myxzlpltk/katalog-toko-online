@@ -88,7 +88,7 @@
 								@endfor
 							</div>
 						</div>
-						<div class="listing__details__comment">
+						<div class="listing__details__comment" id="reviews">
 							<h4>Komentar</h4>
 							@forelse($shop->public_reviews->take(request()->get('review') ? null : 3) as $review)
 							<div class="listing__details__comment__item">
@@ -179,5 +179,9 @@
 		$('#rating').change(function (){
 			$('#rating-count').text($(this).val())
 		});
+
+		@if($shop->public_reviews_count > 3 && request()->get('review'))
+		document.getElementById('reviews').scrollIntoView();
+		@endif
 	</script>
 @endsection

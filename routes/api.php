@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/categories', [HomeController::class, 'getCategories']);
+Route::get('/shops', [ShopController::class, 'search']);
+Route::get('/shops/{shop}', [ShopController::class, 'view']);
+Route::get('/shops/{shop}/reviews', [ShopController::class, 'getReviews']);
+Route::post('/shops/{shop}/reviews', [ShopController::class, 'addReview']);

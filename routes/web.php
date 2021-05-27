@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/categories', [HomeController::class, 'getCategories']);
 Route::get('toko/pencarian', [ShopController::class, 'search'])->name('shops.search');
 Route::get('toko/{shop:slug}', [ShopController::class, 'view'])->name('shops.view');
 Route::post('toko/{shop:slug}/add-review', [ShopController::class, 'addReview'])->name('shops.add-review');

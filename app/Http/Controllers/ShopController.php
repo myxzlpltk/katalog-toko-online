@@ -2,34 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReviewCollection;
+use App\Http\Resources\ReviewResource;
+use App\Http\Resources\ShopCollection;
+use App\Http\Resources\ShopResource;
 use App\Models\Category;
 use App\Models\Review;
 use App\Models\Shop;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class ShopController extends Controller{
 
-	public function view(Shop $shop){
+	public function view(Request $request, Shop $shop){
 		$shop->loadCount('public_reviews')
 			->loadMax('photos', 'file')
 			->loadAvg('public_reviews', 'rating');
 
-		SEOTools::setDescription("Informasi toko {$shop->name}");
+		if($request->wantsJson()){
+			return new ShopResource($shop->load([
+				'photos',
+				'public_reviews' => function(HasMany $query){
+					$query->limit(3);
+				}
+			]));
+		}
+		else{
+			SEOTools::setDescription("Informasi toko {$shop->name}");
 
-		SEOTools::opengraph()->addProperty('type', 'shops');
-		SEOTools::opengraph()->setTitle($shop->name);
-		SEOTools::opengraph()->addImage(asset("storage/photos/{$shop->photos_max_file}"));
+			SEOTools::opengraph()->addProperty('type', 'shops');
+			SEOTools::opengraph()->setTitle($shop->name);
+			SEOTools::opengraph()->addImage(asset("storage/photos/{$shop->photos_max_file}"));
 
-		SEOTools::twitter()->setTitle($shop->name);
-		SEOTools::twitter()->setImage(asset("storage/photos/{$shop->photos_max_file}"));
+			SEOTools::twitter()->setTitle($shop->name);
+			SEOTools::twitter()->setImage(asset("storage/photos/{$shop->photos_max_file}"));
 
-		SEOTools::jsonLd()->setTitle($shop->name);
-		SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
+			SEOTools::jsonLd()->setTitle($shop->name);
+			SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
 
-		return view('shops.view', compact('shop'));
+			return view('shops.view', compact('shop'));
+		}
 	}
 
 	public function search(Request $request){
@@ -87,7 +102,24 @@ class ShopController extends Controller{
 		]);
 		$categories = Category::all();
 
-		return view('shops.search', compact('shops', 'categories', 'min_price', 'max_price'));
+		if($request->wantsJson()){
+			return (new ShopCollection($shops))->additional([
+				'min_price' => $min_price,
+				'max_price' => $max_price
+			]);
+		}
+		else{
+			return view('shops.search', compact('shops', 'categories', 'min_price', 'max_price'));
+		}
+	}
+
+	public function getReviews(Shop $shop, Request $request){
+		if($request->wantsJson()){
+			return new ReviewCollection($shop->public_reviews()->paginate(10));
+		}
+		else{
+			abort(404);
+		}
 	}
 
 	public function addReview(Shop $shop, Request $request){
@@ -108,6 +140,11 @@ class ShopController extends Controller{
 		$review->rating = $request->rating;
 		$shop->reviews()->save($review);
 
-		return redirect()->route('shop.view', $shop);
+		if($request->wantsJson()){
+			return new ReviewResource($review);
+		}
+		else{
+			return redirect()->route('shop.view', $shop);
+		}
 	}
 }

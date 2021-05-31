@@ -14,7 +14,7 @@ class ShopResource extends JsonResource{
      */
     public function toArray($request){
         return [
-			'id' => $this->id,
+			'id' => (int)$this->id,
 			'category' => $this->whenLoaded('category', function (){
 				return $this->category->name;
 			}),
@@ -38,12 +38,15 @@ class ShopResource extends JsonResource{
 			'saturday_close' => $this->saturday_close,
 			'sunday_open' => $this->sunday_open,
 			'sunday_close' => $this->sunday_close,
-			'public_reviews_avg_rating' => $this->public_reviews_avg_rating,
-			'public_reviews_count' => $this->public_reviews_count,
-			'photos_max_file' => $this->photos_max_file ? asset("storage/photos/{$this->photos_max_file}") : null,
+			'public_reviews_avg_rating' => round((double)$this->public_reviews_avg_rating, 1),
+			'public_reviews_count' => (int)$this->public_reviews_count,
+			'photos_max_file' => $this->photos_max_file ? asset("storage/photos/{$this->photos_max_file}") : asset("img/no-photo.jpg"),
 			'is_open' => $this->is_open,
 			'photos' => new PhotoCollection($this->whenLoaded('photos')),
 			'reviews' => new ReviewCollection($this->whenLoaded('public_reviews')),
+			'count_reviews' => $this->whenLoaded('public_reviews', function (){
+				return $this->count_reviews;
+			})
 		];
     }
 }

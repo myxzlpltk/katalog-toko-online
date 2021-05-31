@@ -13,12 +13,34 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class ShopController extends Controller{
 
+	public function list(Request $request){
+		$request->validate(['ids' => 'required|array']);
+
+		$shops = Shop::query()
+			->with('category')
+			->has('category')
+			->withCount('public_reviews')
+			->withMax('photos', 'file')
+			->withAvg('public_reviews', 'rating')
+			->whereIn('id', $request->ids)
+			->get();
+
+		if($request->wantsJson()){
+			return new ShopCollection($shops);
+		}
+		else{
+			abort(404);
+		}
+	}
+
 	public function view(Request $request, Shop $shop){
-		$shop->loadCount('public_reviews')
+		$shop->load('category')
+			->loadCount('public_reviews')
 			->loadMax('photos', 'file')
 			->loadAvg('public_reviews', 'rating');
 

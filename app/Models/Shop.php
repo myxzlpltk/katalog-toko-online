@@ -86,4 +86,18 @@ class Shop extends Model{
 
 		return $this->luminance_class;
 	}
+
+	public function getCountReviewsAttribute(){
+		$result = array(1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0);
+		$data = $this->public_reviews()
+			->selectRaw('rating, COUNT(*) as value')
+			->groupBy('rating')
+			->get();
+
+		foreach($data as $item){
+			$result[$item->rating] = $item->value;
+		}
+
+		return $result;
+	}
 }

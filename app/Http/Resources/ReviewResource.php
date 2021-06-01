@@ -14,10 +14,10 @@ class ReviewResource extends JsonResource{
      */
     public function toArray($request){
         return [
-			'id' => $this->id,
+			'id' => intval($this->id),
 			'name' => $this->name,
 			'review_text' => $this->review_text,
-			'rating' => $this->rating,
+			'rating' => intval($this->rating),
 			'created_at' => $this->created_at,
 		];
     }

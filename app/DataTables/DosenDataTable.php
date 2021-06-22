@@ -24,6 +24,9 @@ class DosenDataTable extends DataTable{
 			->editColumn('name', function (Dosen $dosen){
 				return $dosen->user->name;
 			})
+			->editColumn('email', function (Dosen $dosen){
+				return $dosen->user->email;
+			})
 			->addColumn('action', 'admin.dosens.action');
 	}
 
@@ -65,8 +68,9 @@ class DosenDataTable extends DataTable{
 	protected function getColumns(){
 		return [
 			Column::computed('DT_RowIndex')->title('No.'),
-			Column::make('nidn')->title('NISN'),
+			Column::make('nidn')->title('NIDN'),
 			Column::make('name', 'user.name')->title('Nama'),
+			Column::make('email', 'user.email')->title('Email'),
 			Column::computed('action')->title('Aksi'),
 		];
 	}

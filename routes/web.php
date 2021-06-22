@@ -32,9 +32,11 @@ Route::prefix('admin/')->middleware('auth')->group(function (){
 
 	Route::resource('categories', Admin\CategoryController::class, ['as' => 'admin'])->except('show');
 
-	Route::patch('shops.reviews/publish-all', [Admin\ReviewController::class, 'publishAll'])->name('admin.reviews.publish-all');
-    Route::patch('shops.reviews/{review}/publish', [Admin\ReviewController::class, 'publish'])->name('admin.reviews.publish');
+	Route::patch('shops/reviews/publish-all', [Admin\ReviewController::class, 'publishAll'])->name('admin.reviews.publish-all');
+    Route::patch('shops/reviews/{review}/publish', [Admin\ReviewController::class, 'publish'])->name('admin.reviews.publish');
     Route::resource('shops.reviews', Admin\ReviewController::class, ['as' => 'admin'])->only('destroy')->shallow();
 
     Route::resource('shops.photos', Admin\PhotoController::class, ['as' => 'admin'])->only('create', 'store', 'destroy')->shallow();
+
+    Route::resource('dosens', Admin\DosenController::class, ['as' => 'admin'])->except('show');
 });

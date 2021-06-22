@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Dosen;
 use App\Models\Photo;
 use App\Models\Review;
 use App\Models\Shop;
@@ -25,6 +26,12 @@ class DatabaseSeeder extends Seeder
         Storage::delete(Storage::allFiles('photos'));
 
         User::factory()->create(['email' => 'admin@gmail.com']);
+        User::factory()->for(
+        	Dosen::factory(), 'userable'
+		)->create(['role' => 'dosen', 'email' => 'dosen@gmail.com']);
+		/*User::factory()->count(3)->create(['role' => 'dosen'])->each(function (User $user){
+			$user->userable()->associate(Dosen::factory()->create());
+		});*/
 
         Category::query()->create(['name' => 'Tradisional']);
         Category::query()->create(['name' => 'Oleh-Oleh']);

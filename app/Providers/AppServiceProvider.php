@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Dosen;
 use App\Models\Photo;
 use App\Models\Review;
 use App\Models\Shop;
+use App\Observers\DosenObserver;
 use App\Observers\PhotoObserver;
 use App\Observers\ReviewObserver;
 use App\Observers\ShopObserver;
@@ -45,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
 		});
 
 		/* Observer */
+		Dosen::observe(DosenObserver::class);
 		Photo::observe(PhotoObserver::class);
 		Review::observe(ReviewObserver::class);
 		Shop::observe(ShopObserver::class);

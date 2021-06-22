@@ -15,7 +15,7 @@ class LoginController extends Controller{
 			return redirect()->route('dosen.dashboard');
 		}
 		elseif($request->user()->is_mahasiswa){
-			return redirect()->route('dosen.dashboard');
+			return redirect()->route('mahasiswa.dashboard');
 		}
 		else{
 			Auth::logout();

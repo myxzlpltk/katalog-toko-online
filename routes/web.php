@@ -21,6 +21,8 @@ Route::get('toko/pencarian', [ShopController::class, 'search'])->name('shops.sea
 Route::get('toko/{shop:slug}', [ShopController::class, 'view'])->name('shops.view');
 Route::post('toko/{shop:slug}/add-review', [ShopController::class, 'addReview'])->name('shops.add-review');
 
+Route::get('dashboard', [LoginController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
 Route::prefix('admin/')->middleware('auth')->group(function (){
 	Route::redirect('/', 'dasbor');
     Route::get('dasbor', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');

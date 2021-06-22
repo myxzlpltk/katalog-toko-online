@@ -9,6 +9,10 @@ class Teacher extends Model{
 
     use HasFactory;
 
+	public function businesses(){
+		return $this->hasMany(Business::class);
+	}
+
     public function user(){
     	return $this->morphOne(User::class, 'userable');
 	}

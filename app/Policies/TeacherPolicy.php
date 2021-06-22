@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Dosen;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DosenPolicy
+class TeacherPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class DosenPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Dosen  $dosen
+     * @param  \App\Models\Teacher  $teacher
      * @return mixed
      */
-    public function view(User $user, Dosen $dosen)
+    public function view(User $user, Teacher $teacher)
     {
         //
     }
@@ -48,10 +48,10 @@ class DosenPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Dosen  $dosen
+     * @param  \App\Models\Teacher  $teacher
      * @return mixed
      */
-    public function update(User $user, Dosen $dosen)
+    public function update(User $user, Teacher $teacher)
     {
         //
     }
@@ -60,10 +60,10 @@ class DosenPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Dosen  $dosen
+     * @param  \App\Models\Teacher  $teacher
      * @return mixed
      */
-    public function delete(User $user, Dosen $dosen)
+    public function delete(User $user, Teacher $teacher)
     {
         //
     }
@@ -72,10 +72,10 @@ class DosenPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Dosen  $dosen
+     * @param  \App\Models\Teacher  $teacher
      * @return mixed
      */
-    public function restore(User $user, Dosen $dosen)
+    public function restore(User $user, Teacher $teacher)
     {
         //
     }
@@ -84,10 +84,10 @@ class DosenPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Dosen  $dosen
+     * @param  \App\Models\Teacher  $teacher
      * @return mixed
      */
-    public function forceDelete(User $user, Dosen $dosen)
+    public function forceDelete(User $user, Teacher $teacher)
     {
         //
     }

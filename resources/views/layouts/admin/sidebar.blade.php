@@ -35,8 +35,8 @@
 		</a>
 	</li>
 
-	<li class="nav-item @if(Route::is('admin.dosens.*')) active @endif">
-		<a class="nav-link" href="{{ route('admin.dosens.index') }}">
+	<li class="nav-item @if(Route::is('admin.teachers.*')) active @endif">
+		<a class="nav-link" href="{{ route('admin.teachers.index') }}">
 			<i class="fas fa-fw fa-chalkboard-teacher"></i>
 			<span>Data Dosen</span>
 		</a>

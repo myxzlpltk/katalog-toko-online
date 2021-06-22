@@ -3,13 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Category;
-use App\Models\Dosen;
+use App\Models\Teacher;
 use App\Models\Photo;
 use App\Models\Review;
 use App\Models\Shop;
 use App\Models\User;
 use App\Policies\CategoryPolicy;
-use App\Policies\DosenPolicy;
+use App\Policies\TeacherPolicy;
 use App\Policies\PhotoPolicy;
 use App\Policies\ReviewPolicy;
 use App\Policies\ShopPolicy;
@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Category::class => CategoryPolicy::class,
-		Dosen::class => DosenPolicy::class,
+		Teacher::class => TeacherPolicy::class,
 		Photo::class => PhotoPolicy::class,
 		Review::class => ReviewPolicy::class,
 		Shop::class => ShopPolicy::class,

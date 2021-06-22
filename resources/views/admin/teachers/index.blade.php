@@ -7,7 +7,7 @@
 @endsection
 
 @section('actions')
-	<a href="{{ route('admin.dosens.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
+	<a href="{{ route('admin.teachers.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
 @endsection
 
 @section('content')

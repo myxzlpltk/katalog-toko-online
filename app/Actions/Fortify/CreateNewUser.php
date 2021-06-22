@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\Mahasiswa;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
@@ -23,7 +23,7 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         Validator::make($input, [
-			'nim' => ['required', 'numeric', Rule::unique(Mahasiswa::class)],
+			'nim' => ['required', 'numeric', Rule::unique(Student::class)],
             'name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
@@ -35,16 +35,16 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-		$mahasiswa = new Mahasiswa();
-		$mahasiswa->nim = $input['nim'];
-		$mahasiswa->save();
+		$student = new Student();
+		$student->nim = $input['nim'];
+		$student->save();
 
 		$user = new User();
 		$user->name = $input['name'];
 		$user->email = $input['email'];
 		$user->password = Hash::make($input['password']);
-		$user->role = 'mahasiswa';
-		$user->userable()->associate($mahasiswa);
+		$user->role = 'student';
+		$user->userable()->associate($student);
 		$user->save();
 
 		return $user;

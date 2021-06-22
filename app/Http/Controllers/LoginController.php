@@ -11,11 +11,11 @@ class LoginController extends Controller{
 		if($request->user()->is_admin){
 			return redirect()->route('admin.dashboard');
 		}
-		elseif($request->user()->is_dosen){
-			return redirect()->route('dosen.dashboard');
+		elseif($request->user()->is_teacher){
+			return redirect()->route('teacher.dashboard');
 		}
-		elseif($request->user()->is_mahasiswa){
-			return redirect()->route('mahasiswa.dashboard');
+		elseif($request->user()->is_student){
+			return redirect()->route('student.dashboard');
 		}
 		else{
 			Auth::logout();

@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Dosen;
+use App\Models\Teacher;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class DosenDataTable extends DataTable{
+class TeacherDataTable extends DataTable{
 
 	/**
 	 * Build DataTable class.
@@ -21,22 +21,22 @@ class DosenDataTable extends DataTable{
 		return datatables()
 			->eloquent($query)
 			->addIndexColumn()
-			->editColumn('name', function (Dosen $dosen){
-				return $dosen->user->name;
+			->editColumn('name', function (Teacher $teacher){
+				return $teacher->user->name;
 			})
-			->editColumn('email', function (Dosen $dosen){
-				return $dosen->user->email;
+			->editColumn('email', function (Teacher $teacher){
+				return $teacher->user->email;
 			})
-			->addColumn('action', 'admin.dosens.action');
+			->addColumn('action', 'admin.teachers.action');
 	}
 
 	/**
 	 * Get query source of dataTable.
 	 *
-	 * @param \App\Models\Dosen $model
+	 * @param \App\Models\Teacher $model
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
-	public function query(Dosen $model){
+	public function query(Teacher $model){
 		return $model->newQuery()
 			->has('user')
 			->with('user');
@@ -49,7 +49,7 @@ class DosenDataTable extends DataTable{
 	 */
 	public function html(){
 		return $this->builder()
-			->setTableId('dosen-table')
+			->setTableId('teacher-table')
 			->columns($this->getColumns())
 			->minifiedAjax()
 			->orderBy(1, 'asc')
@@ -81,6 +81,6 @@ class DosenDataTable extends DataTable{
 	 * @return string
 	 */
 	protected function filename(){
-		return 'Dosen_' . date('YmdHis');
+		return 'Teacher_' . date('YmdHis');
 	}
 }

@@ -11,7 +11,7 @@
 			<h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-clipboard-list fa-fw"></i> Formulir</h6>
 		</div>
 		<div class="card-body">
-			<form action="{{ route('admin.dosens.store') }}" method="post" enctype="multipart/form-data">
+			<form action="{{ route('admin.teachers.store') }}" method="post" enctype="multipart/form-data">
 				@csrf
 
 				<div class="form-group">

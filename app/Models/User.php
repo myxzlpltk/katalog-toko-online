@@ -49,11 +49,11 @@ class User extends Authenticatable
     	return $this->role == 'admin';
 	}
 
-	public function getIsMahasiswaAttribute(){
-		return $this->role == 'mahasiswa';
+	public function getIsStudentAttribute(){
+		return $this->role == 'student';
 	}
 
-	public function getIsDosenAttribute(){
-		return $this->role == 'dosen';
+	public function getIsTeacherAttribute(){
+		return $this->role == 'teacher';
 	}
 }

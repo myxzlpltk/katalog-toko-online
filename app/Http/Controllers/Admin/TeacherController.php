@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\DosenDataTable;
+use App\DataTables\TeacherDataTable;
 use App\Http\Controllers\Controller;
-use App\Models\Dosen;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
-class DosenController extends Controller{
+class TeacherController extends Controller{
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DosenDataTable $dataTable){
-    	return $dataTable->render('admin.dosens.index');
+    public function index(TeacherDataTable $dataTable){
+    	return $dataTable->render('admin.teachers.index');
     }
 
     /**
@@ -28,7 +28,7 @@ class DosenController extends Controller{
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create(){
-        return view('admin.dosens.create');
+        return view('admin.teachers.create');
     }
 
     /**
@@ -39,80 +39,80 @@ class DosenController extends Controller{
 	 */
     public function store(Request $request){
         $request->validate([
-        	'nidn' => ['required', Rule::unique(Dosen::class)],
+        	'nidn' => ['required', Rule::unique(Teacher::class)],
 			'name' => 'required|string|max:255',
 			'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)],
 			'password' => 'required|string|min:8',
 		]);
 
-		$dosen = new Dosen();
-		$dosen->nidn = $request->nidn;
-		$dosen->save();
+		$teacher = new Teacher();
+		$teacher->nidn = $request->nidn;
+		$teacher->save();
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->role = 'dosen';
+        $user->role = 'teacher';
 		$user->email_verified_at = now();
-		$user->userable()->associate($dosen);
+		$user->userable()->associate($teacher);
         $user->save();
 
-        return redirect()->route('admin.dosens.index')->with('success', 'Data telah ditambahkan.');
+        return redirect()->route('admin.teachers.index')->with('success', 'Data telah ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Dosen  $dosen
+     * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function show(Dosen $dosen){
+    public function show(Teacher $teacher){
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Dosen  $dosen
+     * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit(Dosen $dosen){
-        return view('admin.dosens.edit', compact('dosen'));
+    public function edit(Teacher $teacher){
+        return view('admin.teachers.edit', compact('teacher'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Dosen  $dosen
+     * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\RedirectResponse
 	 */
-    public function update(Request $request, Dosen $dosen){
+    public function update(Request $request, Teacher $teacher){
 		$request->validate([
-			'nidn' => ['required', Rule::unique(Dosen::class)->ignoreModel($dosen)],
+			'nidn' => ['required', Rule::unique(Teacher::class)->ignoreModel($teacher)],
 			'name' => 'required|string|max:255',
-			'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->ignoreModel($dosen->user)],
+			'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->ignoreModel($teacher->user)],
 		]);
 
-		$dosen->nidn = $request->nidn;
-		$dosen->save();
+		$teacher->nidn = $request->nidn;
+		$teacher->save();
 
-		$dosen->user->name = $request->name;
-		$dosen->user->email = $request->email;
-		$dosen->user->save();
+		$teacher->user->name = $request->name;
+		$teacher->user->email = $request->email;
+		$teacher->user->save();
 
-		return redirect()->route('admin.dosens.index')->with('success', 'Data telah diperbarui.');
+		return redirect()->route('admin.teachers.index')->with('success', 'Data telah diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Dosen  $dosen
+     * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\RedirectResponse
 	 */
-    public function destroy(Dosen $dosen){
-		$dosen->delete();
+    public function destroy(Teacher $teacher){
+		$teacher->delete();
 
 		return redirect()->back()->with('success', 'Data telah dihapus.');
     }

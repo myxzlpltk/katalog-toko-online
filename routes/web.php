@@ -38,5 +38,5 @@ Route::prefix('admin/')->middleware(['auth', 'can:is-admin'])->group(function ()
 
     Route::resource('shops.photos', Admin\PhotoController::class, ['as' => 'admin'])->only('create', 'store', 'destroy')->shallow();
 
-    Route::resource('dosens', Admin\DosenController::class, ['as' => 'admin'])->except('show');
+    Route::resource('teachers', Admin\TeacherController::class, ['as' => 'admin'])->except('show');
 });

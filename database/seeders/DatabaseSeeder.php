@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use App\Models\Dosen;
-use App\Models\Mahasiswa;
+use App\Models\Teacher;
+use App\Models\Student;
 use App\Models\Photo;
 use App\Models\Review;
 use App\Models\Shop;
@@ -28,11 +28,11 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create(['email' => 'admin@gmail.com']);
         User::factory()->for(
-        	Dosen::factory(), 'userable'
-		)->create(['role' => 'dosen', 'email' => 'dosen@gmail.com']);
+        	Teacher::factory(), 'userable'
+		)->create(['role' => 'teacher', 'email' => 'teacher@gmail.com']);
 		User::factory()->for(
-			Mahasiswa::factory(), 'userable'
-		)->create(['role' => 'mahasiswa', 'email' => 'mahasiswa@gmail.com']);
+			Student::factory(), 'userable'
+		)->create(['role' => 'student', 'email' => 'student@gmail.com']);
 
         Category::query()->create(['name' => 'Tradisional']);
         Category::query()->create(['name' => 'Oleh-Oleh']);

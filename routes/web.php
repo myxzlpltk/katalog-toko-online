@@ -23,7 +23,7 @@ Route::post('toko/{shop:slug}/add-review', [ShopController::class, 'addReview'])
 
 Route::get('dashboard', [LoginController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 
-Route::prefix('admin/')->middleware('auth')->group(function (){
+Route::prefix('admin/')->middleware(['auth', 'can:is-admin'])->group(function (){
 	Route::redirect('/', 'dasbor');
     Route::get('dasbor', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('profil', [Admin\ProfileController::class, 'index'])->name('admin.profile');

@@ -7,6 +7,7 @@ use App\Models\Dosen;
 use App\Models\Photo;
 use App\Models\Review;
 use App\Models\Shop;
+use App\Models\User;
 use App\Policies\CategoryPolicy;
 use App\Policies\DosenPolicy;
 use App\Policies\PhotoPolicy;
@@ -39,6 +40,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+		Gate::define('is-admin', function (User $user) {
+			return $user->is_admin;
+		});
     }
 }

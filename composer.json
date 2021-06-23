@@ -8,6 +8,7 @@
         "php": "^7.3|^8.0",
         "ext-gd": "*",
         "artesaos/seotools": "^0.20.0",
+        "diglactic/laravel-breadcrumbs": "^7.0",
         "fakerphp/faker": "^1.9.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",

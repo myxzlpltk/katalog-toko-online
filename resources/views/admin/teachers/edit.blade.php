@@ -5,6 +5,10 @@
 @section('stylesheets')
 @endsection
 
+@section('breadcrumbs')
+	{{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.teachers.edit', $teacher) }}
+@endsection
+
 @section('content')
 	<div class="card shadow mb-3">
 		<div class="card-header py-3">

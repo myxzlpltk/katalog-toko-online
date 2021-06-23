@@ -1,13 +1,15 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Data Kategori')
+@section('title', 'Data Bidang Usaha')
 
 @section('stylesheets')
 	<link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}">
 @endsection
 
 @section('actions')
-	<a href="{{ route('admin.categories.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
+	@can('create', \App\Models\BusinessField::class)
+	<a href="{{ route('admin.business-fields.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
+	@endcan
 @endsection
 
 @section('content')
@@ -19,27 +21,33 @@
 						<tr>
 							<th>No.</th>
 							<th>Nama</th>
-							<th>Jumlah Toko</th>
+							<th>Total Jenis Usaha</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($categories as $category)
+						@foreach($businessFields as $businessField)
 						<tr>
 							<td>{{ $loop->iteration }}</td>
-							<td>{{ $category->name }}</td>
-							<td>{{ $category->shops_count }} Toko</td>
+							<td>{{ $businessField->name }}</td>
+							<td>{{ $businessField->business_types_count }} Jenis</td>
 							<td>
-								<a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-warning btn-sm">Edit</a>
+								@can('view', $businessField)
+									<a href="{{ route('admin.business-fields.business-types.index', $businessField) }}" class="btn btn-primary btn-sm">Lihat</a>
+								@endcan
 
-								@if($category->shops_count == 0)
-								<form action="{{ route('admin.categories.destroy', $category) }}" class="d-inline" method="POST">
+								@can('update', $businessField)
+									<a href="{{ route('admin.business-fields.edit', $businessField) }}" class="btn btn-warning btn-sm">Edit</a>
+								@endcan
+
+								@can('delete', $businessField)
+								<form action="{{ route('admin.business-fields.destroy', $businessField) }}" class="d-inline" method="POST">
 									@csrf
 									@method('DELETE')
 
 									<button type="submit" class="btn btn-danger btn-sm" @confirmation>Hapus</button>
 								</form>
-								@endif
+								@endcan
 							</td>
 						</tr>
 						@endforeach

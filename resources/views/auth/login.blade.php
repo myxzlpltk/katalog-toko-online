@@ -42,18 +42,18 @@
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary btn-user btn-block">Masuk</button>
+
+										<div class="mt-3 text-center">
+											<a href="{{ route('password.email') }}"><small>Lupa kata sandi?</small></a>
+										</div>
+
+										<hr/>
+
+										<div class="mt-3 text-center">
+											<p><small>Mahasiswa dan belum mempunyai akun?</small></p>
+											<a href="{{ route('register') }}" class="btn btn-outline-primary btn-user btn-block">Daftarkan Saya!</a>
+										</div>
 									</form>
-
-									<div class="mt-3 text-center">
-										<a href="{{ route('password.email') }}"><small>Lupa kata sandi?</small></a>
-									</div>
-
-									<hr/>
-
-									<div class="mt-3 text-center">
-										<p><small>Mahasiswa dan belum mempunyai akun?</small></p>
-										<a href="{{ route('register') }}" class="btn btn-outline-primary btn-block">Daftarkan Saya!</a>
-									</div>
 								</div>
 							</div>
 						</div>

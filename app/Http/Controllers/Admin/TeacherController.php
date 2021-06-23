@@ -19,6 +19,8 @@ class TeacherController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(TeacherDataTable $dataTable){
+    	$this->authorize('view-any', Teacher::class);
+
     	return $dataTable->render('admin.teachers.index');
     }
 
@@ -28,6 +30,8 @@ class TeacherController extends Controller{
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create(){
+		$this->authorize('create', Teacher::class);
+
         return view('admin.teachers.create');
     }
 
@@ -38,6 +42,8 @@ class TeacherController extends Controller{
      * @return \Illuminate\Http\RedirectResponse
 	 */
     public function store(Request $request){
+		$this->authorize('create', Teacher::class);
+
         $request->validate([
         	'nidn' => ['required', Rule::unique(Teacher::class)],
 			'name' => 'required|string|max:255',
@@ -68,7 +74,6 @@ class TeacherController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function show(Teacher $teacher){
-        //
     }
 
     /**
@@ -78,6 +83,8 @@ class TeacherController extends Controller{
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(Teacher $teacher){
+		$this->authorize('update', $teacher);
+
         return view('admin.teachers.edit', compact('teacher'));
     }
 
@@ -89,6 +96,8 @@ class TeacherController extends Controller{
      * @return \Illuminate\Http\RedirectResponse
 	 */
     public function update(Request $request, Teacher $teacher){
+		$this->authorize('update', $teacher);
+
 		$request->validate([
 			'nidn' => ['required', Rule::unique(Teacher::class)->ignoreModel($teacher)],
 			'name' => 'required|string|max:255',
@@ -112,6 +121,8 @@ class TeacherController extends Controller{
      * @return \Illuminate\Http\RedirectResponse
 	 */
     public function destroy(Teacher $teacher){
+		$this->authorize('delete', $teacher);
+
 		$teacher->delete();
 
 		return redirect()->back()->with('success', 'Data telah dihapus.');

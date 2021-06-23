@@ -40,6 +40,12 @@
 						</div>
 					</div>
 
+					@hasSection('breadcrumbs')
+						@yield('breadcrumbs')
+					@else
+						{{ \Diglactic\Breadcrumbs\Breadcrumbs::render(\Illuminate\Support\Facades\Route::currentRouteName()) }}
+					@endif
+
 					@include('layouts.admin.flash')
 
 					@yield('content')

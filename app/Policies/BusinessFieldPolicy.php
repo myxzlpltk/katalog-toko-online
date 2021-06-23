@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Teacher;
+use App\Models\BusinessField;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TeacherPolicy{
+class BusinessFieldPolicy{
 
     use HandlesAuthorization;
 
@@ -24,11 +24,11 @@ class TeacherPolicy{
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Teacher  $teacher
+     * @param  \App\Models\BusinessField  $businessField
      * @return mixed
      */
-    public function view(User $user, Teacher $teacher){
-        return $user->is_admin;
+    public function view(User $user, BusinessField $businessField){
+		return $user->is_admin;
     }
 
     /**
@@ -45,10 +45,10 @@ class TeacherPolicy{
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Teacher  $teacher
+     * @param  \App\Models\BusinessField  $businessField
      * @return mixed
      */
-    public function update(User $user, Teacher $teacher){
+    public function update(User $user, BusinessField $businessField){
 		return $user->is_admin;
     }
 
@@ -56,21 +56,21 @@ class TeacherPolicy{
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Teacher  $teacher
+     * @param  \App\Models\BusinessField  $businessField
      * @return mixed
      */
-    public function delete(User $user, Teacher $teacher){
-		return $user->is_admin;
+    public function delete(User $user, BusinessField $businessField){
+		return $user->is_admin && $businessField->business_types_count == 0;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Teacher  $teacher
+     * @param  \App\Models\BusinessField  $businessField
      * @return mixed
      */
-    public function restore(User $user, Teacher $teacher){
+    public function restore(User $user, BusinessField $businessField){
         //
     }
 
@@ -78,10 +78,10 @@ class TeacherPolicy{
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Teacher  $teacher
+     * @param  \App\Models\BusinessField  $businessField
      * @return mixed
      */
-    public function forceDelete(User $user, Teacher $teacher){
+    public function forceDelete(User $user, BusinessField $businessField){
         //
     }
 }

@@ -28,19 +28,23 @@
 		</a>
 	</li>
 
-	<li class="nav-item @if(Route::is('admin.categories.*')) active @endif">
-		<a class="nav-link" href="{{ route('admin.categories.index') }}">
+	@can('view-any', \App\Models\BusinessField::class)
+	<li class="nav-item @if(Route::is('admin.business-fields.*')) active @endif">
+		<a class="nav-link" href="{{ route('admin.business-fields.index') }}">
 			<i class="fas fa-fw fa-tags"></i>
-			<span>Data Kategori</span>
+			<span>Data Bidang Usaha</span>
 		</a>
 	</li>
+	@endcan
 
+	@can('view-any', \App\Models\Teacher::class)
 	<li class="nav-item @if(Route::is('admin.teachers.*')) active @endif">
 		<a class="nav-link" href="{{ route('admin.teachers.index') }}">
 			<i class="fas fa-fw fa-chalkboard-teacher"></i>
 			<span>Data Dosen</span>
 		</a>
 	</li>
+	@endcan
 
 	<hr class="sidebar-divider d-none d-md-block">
 

@@ -7,7 +7,9 @@
 @endsection
 
 @section('actions')
+	@can('create', \App\Models\Teacher::class)
 	<a href="{{ route('admin.teachers.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
+	@endcan
 @endsection
 
 @section('content')

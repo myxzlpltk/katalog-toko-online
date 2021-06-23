@@ -1,8 +1,12 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Tambah Kategori')
+@section('title', 'Tambah Jenis Usaha')
 
 @section('stylesheets')
+@endsection
+
+@section('breadcrumbs')
+	{{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.business-fields.business-types.create', $businessField) }}
 @endsection
 
 @section('content')
@@ -11,7 +15,7 @@
 			<h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-clipboard-list fa-fw"></i> Formulir</h6>
 		</div>
 		<div class="card-body">
-			<form action="{{ route('admin.categories.store') }}" method="post" enctype="multipart/form-data">
+			<form action="{{ route('admin.business-fields.business-types.store', $businessField) }}" method="post" enctype="multipart/form-data">
 				@csrf
 
 				<div class="form-group">

@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use App\Models\Business;
+use App\Models\BusinessField;
+use App\Models\BusinessType;
 use App\Models\Teacher;
+use App\Observers\BusinessFieldObserver;
 use App\Observers\BusinessObserver;
+use App\Observers\BusinessTypeObserver;
 use App\Observers\TeacherObserver;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
@@ -44,6 +48,8 @@ class AppServiceProvider extends ServiceProvider
 
 		/* Observer */
 		Business::observe(BusinessObserver::class);
+		BusinessField::observe(BusinessFieldObserver::class);
+		BusinessType::observe(BusinessTypeObserver::class);
 		Teacher::observe(TeacherObserver::class);
     }
 }

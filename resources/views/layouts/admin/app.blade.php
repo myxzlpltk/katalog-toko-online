@@ -23,7 +23,9 @@
 </head>
 <body id="page-top">
 
-@section('simple')
+@hasSection('simple')
+	@yield('simple')
+@else
 	<div id="wrapper">
 
 		@include('layouts.admin.sidebar')
@@ -62,7 +64,7 @@
 	</a>
 
 	@include('layouts.admin.logout-modal')
-@show
+@endif
 
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

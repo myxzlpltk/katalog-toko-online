@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Console;
 
 use App\DataTables\ReviewDataTable;
 use App\DataTables\Scopes\PublishedReview;

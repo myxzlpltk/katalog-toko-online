@@ -17,11 +17,13 @@ class CreateBusinessesTable extends Migration
             $table->id();
 			$table->foreignId('business_type_id');
 			$table->foreignId('teacher_id');
+			$table->foreignId('owner_id');
 			$table->string('name');
 			$table->string('slug')->nullable()->unique();
 			$table->longText('description');
 			$table->string('logo')->nullable();
 			$table->string('tagline');
+			$table->string('invitation_code')->nullable();
             $table->timestamps();
         });
     }

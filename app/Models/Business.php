@@ -10,27 +10,26 @@ class Business extends Model{
     use HasFactory;
 
 	public function activeMembers(){
-		return $this->belongsToMany(Student::class)
-			->using(BusinessStudent::class)
-			->where('is_valid', true);
+		return $this->hasMany(Student::class)->whereNotNull('validated_at');
 	}
 
     public function businessType(){
     	return $this->belongsTo(BusinessType::class);
 	}
 
+	public function feedplans(){
+		return $this->hasMany(FeedPlan::class);
+	}
+
 	public function members(){
-    	return $this->belongsToMany(Student::class)
-			->using(BusinessStudent::class);
+    	return $this->hasMany(Student::class);
+	}
+
+	public function owner(){
+		return $this->belongsTo(Student::class);
 	}
 
 	public function teacher(){
     	return $this->belongsTo(Teacher::class);
-	}
-
-	public function getOwnerAttribute(){
-		return $this->members()
-			->where('role', 'owner')
-			->first();
 	}
 }

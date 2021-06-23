@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Console;
 
 use App\DataTables\TeacherDataTable;
 use App\Http\Controllers\Controller;

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBusinessStudentTable extends Migration
+class CreateFeedPlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateBusinessStudentTable extends Migration
      */
     public function up()
     {
-        Schema::create('business_student', function (Blueprint $table) {
+        Schema::create('feed_plans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_id');
-            $table->foreignId('student_id');
-            $table->enum('role', ['owner', 'member']);
-            $table->boolean('is_valid')->default(false);
-            $table->timestamp('validated_at')->nullable();
+            $table->unsignedInteger('feed_index');
+            $table->dateTime('plan_date');
+            $table->string('topic');
+            $table->text('content');
+            $table->string('brief_image');
+            $table->text('caption');
+            $table->text('headline');
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class CreateBusinessStudentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('business_student');
+        Schema::dropIfExists('feed_plans');
     }
 }

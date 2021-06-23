@@ -21,17 +21,15 @@ Route::get('toko/pencarian', [ShopController::class, 'search'])->name('shops.sea
 Route::get('toko/{shop:slug}', [ShopController::class, 'view'])->name('shops.view');
 Route::post('toko/{shop:slug}/add-review', [ShopController::class, 'addReview'])->name('shops.add-review');
 
-Route::get('dashboard', [LoginController::class, 'dashboard'])->middleware('auth')->name('dashboard');
-
-Route::prefix('console/')->middleware(['auth', 'can:is-admin'])->group(function (){
+Route::prefix('console/')->middleware(['auth', 'verified'])->group(function (){
 	Route::redirect('/', 'console/dasbor');
-    Route::get('dasbor', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('profil', [Admin\ProfileController::class, 'index'])->name('admin.profile');
+    Route::get('dasbor', [Console\DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('profil', [Console\ProfileController::class, 'index'])->name('admin.profile');
 
-    Route::resource('shops', Admin\ShopController::class, ['as' => 'admin']);
+    Route::resource('shops', Console\ShopController::class, ['as' => 'admin']);
 
-    Route::resource('business-fields', Admin\BusinessFieldController::class, ['as' => 'admin'])->except('show');
-    Route::resource('business-fields.business-types', Admin\BusinessTypeController::class, ['as' => 'admin'])->shallow()->except('show');
+    Route::resource('business-fields', Console\BusinessFieldController::class, ['as' => 'admin'])->except('show');
+    Route::resource('business-fields.business-types', Console\BusinessTypeController::class, ['as' => 'admin'])->shallow()->except('show');
 
-    Route::resource('teachers', Admin\TeacherController::class, ['as' => 'admin'])->except('show');
+    Route::resource('teachers', Console\TeacherController::class, ['as' => 'admin'])->except('show');
 });

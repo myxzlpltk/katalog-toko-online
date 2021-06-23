@@ -9,16 +9,12 @@ class Student extends Model{
 
     use HasFactory;
 
-	public function businesses(){
-		return $this->belongsToMany(Business::class)->using(BusinessStudent::class);
+	public function business(){
+		return $this->belongsTo(Business::class);
 	}
 
 	public function user(){
 		return $this->morphOne(User::class, 'userable');
-	}
-
-	public function getActiveBusinessAttribute(){
-		return $this->businesses()->first();
 	}
 
 	public function getNameAttribute(){

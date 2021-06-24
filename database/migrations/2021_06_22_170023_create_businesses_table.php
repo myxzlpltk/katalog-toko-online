@@ -23,7 +23,7 @@ class CreateBusinessesTable extends Migration
 			$table->longText('description');
 			$table->string('logo')->nullable();
 			$table->string('tagline');
-			$table->string('invitation_code')->nullable();
+			$table->string('invitation_code')->nullable()->unique();
             $table->timestamps();
         });
     }

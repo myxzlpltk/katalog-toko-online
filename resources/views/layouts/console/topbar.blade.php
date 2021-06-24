@@ -9,7 +9,7 @@
         <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
       </a>
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-        <a class="dropdown-item @if(Route::is('admin.profile')) active @endif" href="{{ route('admin.profile') }}">
+        <a class="dropdown-item @if(Route::is('console.profile')) active @endif" href="{{ route('console.profile') }}">
           <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
           Profil
         </a>

@@ -1,15 +1,19 @@
-@extends('layouts.admin.app')
+@extends('layouts.console.app')
 
-@section('title', 'Data Bidang Usaha')
+@section('title', 'Data Jenis Usaha')
 
 @section('stylesheets')
 	<link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}">
 @endsection
 
 @section('actions')
-	@can('create', \App\Models\BusinessField::class)
-	<a href="{{ route('admin.business-fields.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
+	@can('create', \App\Models\BusinessType::class)
+	<a href="{{ route('console.business-fields.business-types.create', $businessField) }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
 	@endcan
+@endsection
+
+@section('breadcrumbs')
+	{{ \Diglactic\Breadcrumbs\Breadcrumbs::render('console.business-fields.business-types.index', $businessField) }}
 @endsection
 
 @section('content')
@@ -21,27 +25,21 @@
 						<tr>
 							<th>No.</th>
 							<th>Nama</th>
-							<th>Total Jenis Usaha</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($businessFields as $businessField)
+						@foreach($businessField->businessTypes as $businessType)
 						<tr>
 							<td>{{ $loop->iteration }}</td>
-							<td>{{ $businessField->name }}</td>
-							<td>{{ $businessField->business_types_count }} Jenis</td>
+							<td>{{ $businessType->name }}</td>
 							<td>
-								@can('view', $businessField)
-									<a href="{{ route('admin.business-fields.business-types.index', $businessField) }}" class="btn btn-primary btn-sm">Lihat</a>
+								@can('update', $businessType)
+									<a href="{{ route('console.business-types.edit', $businessType) }}" class="btn btn-warning btn-sm">Edit</a>
 								@endcan
 
-								@can('update', $businessField)
-									<a href="{{ route('admin.business-fields.edit', $businessField) }}" class="btn btn-warning btn-sm">Edit</a>
-								@endcan
-
-								@can('delete', $businessField)
-								<form action="{{ route('admin.business-fields.destroy', $businessField) }}" class="d-inline" method="POST">
+								@can('delete', $businessType)
+								<form action="{{ route('console.business-types.destroy', $businessType) }}" class="d-inline" method="POST">
 									@csrf
 									@method('DELETE')
 

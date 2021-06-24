@@ -8,7 +8,17 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller{
 
     public function index(Request $request){
-        return view('admin.dashboard');
+    	$user = $request->user();
+
+        if($user->is_admin){
+			return view('console.admin-dashboard');
+		}
+        elseif($user->is_student){
+			return view('console.student-dashboard', compact('user'));
+		}
+        else{
+        	abort(403);
+		}
     }
 
 }

@@ -17,6 +17,10 @@ class Business extends Model{
     	return $this->belongsTo(BusinessType::class);
 	}
 
+	public function candidateMembers(){
+		return $this->hasMany(Student::class)->whereNull('validated_at');
+	}
+
 	public function feedplans(){
 		return $this->hasMany(FeedPlan::class);
 	}
@@ -31,5 +35,14 @@ class Business extends Model{
 
 	public function teacher(){
     	return $this->belongsTo(Teacher::class);
+	}
+
+	public function getLogoPathAttribute(){
+		if($this->logo){
+			return asset("storage/logos/{$this->logo}");
+		}
+		else{
+			return asset('img/shop-logo-default.png');
+		}
 	}
 }

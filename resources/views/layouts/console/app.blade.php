@@ -28,34 +28,36 @@
 @else
 	<div id="wrapper">
 
-		@include('layouts.admin.sidebar')
+		@include('layouts.console.sidebar')
 
 		<div id="content-wrapper" class="d-flex flex-column">
 			<div id="content">
-				@include('layouts.admin.topbar')
+				@include('layouts.console.topbar')
 
 				<div class="container-fluid">
-					<div class="d-sm-flex align-items-center justify-content-between mb-4">
+					<div class="d-sm-flex align-items-center justify-content-between mb-2">
 						<h1 class="h3 mb-0 text-gray-800">@yield('title', 'Halaman Kosong')</h1>
 						<div>
 							@yield('actions')
 						</div>
 					</div>
 
-					@hasSection('breadcrumbs')
-						@yield('breadcrumbs')
-					@else
-						{{ \Diglactic\Breadcrumbs\Breadcrumbs::render(\Illuminate\Support\Facades\Route::currentRouteName()) }}
-					@endif
+					<div class="mb-4">
+						@hasSection('breadcrumbs')
+							@yield('breadcrumbs')
+						@else
+							{{ \Diglactic\Breadcrumbs\Breadcrumbs::render(\Illuminate\Support\Facades\Route::currentRouteName()) }}
+						@endif
+					</div>
 
-					@include('layouts.admin.flash')
+					@include('layouts.console.flash')
 
 					@yield('content')
 				</div>
 
 			</div>
 
-			@include('layouts.admin.footer')
+			@include('layouts.console.footer')
 		</div>
 	</div>
 
@@ -63,7 +65,7 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 
-	@include('layouts.admin.logout-modal')
+	@include('layouts.console.logout-modal')
 @endif
 
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>

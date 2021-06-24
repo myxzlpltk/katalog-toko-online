@@ -1,13 +1,13 @@
-@extends('layouts.admin.app')
+@extends('layouts.console.app')
 
-@section('title', 'Data Toko')
+@section('title', 'Data Usaha')
 
 @section('stylesheets')
 	<link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}">
 @endsection
 
 @section('actions')
-	<a href="{{ route('admin.shops.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
+	<a href="{{ route('console.businesses.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
 @endsection
 
 @section('content')

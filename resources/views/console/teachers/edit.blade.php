@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.console.app')
 
 @section('title', 'Edit Dosen')
 
@@ -6,7 +6,7 @@
 @endsection
 
 @section('breadcrumbs')
-	{{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.teachers.edit', $teacher) }}
+	{{ \Diglactic\Breadcrumbs\Breadcrumbs::render('console.teachers.edit', $teacher) }}
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
 			<h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-clipboard-list fa-fw"></i> Formulir</h6>
 		</div>
 		<div class="card-body">
-			<form action="{{ route('admin.teachers.update', $teacher) }}" method="post" enctype="multipart/form-data">
+			<form action="{{ route('console.teachers.update', $teacher) }}" method="post" enctype="multipart/form-data">
 				@csrf
 				@method('PATCH')
 

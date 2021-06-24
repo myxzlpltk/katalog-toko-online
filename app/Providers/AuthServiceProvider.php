@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Business;
 use App\Models\BusinessField;
 use App\Models\BusinessType;
 use App\Models\Teacher;
 use App\Models\Shop;
 use App\Models\User;
 use App\Policies\BusinessFieldPolicy;
+use App\Policies\BusinessPolicy;
 use App\Policies\BusinessTypePolicy;
 use App\Policies\TeacherPolicy;
 use App\Policies\ShopPolicy;
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+    	Business::class => BusinessPolicy::class,
     	BusinessField::class => BusinessFieldPolicy::class,
 		BusinessType::class => BusinessTypePolicy::class,
 		Teacher::class => TeacherPolicy::class,

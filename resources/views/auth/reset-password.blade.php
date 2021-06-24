@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.console.app')
 
 @section('title', "Reset kata sandi")
 
@@ -19,7 +19,7 @@
 							<div class="col-lg-6">
 								<div class="p-5">
 
-									@include('layouts.admin.flash')
+									@include('layouts.console.flash')
 
 									<div class="text-center">
 										<h1 class="h4 text-gray-900 mb-2">Reset Kata Sandi</h1>

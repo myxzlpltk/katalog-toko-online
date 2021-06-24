@@ -10,6 +10,7 @@ class BusinessField extends Model{
     use HasFactory;
 
     public function businessTypes(){
-    	return $this->hasMany(BusinessType::class);
+    	return $this->hasMany(BusinessType::class)
+			->orderBy('name');
 	}
 }

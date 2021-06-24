@@ -20,7 +20,7 @@ class BusinessTypeController extends Controller{
     public function index(BusinessField $businessField){
 		$this->authorize('view-any', BusinessType::class);
 
-		return view('admin.business-types.index', compact('businessField'));
+		return view('console.business-types.index', compact('businessField'));
     }
 
     /**
@@ -32,7 +32,7 @@ class BusinessTypeController extends Controller{
     public function create(BusinessField $businessField){
 		$this->authorize('create', BusinessType::class);
 
-		return view('admin.business-types.create', compact('businessField'));
+		return view('console.business-types.create', compact('businessField'));
     }
 
     /**
@@ -57,7 +57,7 @@ class BusinessTypeController extends Controller{
 		$businessTypes->name = $request->name;
 		$businessTypes->save();
 
-		return redirect()->route('admin.business-fields.business-types.index', $businessField)->with('success', 'Data telah ditambahkan');
+		return redirect()->route('console.business-fields.business-types.index', $businessField)->with('success', 'Data telah ditambahkan');
     }
 
     /**
@@ -81,7 +81,7 @@ class BusinessTypeController extends Controller{
     public function edit(BusinessField $businessField, BusinessType $businessType){
 		$this->authorize('update', $businessType);
 
-		return view('admin.business-types.edit', compact('businessType'));
+		return view('console.business-types.edit', compact('businessType'));
     }
 
     /**
@@ -105,7 +105,7 @@ class BusinessTypeController extends Controller{
 		$businessType->name = $request->name;
 		$businessType->save();
 
-		return redirect()->route('admin.business-fields.business-types.index', $businessType->businessField)->with('success', 'Data telah diperbarui');
+		return redirect()->route('console.business-fields.business-types.index', $businessType->businessField)->with('success', 'Data telah diperbarui');
     }
 
     /**

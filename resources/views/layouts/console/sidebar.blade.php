@@ -8,8 +8,8 @@
 
 	<hr class="sidebar-divider my-0">
 
-	<li class="nav-item @if(Route::is('admin.dashboard')) active @endif">
-		<a class="nav-link" href="{{ route('admin.dashboard') }}">
+	<li class="nav-item @if(Route::is('console.dashboard')) active @endif">
+		<a class="nav-link" href="{{ route('console.dashboard') }}">
 			<i class="fas fa-fw fa-tachometer-alt"></i>
 			<span>Dasbor</span>
 		</a>
@@ -21,16 +21,16 @@
 		Data Primer
 	</div>
 
-	<li class="nav-item @if(Route::is('admin.shops.*')) active @endif">
-		<a class="nav-link" href="{{ route('admin.shops.index') }}">
+	<li class="nav-item @if(Route::is('console.businesses.*')) active @endif">
+		<a class="nav-link" href="{{ route('console.businesses.index') }}">
 			<i class="fas fa-fw fa-store"></i>
-			<span>Data Toko</span>
+			<span>Data Usaha</span>
 		</a>
 	</li>
 
 	@can('view-any', \App\Models\BusinessField::class)
-	<li class="nav-item @if(Route::is('admin.business-fields.*')) active @endif">
-		<a class="nav-link" href="{{ route('admin.business-fields.index') }}">
+	<li class="nav-item @if(Route::is('console.business-fields.*')) active @endif">
+		<a class="nav-link" href="{{ route('console.business-fields.index') }}">
 			<i class="fas fa-fw fa-tags"></i>
 			<span>Data Bidang Usaha</span>
 		</a>
@@ -38,8 +38,8 @@
 	@endcan
 
 	@can('view-any', \App\Models\Teacher::class)
-	<li class="nav-item @if(Route::is('admin.teachers.*')) active @endif">
-		<a class="nav-link" href="{{ route('admin.teachers.index') }}">
+	<li class="nav-item @if(Route::is('console.teachers.*')) active @endif">
+		<a class="nav-link" href="{{ route('console.teachers.index') }}">
 			<i class="fas fa-fw fa-chalkboard-teacher"></i>
 			<span>Data Dosen</span>
 		</a>

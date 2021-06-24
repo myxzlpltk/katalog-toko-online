@@ -19,7 +19,7 @@ class BusinessFieldController extends Controller{
 
     	$businessFields = BusinessField::withCount('businessTypes')->get();
 
-		return view('admin.business-fields.index', compact('businessFields'));
+		return view('console.business-fields.index', compact('businessFields'));
     }
 
     /**
@@ -30,7 +30,7 @@ class BusinessFieldController extends Controller{
     public function create(){
 		$this->authorize('create', BusinessField::class);
 
-		return view('admin.business-fields.create');
+		return view('console.business-fields.create');
     }
 
     /**
@@ -53,7 +53,7 @@ class BusinessFieldController extends Controller{
 		$businessFields->name = $request->name;
 		$businessFields->save();
 
-		return redirect()->route('admin.business-fields.index')->with('success', 'Data telah ditambahkan');
+		return redirect()->route('console.business-fields.index')->with('success', 'Data telah ditambahkan');
     }
 
     /**
@@ -75,7 +75,7 @@ class BusinessFieldController extends Controller{
     public function edit(BusinessField $businessField){
 		$this->authorize('update', $businessField);
 
-		return view('admin.business-fields.edit', compact('businessField'));
+		return view('console.business-fields.edit', compact('businessField'));
     }
 
     /**
@@ -98,7 +98,7 @@ class BusinessFieldController extends Controller{
 		$businessField->name = $request->name;
 		$businessField->save();
 
-		return redirect()->route('admin.business-fields.index')->with('success', 'Data telah diperbarui');
+		return redirect()->route('console.business-fields.index')->with('success', 'Data telah diperbarui');
     }
 
     /**

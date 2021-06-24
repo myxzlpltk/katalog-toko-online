@@ -1,9 +1,8 @@
-@extends('layouts.admin.app')
+@extends('layouts.console.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Dasbor')
 
 @section('stylesheets')
-	<link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}">
 @endsection
 
 @section('content')

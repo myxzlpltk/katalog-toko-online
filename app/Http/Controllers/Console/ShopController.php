@@ -23,7 +23,7 @@ class ShopController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(ShopDataTable $dataTable){
-        return $dataTable->render('admin.shops.index');
+        return $dataTable->render('console.shops.index');
     }
 
     /**
@@ -34,7 +34,7 @@ class ShopController extends Controller{
     public function create(){
     	$categories = Category::all();
 
-        return view('admin.shops.create', compact('categories'));
+        return view('console.shops.create', compact('categories'));
     }
 
     /**
@@ -102,7 +102,7 @@ class ShopController extends Controller{
 
 		$shop->save();
 
-		return redirect()->route('admin.shops.show', $shop)->with('success', 'Data telah ditambahkan.');
+		return redirect()->route('console.shops.show', $shop)->with('success', 'Data telah ditambahkan.');
     }
 
     /**
@@ -118,7 +118,7 @@ class ShopController extends Controller{
         return $dataTable
 			->addScope(new ShopFilter($shop))
 			->addScope(new PublishedReview())
-			->render('admin.shops.view', compact('shop'));
+			->render('console.shops.view', compact('shop'));
     }
 
     /**
@@ -130,7 +130,7 @@ class ShopController extends Controller{
     public function edit(Shop $shop){
 		$categories = Category::all();
 
-        return view('admin.shops.edit', compact('categories', 'shop'));
+        return view('console.shops.edit', compact('categories', 'shop'));
     }
 
     /**
@@ -198,7 +198,7 @@ class ShopController extends Controller{
 
 		$shop->save();
 
-		return redirect()->route('admin.shops.show', $shop)->with('success', 'Data telah diperbarui.');
+		return redirect()->route('console.shops.show', $shop)->with('success', 'Data telah diperbarui.');
     }
 
     /**
@@ -210,6 +210,6 @@ class ShopController extends Controller{
     public function destroy(Shop $shop){
         $shop->delete();
 
-        return redirect()->route('admin.shops.index')->with('success', 'Data telah dihapus');
+        return redirect()->route('console.shops.index')->with('success', 'Data telah dihapus');
     }
 }

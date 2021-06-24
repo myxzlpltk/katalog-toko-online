@@ -21,7 +21,7 @@ class TeacherController extends Controller{
     public function index(TeacherDataTable $dataTable){
     	$this->authorize('view-any', Teacher::class);
 
-    	return $dataTable->render('admin.teachers.index');
+    	return $dataTable->render('console.teachers.index');
     }
 
     /**
@@ -32,7 +32,7 @@ class TeacherController extends Controller{
     public function create(){
 		$this->authorize('create', Teacher::class);
 
-        return view('admin.teachers.create');
+        return view('console.teachers.create');
     }
 
     /**
@@ -64,7 +64,7 @@ class TeacherController extends Controller{
 		$user->userable()->associate($teacher);
         $user->save();
 
-        return redirect()->route('admin.teachers.index')->with('success', 'Data telah ditambahkan.');
+        return redirect()->route('console.teachers.index')->with('success', 'Data telah ditambahkan.');
     }
 
     /**
@@ -85,7 +85,7 @@ class TeacherController extends Controller{
     public function edit(Teacher $teacher){
 		$this->authorize('update', $teacher);
 
-        return view('admin.teachers.edit', compact('teacher'));
+        return view('console.teachers.edit', compact('teacher'));
     }
 
     /**
@@ -111,7 +111,7 @@ class TeacherController extends Controller{
 		$teacher->user->email = $request->email;
 		$teacher->user->save();
 
-		return redirect()->route('admin.teachers.index')->with('success', 'Data telah diperbarui.');
+		return redirect()->route('console.teachers.index')->with('success', 'Data telah diperbarui.');
     }
 
     /**

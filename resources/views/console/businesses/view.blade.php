@@ -10,7 +10,7 @@
 @endsection
 
 @section('actions')
-	@can('edit', $business)
+	@can('update', $business)
 	<a href="{{ route('console.businesses.edit', $business) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-fw"></i> Edit</a>
 	@endcan
 

@@ -54,7 +54,7 @@ class BusinessPolicy{
      * @return mixed
      */
     public function update(User $user, Business $business){
-        //
+        return $user->is_student && $user->userable->business_id == $business->id && $user->userable->validated_at != null;
     }
 
     /**
@@ -65,7 +65,7 @@ class BusinessPolicy{
      * @return mixed
      */
     public function delete(User $user, Business $business){
-        //
+        return $user->is_admin;
     }
 
     /**

@@ -21,12 +21,14 @@
 		Data Primer
 	</div>
 
+	@can('view-any', \App\Models\Business::class)
 	<li class="nav-item @if(Route::is('console.businesses.*')) active @endif">
 		<a class="nav-link" href="{{ route('console.businesses.index') }}">
 			<i class="fas fa-fw fa-store"></i>
 			<span>Data Usaha</span>
 		</a>
 	</li>
+	@endcan
 
 	@can('view-any', \App\Models\BusinessField::class)
 	<li class="nav-item @if(Route::is('console.business-fields.*')) active @endif">

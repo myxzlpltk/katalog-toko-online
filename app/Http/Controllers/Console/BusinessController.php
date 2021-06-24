@@ -16,58 +16,60 @@ use Intervention\Image\Facades\Image;
 
 class BusinessController extends Controller{
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\RedirectResponse
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-    public function index(Request $request){
-    	$this->authorize('view-any', Business::class);
+	public function index(Request $request){
+		$this->authorize('view-any', Business::class);
 
-    	$user = $request->user();
+		$user = $request->user();
 
-        if($user->is_admin){
-
-		}
-        elseif($user->is_student){
-        	return redirect()->route('console.businesses.show', $user->userable->business);
-		}
-        elseif($user->is_teacher){
+		if($user->is_admin){
 
 		}
+		elseif($user->is_student){
+			return redirect()->route('console.businesses.show', $user->userable->business);
+		}
+		elseif($user->is_teacher){
 
-        abort(403);
-    }
+		}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
-    public function create(){
-        $this->authorize('create', Business::class);
+		abort(403);
+	}
 
-        $businessFields = BusinessField::query()
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+	 */
+	public function create(){
+		$this->authorize('create', Business::class);
+
+		$businessFields = BusinessField::query()
 			->with('businessTypes')
 			->has('businessTypes')
 			->orderBy('name')
 			->get();
-        $teachers = Teacher::query()
+		$teachers = Teacher::query()
 			->with('user')
 			->has('user')
 			->get()
 			->sortBy('user.name');
 
-        return view('console.businesses.create', compact('businessFields', 'teachers'));
-    }
+		return view('console.businesses.create', compact('businessFields', 'teachers'));
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-    public function store(Request $request){
+	public function store(Request $request){
+		$this->authorize('create', Business::class);
+
 		$request->validate([
 			'name' => 'required|string|max:255',
 			'business_type_id' => ['required', Rule::exists(BusinessType::class, 'id')],
@@ -99,69 +101,113 @@ class BusinessController extends Controller{
 		$request->user()->userable->save();
 
 		return redirect()->route('console.businesses.show', $business)->with('success', 'Data telah ditambahkan.');
-    }
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Business  $business
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
-    public function show(Business $business){
-    	$this->authorize('view', $business);
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  \App\Models\Business  $business
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+	 */
+	public function show(Business $business){
+		$this->authorize('view', $business);
 
-        $business->load(['businessType.businessField', 'teacher.user', 'members.user']);
+		$business->load(['businessType.businessField', 'teacher.user', 'members.user']);
 
-        return view('console.businesses.view', compact('business'));
-    }
+		return view('console.businesses.view', compact('business'));
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Business  $business
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Business $business){
-        //
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  \App\Models\Business  $business
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+	 */
+	public function edit(Business $business){
+		$this->authorize('update', $business);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Business  $business
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Business $business){
-        //
-    }
+		$businessFields = BusinessField::query()
+			->with('businessTypes')
+			->has('businessTypes')
+			->orderBy('name')
+			->get();
+		$teachers = Teacher::query()
+			->with('user')
+			->has('user')
+			->get()
+			->sortBy('user.name');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Business  $business
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Business $business){
-        //
-    }
+		return view('console.businesses.edit', compact('businessFields', 'teachers', 'business'));
+	}
 
-    public function toggleInvitation(Business $business){
-    	$this->authorize('toggle-invitation', $business);
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Models\Business  $business
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function update(Request $request, Business $business){
+		$this->authorize('update', $business);
 
-    	if($business->invitation_code){
-    		$business->invitation_code = null;
-    		$business->save();
+		$request->validate([
+			'name' => 'required|string|max:255',
+			'business_type_id' => ['required', Rule::exists(BusinessType::class, 'id')],
+			'teacher_id' => ['required', Rule::exists(Teacher::class, 'id')],
+			'description' => 'required|string',
+			'tagline' => 'required|string|max:255',
+			'logo' => 'nullable|image|max:2048',
+		]);
 
-    		return redirect()->back()->with('success', 'Kode undangan telah dibatalkan.');
+		$business->name = $request->name;
+		$business->business_type_id = $request->business_type_id;
+		$business->teacher_id = $request->teacher_id;
+		$business->description = $request->description;
+		$business->tagline = $request->tagline;
+
+		if($request->file('logo')){
+			$image = Image::make($request->file('logo'));
+			$dim = min($image->width(), $image->height(), 500);
+
+			$business->logo = Str::random(64).'.jpg';
+			Storage::put("logos/$business->logo", $image->fit($dim)->encode('jpg', 80));
 		}
-    	else{
-    		do{
-    			$code = strtolower(Str::random(10));
+
+		$business->save();
+
+		return redirect()->route('console.businesses.show', $business)->with('success', 'Data telah diperbarui.');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Models\Business  $business
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function destroy(Business $business){
+		$this->authorize('delete', $business);
+
+		$business->delete();
+
+		return redirect()->route('console.businesses.index')->with('success', 'Data telah dihapus.');
+	}
+
+	public function toggleInvitation(Business $business){
+		$this->authorize('toggle-invitation', $business);
+
+		if($business->invitation_code){
+			$business->invitation_code = null;
+			$business->save();
+
+			return redirect()->back()->with('success', 'Kode undangan telah dibatalkan.');
+		}
+		else{
+			do{
+				$code = strtolower(Str::random(10));
 			} while(Business::query()->where('invitation_code', $code)->exists());
 
-    		$business->invitation_code = $code;
-    		$business->save();
+			$business->invitation_code = $code;
+			$business->save();
 
 			return redirect()->back()->with('success', 'Kode undangan telah dibuat.');
 		}
@@ -212,12 +258,12 @@ class BusinessController extends Controller{
 	 * @param Business $business
 	 * @param Student $student
 	 */
-    public function deleteMember(Business $business, Student $student){
-    	$this->authorize('delete-member', [$business, $student]);
+	public function deleteMember(Business $business, Student $student){
+		$this->authorize('delete-member', [$business, $student]);
 
-    	$student->business_id = null;
-    	$student->save();
+		$student->business_id = null;
+		$student->save();
 
-    	return redirect()->back()->with('success', 'Anggota berhasil dihapus.');
+		return redirect()->back()->with('success', 'Anggota berhasil dihapus.');
 	}
 }

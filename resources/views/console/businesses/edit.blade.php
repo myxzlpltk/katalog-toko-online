@@ -5,6 +5,10 @@
 @section('stylesheets')
 @endsection
 
+@section('breadcrumbs')
+	{{ \Diglactic\Breadcrumbs\Breadcrumbs::render('console.businesses.edit', $business) }}
+@endsection
+
 @section('content')
 	<div class="card shadow mb-3">
 		<div class="card-header py-3">
@@ -16,33 +20,62 @@
 				@method('PATCH')
 
 				<div class="form-group">
-					<label for="name">Nama Usaha <x-required/></label>
-					<input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $business->name) }}" required>
-					@error('name')
-					<div class="invalid-feedback">{{ $message }}</div>
-					@enderror
-				</div>
-				<div class="form-group">
-					<label for="logo">Logo</label>
-					<div class="custom-file" id="logo" class="form-control @error('logo') is-invalid @enderror">
-						<input type="file" class="custom-file-input" name="logo" accept="image/*">
-						<label class="custom-file-label" for="logo">Pilih Berkas</label>
-					</div>
-					@error('logo')
-					<div class="invalid-feedback">{{ $message }}</div>
-					@enderror
-				</div>
-				<div class="form-group">
-					<label for="category_id">Kategori <x-required/></label>
-					<select name="category_id" id="category_id" class="custom-select @error('category_id') is-invalid @enderror" required>
+					<label for="teacher_id">Dosen Pembimbing <x-required/></label>
+					<select name="teacher_id" id="teacher_id" class="custom-select @error('teacher_id') is-invalid @enderror" required>
 						<option disabled hidden selected>-- Pilih Kategori --</option>
-						@foreach($categories as $category)
-							<option value="{{ $category->id }}" @if(old('category_id', $business->category_id) == $category->id) selected @endif>{{ $category->name }}</option>
+						@foreach($teachers as $teacher)
+							<option value="{{ $teacher->id }}" @if(old('teacher_id', $business->teacher_id) == $teacher->id) selected @endif>{{ $teacher->name }}</option>
 						@endforeach
 					</select>
-					@error('category_id')
+					@error('teacher_id')
 					<div class="invalid-feedback">{{ $message }}</div>
 					@enderror
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="name">Nama Usaha <x-required/></label>
+							<input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $business->name) }}" required>
+							@error('name')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+						<div class="form-group">
+							<label for="business_type_id">Jenis Usaha <x-required/></label>
+							<select name="business_type_id" id="business_type_id" class="custom-select @error('business_type_id') is-invalid @enderror" required>
+								<option disabled hidden selected>-- Pilih Kategori --</option>
+								@foreach($businessFields as $businessField)
+									<optgroup label="{{ $businessField->name }}">
+										@foreach($businessField->businessTypes as $businessType)
+											<option value="{{ $businessType->id }}" @if(old('business_type_id', $business->business_type_id) == $businessType->id) selected @endif>{{ $businessType->name }}</option>
+										@endforeach
+									</optgroup>
+								@endforeach
+							</select>
+							@error('business_type_id')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="logo">Logo</label>
+							<div class="custom-file" id="logo" class="form-control @error('logo') is-invalid @enderror">
+								<input type="file" class="custom-file-input" name="logo" accept="image/*">
+								<label class="custom-file-label" for="logo">Pilih Berkas</label>
+							</div>
+							@error('logo')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+						<div class="form-group">
+							<label for="tagline">Tagline <x-required/></label>
+							<input type="text" name="tagline" id="tagline" class="form-control @error('tagline') is-invalid @enderror" value="{{ old('tagline', $business->tagline) }}" required>
+							@error('tagline')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="description">Deskripsi <x-required/></label>
@@ -50,182 +83,6 @@
 					@error('description')
 					<div class="invalid-feedback">{{ $message }}</div>
 					@enderror
-				</div>
-				<div class="form-group">
-					<label for="address">Alamat <x-required/></label>
-					<input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address', $business->address) }}" required>
-					@error('address')
-					<div class="invalid-feedback">{{ $message }}</div>
-					@enderror
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="phone_number">Nomor HP <x-required/></label>
-							<input type="text" name="phone_number" id="phone_number" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number', $business->phone_number) }}" required>
-							@error('phone_number')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<label for="min_price">Harga Minimum</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">Rp.</div>
-								</div>
-								<input type="text" name="min_price" id="min_price" class="form-control @error('min_price') is-invalid @enderror" value="{{ old('min_price', $business->min_price) }}">
-							</div>
-							@error('min_price')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<label for="max_price">Harga Maksimum</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">Rp.</div>
-								</div>
-								<input type="text" name="max_price" id="max_price" class="form-control @error('max_price') is-invalid @enderror" value="{{ old('max_price', $business->max_price) }}">
-							</div>
-							@error('max_price')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-				</div>
-				<hr>
-				<p><strong>Jam Buka :</strong></p>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="monday_open">Jam Buka Hari Senin</label>
-							<input type="time" name="monday_open" id="monday_open" class="form-control @error('monday_open') is-invalid @enderror" value="{{ old('monday_open', $business->monday_open ? $business->monday_open->format('H:i') : null ) }}">
-							@error('monday_open')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="monday_close">Jam Tutup Hari Senin</label>
-							<input type="time" name="monday_close" id="monday_close" class="form-control @error('monday_close') is-invalid @enderror" value="{{ old('monday_close', $business->monday_close ? $business->monday_close->format('H:i') : null ) }}">
-							@error('monday_close')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="tuesday_open">Jam Buka Hari Selasa</label>
-							<input type="time" name="tuesday_open" id="tuesday_open" class="form-control @error('tuesday_open') is-invalid @enderror" value="{{ old('tuesday_open', $business->tuesday_open ? $business->tuesday_open->format('H:i') : null ) }}">
-							@error('tuesday_open')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="tuesday_close">Jam Tutup Hari Selasa</label>
-							<input type="time" name="tuesday_close" id="tuesday_close" class="form-control @error('tuesday_close') is-invalid @enderror" value="{{ old('tuesday_close', $business->tuesday_close ? $business->tuesday_close->format('H:i') : null ) }}">
-							@error('tuesday_close')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="wednesday_open">Jam Buka Hari Rabu</label>
-							<input type="time" name="wednesday_open" id="wednesday_open" class="form-control @error('wednesday_open') is-invalid @enderror" value="{{ old('wednesday_open', $business->wednesday_open ? $business->wednesday_open->format('H:i') : null ) }}">
-							@error('wednesday_open')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="wednesday_close">Jam Tutup Hari Rabu</label>
-							<input type="time" name="wednesday_close" id="wednesday_close" class="form-control @error('wednesday_close') is-invalid @enderror" value="{{ old('wednesday_close', $business->wednesday_close ? $business->wednesday_close->format('H:i') : null ) }}">
-							@error('wednesday_close')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="thursday_open">Jam Buka Hari Kamis</label>
-							<input type="time" name="thursday_open" id="thursday_open" class="form-control @error('thursday_open') is-invalid @enderror" value="{{ old('thursday_open', $business->thursday_open ? $business->thursday_open->format('H:i') : null ) }}">
-							@error('thursday_open')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="thursday_close">Jam Tutup Hari Kamis</label>
-							<input type="time" name="thursday_close" id="thursday_close" class="form-control @error('thursday_close') is-invalid @enderror" value="{{ old('thursday_close', $business->thursday_close ? $business->thursday_close->format('H:i') : null ) }}">
-							@error('thursday_close')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="friday_open">Jam Buka Hari Jumat</label>
-							<input type="time" name="friday_open" id="friday_open" class="form-control @error('friday_open') is-invalid @enderror" value="{{ old('friday_open', $business->friday_open ? $business->friday_open->format('H:i') : null ) }}">
-							@error('friday_open')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="friday_close">Jam Tutup Hari Jumat</label>
-							<input type="time" name="friday_close" id="friday_close" class="form-control @error('friday_close') is-invalid @enderror" value="{{ old('friday_close', $business->friday_close ? $business->friday_close->format('H:i') : null ) }}">
-							@error('friday_close')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="saturday_open">Jam Buka Hari Sabtu</label>
-							<input type="time" name="saturday_open" id="saturday_open" class="form-control @error('saturday_open') is-invalid @enderror" value="{{ old('saturday_open', $business->saturday_open ? $business->saturday_open->format('H:i') : null ) }}">
-							@error('saturday_open')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="saturday_close">Jam Tutup Hari Sabtu</label>
-							<input type="time" name="saturday_close" id="saturday_close" class="form-control @error('saturday_close') is-invalid @enderror" value="{{ old('saturday_close', $business->saturday_close ? $business->saturday_close->format('H:i') : null ) }}">
-							@error('saturday_close')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="sunday_open">Jam Buka Hari Minggu</label>
-							<input type="time" name="sunday_open" id="sunday_open" class="form-control @error('sunday_open') is-invalid @enderror" value="{{ old('sunday_open', $business->sunday_open ? $business->sunday_open->format('H:i') : null ) }}">
-							@error('sunday_open')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="sunday_close">Jam Tutup Hari Minggu</label>
-							<input type="time" name="sunday_close" id="sunday_close" class="form-control @error('sunday_close') is-invalid @enderror" value="{{ old('sunday_close', $business->sunday_close ? $business->sunday_close->format('H:i') : null ) }}">
-							@error('sunday_close')
-							<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-					</div>
 				</div>
 				<button type="submit" class="btn btn-primary"><i class="fa fa-save fa-fw"></i> Simpan</button>
 			</form>

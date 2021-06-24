@@ -3,10 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Teacher;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class TeacherDataTable extends DataTable{
@@ -27,7 +24,7 @@ class TeacherDataTable extends DataTable{
 			->editColumn('email', function (Teacher $teacher){
 				return $teacher->user->email;
 			})
-			->addColumn('action', 'admin.teachers.action');
+			->addColumn('action', 'console.teachers.action');
 	}
 
 	/**

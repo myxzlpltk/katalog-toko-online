@@ -2,24 +2,24 @@
 
 namespace App\DataTables\Scopes;
 
-use App\Models\Shop;
+use App\Models\Business;
 use Yajra\DataTables\Contracts\DataTableScope;
 
-class ShopFilter implements DataTableScope{
+class BusinessFilter implements DataTableScope{
 
-	private $shop;
+	private $business;
 
-	public function __construct(Shop $shop){
-		$this->shop = $shop;
+	public function __construct(Business $business){
+		$this->business = $business;
 	}
 
-    /**
+	/**
      * Apply a query scope.
      *
      * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
      * @return mixed
      */
     public function apply($query){
-        return $query->where('shop_id', $this->shop->id);
+         return $query->where('business_id', $this->business->id);
     }
 }

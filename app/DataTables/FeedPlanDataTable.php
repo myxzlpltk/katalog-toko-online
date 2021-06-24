@@ -2,14 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\Shop;
-use Yajra\DataTables\Html\Button;
+use App\Models\FeedPlan;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ShopDataTable extends DataTable{
+class FeedPlanDataTable extends DataTable{
 
 	/**
 	 * Build DataTable class.
@@ -21,22 +18,23 @@ class ShopDataTable extends DataTable{
 		return datatables()
 			->eloquent($query)
 			->addIndexColumn()
-			->editColumn('category', function (Shop $shop){
-				return $shop->category->name;
+			->editColumn('plan_date', function (FeedPlan $feedplan){
+				return $feedplan->plan_date->translatedFormat('j F Y H:i');
 			})
-			->addColumn('action', 'admin.shops.action');
+			->filterColumn('plan_date', function ($query, $keyword) {
+				$query->whereRaw("DATE_FORMAT(plan_date,'%d %M %Y %H:%i') like ?", ["%$keyword%"]);
+			})
+			->addColumn('action', 'console.feed-plans.action');
 	}
 
 	/**
 	 * Get query source of dataTable.
 	 *
-	 * @param \App\Models\Shop $model
+	 * @param \App\Models\FeedPlan $model
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
-	public function query(Shop $model){
-		return $model->newQuery()
-			->has('category')
-			->with('category');
+	public function query(FeedPlan $model){
+		return $model->newQuery();
 	}
 
 	/**
@@ -46,7 +44,7 @@ class ShopDataTable extends DataTable{
 	 */
 	public function html(){
 		return $this->builder()
-			->setTableId('shop-table')
+			->setTableId('feedplan-table')
 			->columns($this->getColumns())
 			->minifiedAjax()
 			->orderBy(1, 'asc')
@@ -64,10 +62,9 @@ class ShopDataTable extends DataTable{
 	 */
 	protected function getColumns(){
 		return [
-			Column::computed('DT_RowIndex')->title('No.'),
-			Column::make('name')->title('Nama Toko'),
-			Column::make('category', 'category.name')->title('Kategori'),
-			Column::make('address')->title('Alamat'),
+			Column::make('feed_index')->title('No.'),
+			Column::make('plan_date')->title('Tanggal Rencana'),
+			Column::make('topic')->title('Topik'),
 			Column::computed('action')->title('Aksi'),
 		];
 	}
@@ -78,6 +75,6 @@ class ShopDataTable extends DataTable{
 	 * @return string
 	 */
 	protected function filename(){
-		return 'Shop_' . date('YmdHis');
+		return 'FeedPlan_' . date('YmdHis');
 	}
 }

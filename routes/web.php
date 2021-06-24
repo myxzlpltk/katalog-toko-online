@@ -32,6 +32,9 @@ Route::prefix('console/')->middleware(['auth', 'verified'])->group(function (){
     Route::delete('businesses/{business}/delete-member/{member}', [Console\BusinessController::class, 'deleteMember'])->name('console.businesses.delete-member');
     Route::resource('businesses', Console\BusinessController::class, ['as' => 'console']);
 
+	Route::resource('businesses.feed-plans', Console\FeedPlanController::class, ['as' => 'console'])->shallow();
+	Route::resource('feed-plans.feed-plan-designs', Console\FeedPlanDesignController::class, ['as' => 'console'])->shallow()->only('create', 'store', 'destroy');
+
     Route::resource('business-fields', Console\BusinessFieldController::class, ['as' => 'console'])->except('show');
     Route::resource('business-fields.business-types', Console\BusinessTypeController::class, ['as' => 'console'])->shallow()->except('show');
 

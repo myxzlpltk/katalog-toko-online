@@ -18,9 +18,7 @@ class BusinessPolicy{
      * @return mixed
      */
     public function viewAny(User $user){
-        return $user->is_admin
-			|| $user->is_teacher
-			|| ($user->is_student && $user->userable->business_id != null);
+        return $user->is_admin || $user->is_teacher;
     }
 
     /**
@@ -33,7 +31,7 @@ class BusinessPolicy{
     public function view(User $user, Business $business){
 		return $user->is_admin
 			|| ($user->is_teacher && $user->userable_id == $business->teacher_id)
-			|| ($user->is_student && $user->userable->business_id == $business->id);
+			|| ($user->is_student && $user->userable->business_id == $business->id && $user->userable->validated_at != null);
     }
 
     /**

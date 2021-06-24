@@ -57,6 +57,10 @@ class BusinessObserver{
 		if($business->logo && Storage::exists("logos/{$business->logo}")){
 			Storage::delete("logos/{$business->logo}");
 		}
+
+		foreach($business->feedplans as $feedplan){
+			$feedplan->delete();
+		}
     }
 
     /**

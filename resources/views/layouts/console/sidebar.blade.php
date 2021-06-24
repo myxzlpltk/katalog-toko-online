@@ -21,13 +21,35 @@
 		Data Primer
 	</div>
 
+	@can('is-student')
+		@can('view', request()->user()->userable->business)
+		<li class="nav-item @if(Route::is('console.businesses.*') && !Route::is('console.businesses.feed-plans.*')) active @endif">
+			<a class="nav-link" href="{{ route('console.businesses.show', request()->user()->userable->business) }}">
+				<i class="fas fa-fw fa-store"></i>
+				<span>Data Usaha</span>
+			</a>
+		</li>
+		@endcan
+	@endcan
+
 	@can('view-any', \App\Models\Business::class)
-	<li class="nav-item @if(Route::is('console.businesses.*')) active @endif">
-		<a class="nav-link" href="{{ route('console.businesses.index') }}">
-			<i class="fas fa-fw fa-store"></i>
-			<span>Data Usaha</span>
-		</a>
-	</li>
+		<li class="nav-item @if(Route::is('console.businesses.*')) active @endif">
+			<a class="nav-link" href="{{ route('console.businesses.index') }}">
+				<i class="fas fa-fw fa-store"></i>
+				<span>Data Usaha</span>
+			</a>
+		</li>
+	@endcan
+
+	@can('is-student')
+		@can('view-any', [\App\Models\FeedPlan::class, request()->user()->userable->business])
+		<li class="nav-item @if(Route::is('console.businesses.feed-plans.*') || Route::is('console.feed-plans.*')) active @endif">
+			<a class="nav-link" href="{{ route('console.businesses.feed-plans.index', request()->user()->userable->business) }}">
+				<i class="fa fa-fw fa-route"></i>
+				<span>Data Feed Plan</span>
+			</a>
+		</li>
+		@endcan
 	@endcan
 
 	@can('view-any', \App\Models\BusinessField::class)

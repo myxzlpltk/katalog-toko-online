@@ -5,10 +5,14 @@ namespace App\Providers;
 use App\Models\Business;
 use App\Models\BusinessField;
 use App\Models\BusinessType;
+use App\Models\FeedPlan;
+use App\Models\FeedPlanDesign;
 use App\Models\Teacher;
 use App\Observers\BusinessFieldObserver;
 use App\Observers\BusinessObserver;
 use App\Observers\BusinessTypeObserver;
+use App\Observers\FeedPlanDesignObserver;
+use App\Observers\FeedPlanObserver;
 use App\Observers\TeacherObserver;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
@@ -50,6 +54,8 @@ class AppServiceProvider extends ServiceProvider
 		Business::observe(BusinessObserver::class);
 		BusinessField::observe(BusinessFieldObserver::class);
 		BusinessType::observe(BusinessTypeObserver::class);
+		FeedPlan::observe(FeedPlanObserver::class);
+		FeedPlanDesign::observe(FeedPlanDesignObserver::class);
 		Teacher::observe(TeacherObserver::class);
     }
 }

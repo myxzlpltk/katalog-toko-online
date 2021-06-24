@@ -24,19 +24,9 @@ class BusinessController extends Controller{
 	public function index(Request $request){
 		$this->authorize('view-any', Business::class);
 
-		$user = $request->user();
-
-		if($user->is_admin){
+		if($request->user()->is_teacher){
 
 		}
-		elseif($user->is_student){
-			return redirect()->route('console.businesses.show', $user->userable->business);
-		}
-		elseif($user->is_teacher){
-
-		}
-
-		abort(403);
 	}
 
 	/**

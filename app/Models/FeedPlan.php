@@ -9,6 +9,8 @@ class FeedPlan extends Model{
 
     use HasFactory;
 
+    protected $dates = ['plan_date'];
+
     public function business(){
     	return $this->belongsTo(Business::class);
 	}

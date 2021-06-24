@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\FeedPlan;
 use App\Models\Student;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;

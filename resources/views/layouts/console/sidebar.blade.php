@@ -72,12 +72,21 @@
 	@endcan
 
 	@can('view-any', \App\Models\Teacher::class)
-	<li class="nav-item @if(Route::is('console.teachers.*')) active @endif">
-		<a class="nav-link" href="{{ route('console.teachers.index') }}">
-			<i class="fas fa-fw fa-chalkboard-teacher"></i>
-			<span>Data Dosen</span>
-		</a>
-	</li>
+		<li class="nav-item @if(Route::is('console.teachers.*')) active @endif">
+			<a class="nav-link" href="{{ route('console.teachers.index') }}">
+				<i class="fas fa-fw fa-chalkboard-teacher"></i>
+				<span>Data Dosen</span>
+			</a>
+		</li>
+	@endcan
+
+	@can('view-any', \App\Models\Student::class)
+		<li class="nav-item @if(Route::is('console.students.*')) active @endif">
+			<a class="nav-link" href="{{ route('console.students.index') }}">
+				<i class="fas fa-fw fa-user-graduate"></i>
+				<span>Data Mahasiswa</span>
+			</a>
+		</li>
 	@endcan
 
 	<hr class="sidebar-divider d-none d-md-block">

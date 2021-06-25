@@ -39,4 +39,6 @@ Route::prefix('console/')->middleware(['auth', 'verified'])->group(function (){
     Route::resource('business-fields.business-types', Console\BusinessTypeController::class, ['as' => 'console'])->shallow()->except('show');
 
     Route::resource('teachers', Console\TeacherController::class, ['as' => 'console'])->except('show');
+
+	Route::resource('students', Console\StudentController::class, ['as' => 'console'])->only('index', 'destroy');
 });

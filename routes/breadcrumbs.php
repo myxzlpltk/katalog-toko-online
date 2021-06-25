@@ -69,7 +69,6 @@ Breadcrumbs::for('console.feed-plans.feed-plan-designs.create', function (Breadc
 	$trail->push('Tambah Desain', route('console.feed-plans.feed-plan-designs.create', $feedPlan));
 });
 
-
 // Data Dosen
 Breadcrumbs::for('console.teachers.index', function (BreadcrumbTrail $trail) {
 	$trail->push('Data Dosen', route('console.teachers.index'));
@@ -83,6 +82,11 @@ Breadcrumbs::for('console.teachers.create', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('console.teachers.edit', function (BreadcrumbTrail $trail, Teacher $teacher) {
 	$trail->parent('console.teachers.index');
 	$trail->push('Edit Data', route('console.teachers.edit', $teacher));
+});
+
+// Data Dosen
+Breadcrumbs::for('console.students.index', function (BreadcrumbTrail $trail) {
+	$trail->push('Data Mahasiswa', route('console.students.index'));
 });
 
 // Data Bidang Usaha

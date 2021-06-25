@@ -15,11 +15,21 @@
 		</a>
 	</li>
 
-	<hr class="sidebar-divider">
+	@can('is-student')
+		@can('view', request()->user()->userable->business)
+		<hr class="sidebar-divider">
 
-	<div class="sidebar-heading">
-		Data Primer
-	</div>
+		<div class="sidebar-heading">
+			Data Primer
+		</div>
+		@endcan
+	@else
+		<hr class="sidebar-divider">
+
+		<div class="sidebar-heading">
+			Data Primer
+		</div>
+	@endcan
 
 	@can('is-student')
 		@can('view', request()->user()->userable->business)

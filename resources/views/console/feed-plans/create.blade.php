@@ -54,16 +54,16 @@
 							@enderror
 						</div>
 						<div class="form-group">
-							<label for="caption">Caption <x-required/></label>
-							<textarea name="caption" id="caption" class="form-control @error('caption') is-invalid @enderror" rows="3" required>{{ old('caption') }}</textarea>
-							@error('caption')
+							<label for="headline">Headline <x-required/></label>
+							<textarea name="headline" id="headline" class="form-control @error('headline') is-invalid @enderror" rows="3" required>{{ old('headline') }}</textarea>
+							@error('headline')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
 						</div>
 						<div class="form-group">
-							<label for="headline">Headline <x-required/></label>
-							<textarea name="headline" id="headline" class="form-control @error('headline') is-invalid @enderror" rows="3" required>{{ old('headline') }}</textarea>
-							@error('headline')
+							<label for="caption">Caption <x-required/></label>
+							<textarea name="caption" id="caption" class="form-control @error('caption') is-invalid @enderror" rows="3" required>{{ old('caption') }}</textarea>
+							@error('caption')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
 						</div>

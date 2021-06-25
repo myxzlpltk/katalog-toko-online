@@ -17,7 +17,13 @@ class DashboardController extends Controller{
 			return view('console.teacher-dashboard', compact('user'));
 		}
 		elseif($user->is_student){
-			return view('console.student-dashboard', compact('user'));
+        	$feedPlans = $user->userable->business->feedPlans()
+				->with('designs')
+				->orderByDesc('plan_date')
+				->limit(6)
+				->get();
+
+			return view('console.student-dashboard', compact('user', 'feedPlans'));
 		}
         else{
         	abort(403);

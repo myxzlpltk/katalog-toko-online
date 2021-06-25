@@ -3,6 +3,32 @@
 @section('title', 'Dasbor')
 
 @section('stylesheets')
+	<link rel="stylesheet" href="{{ asset('vendor/owlcarousel/assets/owl.carousel.min.css') }}">
+	<style>
+		.background-img{
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			border-top-left-radius: 0.35rem;
+			border-bottom-left-radius: 0.35rem;
+		}
+
+		.caption {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 3; /* number of lines to show */
+			-webkit-box-orient: vertical;
+		}
+
+		.headline {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 2; /* number of lines to show */
+			-webkit-box-orient: vertical;
+		}
+	</style>
 @endsection
 
 @section('content')
@@ -12,7 +38,28 @@
 			<span>Silahkan minta ketua tim untuk menerima undangan.</span>
 		</div>
 	@elseif($user->userable->business && $user->userable->validated_at)
-		<p>Feedplan terbaru</p>
+
+		@if($feedPlans->count() > 0)
+			<h4>Feed Plan Terbaru</h4>
+			<div class="owl-carousel owl-theme">
+				@foreach($feedPlans as $feedPlan)
+				<div class="item">
+					<div class="card shadow-sm my-3">
+						<div class="row no-gutters">
+							<div class="col-5 background-img" style="background-image: url('{{ $feedPlan->designs->count() > 0 ? asset("storage/designs/{$feedPlan->designs->pluck('design')->first()}") : asset('img/no-photo.jpg') }}')"></div>
+							<div class="col-7">
+								<div class="card-body">
+									<h5 class="card-title text-dark headline">{{ $feedPlan->headline }}</h5>
+									<p class="caption">{!! nl2br(e($feedPlan->caption)) !!}</p>
+									<p class="card-text"><small class="text-muted">{{ $feedPlan->plan_date->translatedFormat('j F Y') }} | Feed Ke-{{ $feedPlan->feed_index }}</small></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				@endforeach
+			</div>
+		@endif
 
 		@can('is-owner', $user->userable->business)
 			@if($user->userable->business->candidateMembers->count() > 0)
@@ -97,6 +144,7 @@
 @endsection
 
 @section('scripts')
+	<script src="{{ asset('vendor/owlcarousel/owl.carousel.min.js') }}"></script>
 	<script>
 		$('form#invite').submit(function (){
 			code = $('[name="code"]');
@@ -110,5 +158,20 @@
 
 			return true;
 		});
+
+		$('.owl-carousel').owlCarousel({
+			margin: 15,
+			responsive: {
+				0: {
+					items:1
+				},
+				600: {
+					items:2
+				},
+				1000: {
+					items:3
+				}
+			}
+		})
 	</script>
 @endsection

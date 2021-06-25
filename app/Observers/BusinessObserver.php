@@ -58,6 +58,8 @@ class BusinessObserver{
 			Storage::delete("logos/{$business->logo}");
 		}
 
+		$business->members()->update(['business_id' => null, 'validated_at' => null]);
+
 		foreach($business->feedplans as $feedplan){
 			$feedplan->delete();
 		}

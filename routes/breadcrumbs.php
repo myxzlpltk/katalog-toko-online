@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
+use Illuminate\Support\Facades\Gate;
 
 // Dasbor
 Breadcrumbs::for('console.dashboard', function (BreadcrumbTrail $trail) {
@@ -17,7 +18,9 @@ Breadcrumbs::for('console.profile', function (BreadcrumbTrail $trail) {
 
 // Data Usaha
 Breadcrumbs::for('console.businesses.index', function (BreadcrumbTrail $trail) {
-	$trail->push('Data Usaha', route('console.businesses.index'));
+	if(Gate::allows('view-any', Business::class)){
+		$trail->push('Data Usaha', route('console.businesses.index'));
+	}
 });
 // Data Usaha > Tambah Data
 Breadcrumbs::for('console.businesses.create', function (BreadcrumbTrail $trail) {
@@ -26,9 +29,7 @@ Breadcrumbs::for('console.businesses.create', function (BreadcrumbTrail $trail) 
 });
 // Data Usaha > [Usaha]
 Breadcrumbs::for('console.businesses.show', function (BreadcrumbTrail $trail, Business $business) {
-	if(!request()->user()->is_student){
-		$trail->parent('console.businesses.index');
-	}
+	$trail->parent('console.businesses.index');
 	$trail->push($business->name, route('console.businesses.show', $business));
 });
 // Data Usaha > [Usaha] > Edit Data

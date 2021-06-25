@@ -17,10 +17,10 @@ class FeedPlanPolicy{
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user, Business $business){
-		return $user->is_admin
+    public function viewAny(User $user, ?Business $business){
+		return $business != null && ($user->is_admin
 			|| ($user->is_teacher && $user->userable_id == $business->teacher_id)
-			|| ($user->is_student && $user->userable->business_id == $business->id && $user->userable->validated_at != null);
+			|| ($user->is_student && $user->userable->business_id == $business->id && $user->userable->validated_at != null));
     }
 
     /**

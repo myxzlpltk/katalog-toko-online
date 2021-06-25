@@ -22,7 +22,7 @@
 				<div class="form-group">
 					<label for="teacher_id">Dosen Pembimbing <x-required/></label>
 					<select name="teacher_id" id="teacher_id" class="custom-select @error('teacher_id') is-invalid @enderror" required>
-						<option disabled hidden selected>-- Pilih Kategori --</option>
+						<option disabled hidden selected>-- Pilih Dosen Pembimbing --</option>
 						@foreach($teachers as $teacher)
 							<option value="{{ $teacher->id }}" @if(old('teacher_id', $business->teacher_id) == $teacher->id) selected @endif>{{ $teacher->name }}</option>
 						@endforeach
@@ -43,7 +43,7 @@
 						<div class="form-group">
 							<label for="business_type_id">Jenis Usaha <x-required/></label>
 							<select name="business_type_id" id="business_type_id" class="custom-select @error('business_type_id') is-invalid @enderror" required>
-								<option disabled hidden selected>-- Pilih Kategori --</option>
+								<option disabled hidden selected>-- Pilih Jenis Usaha --</option>
 								@foreach($businessFields as $businessField)
 									<optgroup label="{{ $businessField->name }}">
 										@foreach($businessField->businessTypes as $businessType)

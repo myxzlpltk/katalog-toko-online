@@ -46,12 +46,12 @@
 							<td>{!! nl2br(e($feedPlan->content)) !!}</td>
 						</tr>
 						<tr>
-							<th>Caption</th>
-							<td>{!! nl2br(e($feedPlan->caption)) !!}</td>
-						</tr>
-						<tr>
 							<th>Headline</th>
 							<td>{!! nl2br(e($feedPlan->headline)) !!}</td>
+						</tr>
+						<tr>
+							<th>Caption</th>
+							<td>{!! nl2br(e($feedPlan->caption)) !!}</td>
 						</tr>
 					</table>
 				</div>

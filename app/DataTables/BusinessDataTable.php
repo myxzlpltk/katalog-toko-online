@@ -19,10 +19,10 @@ class BusinessDataTable extends DataTable{
 			->eloquent($query)
 			->addIndexColumn()
 			->editColumn('owner', function (Business $business){
-				return $business->owner->name;
+				return $business->owner->user->name;
 			})
 			->editColumn('teacher', function (Business $business){
-				return $business->teacher->name;
+				return $business->teacher->user->name;
 			})
 			->addColumn('logo', 'console.businesses.logo')
 			->addColumn('action', 'console.businesses.action')
@@ -37,10 +37,10 @@ class BusinessDataTable extends DataTable{
 	 */
 	public function query(Business $model){
 		return $model->newQuery()
-			->has('owner.user')
 			->with('owner.user')
-			->has('teacher.user')
-			->with('teacher.user');
+			->with('teacher.user')
+			->has('owner.user')
+			->has('teacher.user');
 	}
 
 	/**
@@ -71,8 +71,8 @@ class BusinessDataTable extends DataTable{
 			Column::computed('DT_RowIndex')->title('No.'),
 			Column::computed('logo')->title('Logo'),
 			Column::make('name')->title('Nama'),
-			Column::make('owner', 'owner.name')->title('Direktur'),
-			Column::make('teacher', 'teacher.name')->title('Dosen Pembimbing'),
+			Column::make('owner', 'owner.user.name')->title('Direktur'),
+			Column::make('teacher', 'teacher.user.name')->title('Dosen Pembimbing'),
 			Column::computed('action')->title('Aksi'),
 		];
 	}

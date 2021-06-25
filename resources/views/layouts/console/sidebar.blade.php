@@ -33,7 +33,7 @@
 	@endcan
 
 	@can('view-any', \App\Models\Business::class)
-		<li class="nav-item @if(Route::is('console.businesses.*')) active @endif">
+		<li class="nav-item @if(Route::is('console.businesses.*') || Route::is('console.feed-plans.*') || Route::is('console.feed-plan-designs.*')) active @endif">
 			<a class="nav-link" href="{{ route('console.businesses.index') }}">
 				<i class="fas fa-fw fa-store"></i>
 				<span>Data Usaha</span>
@@ -43,7 +43,7 @@
 
 	@can('is-student')
 		@can('view-any', [\App\Models\FeedPlan::class, request()->user()->userable->business])
-		<li class="nav-item @if(Route::is('console.businesses.feed-plans.*') || Route::is('console.feed-plans.*')) active @endif">
+		<li class="nav-item @if(Route::is('console.businesses.feed-plans.*') || Route::is('console.feed-plans.*') || Route::is('console.feed-plan-designs.*')) active @endif">
 			<a class="nav-link" href="{{ route('console.businesses.feed-plans.index', request()->user()->userable->business) }}">
 				<i class="fa fa-fw fa-route"></i>
 				<span>Data Feed Plan</span>
@@ -53,7 +53,7 @@
 	@endcan
 
 	@can('view-any', \App\Models\BusinessField::class)
-	<li class="nav-item @if(Route::is('console.business-fields.*')) active @endif">
+	<li class="nav-item @if(Route::is('console.business-fields.*') || Route::is('console.business-types.*')) active @endif">
 		<a class="nav-link" href="{{ route('console.business-fields.index') }}">
 			<i class="fas fa-fw fa-tags"></i>
 			<span>Data Bidang Usaha</span>

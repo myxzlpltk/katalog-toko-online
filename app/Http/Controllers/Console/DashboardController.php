@@ -13,7 +13,10 @@ class DashboardController extends Controller{
         if($user->is_admin){
 			return view('console.admin-dashboard');
 		}
-        elseif($user->is_student){
+		elseif($user->is_teacher){
+			return view('console.teacher-dashboard', compact('user'));
+		}
+		elseif($user->is_student){
 			return view('console.student-dashboard', compact('user'));
 		}
         else{

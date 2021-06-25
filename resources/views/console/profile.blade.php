@@ -16,13 +16,33 @@
                 @csrf
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="input-name">Nama Lengkap <x-required/></label>
-                            <input type="text" id="input-name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Lengkap" value="{{ old('name', $user->name) }}" required>
-                            @error('name')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+						<div class="form-group">
+							<label class="form-control-label" for="input-name">Nama Lengkap <x-required/></label>
+							<input type="text" id="input-name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Lengkap" value="{{ old('name', $user->name) }}" required>
+							@error('name')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+
+						@can('is-student')
+						<div class="form-group">
+							<label class="form-control-label" for="input-nim">NIM <x-required/></label>
+							<input type="text" id="input-nim" name="nim" class="form-control @error('nim') is-invalid @enderror" placeholder="NIM" value="{{ old('nim', $user->userable->nim) }}" required>
+							@error('nim')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+						@endcan
+
+						@can('is-teacher')
+						<div class="form-group">
+							<label class="form-control-label" for="input-nidn">NIDN <x-required/></label>
+							<input type="text" id="input-nidn" name="nidn" class="form-control @error('nidn') is-invalid @enderror" placeholder="NIDN" value="{{ old('nidn', $user->userable->nidn) }}" required>
+							@error('nidn')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+						@endcan
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">

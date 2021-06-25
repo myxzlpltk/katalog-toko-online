@@ -79,7 +79,7 @@
 					<p class="card-subtitle">{{ $business->tagline }}</p>
 				</div>
 				<div class="card-footer">
-					<a href="{{ route('console.businesses.feed-plans.index', $business) }}" class="btn btn-primary btn-sm btn-block"><i class="fa fa-eye fa-fw"></i> Lihat Feed Plan</a>
+					<a href="{{ route('console.businesses.feed-plans.index', $business) }}" class="btn btn-primary btn-sm btn-block"><i class="fa fa-route fa-fw"></i> Lihat Feed Plan</a>
 				</div>
 			</div>
 		</div>

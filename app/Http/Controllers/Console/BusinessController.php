@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Console;
 
+use App\DataTables\BusinessDataTable;
+use App\DataTables\Scopes\TeacherFilter;
 use App\Http\Controllers\Controller;
 use App\Models\Business;
 use App\Models\BusinessField;
@@ -21,12 +23,14 @@ class BusinessController extends Controller{
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function index(Request $request){
+	public function index(BusinessDataTable $dataTable, Request $request){
 		$this->authorize('view-any', Business::class);
 
 		if($request->user()->is_teacher){
-
+			$dataTable->addScope(new TeacherFilter($request->user()->userable));
 		}
+
+		return $dataTable->render('console.businesses.index');
 	}
 
 	/**

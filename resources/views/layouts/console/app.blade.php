@@ -35,7 +35,7 @@
 				@include('layouts.console.topbar')
 
 				<div class="container-fluid">
-					<div class="d-sm-flex align-items-center justify-content-between mb-2">
+					<div class="d-sm-flex align-items-center justify-content-between mb-3">
 						<h1 class="h3 mb-0 text-gray-800">@yield('title', 'Halaman Kosong')</h1>
 						<div>
 							@yield('actions')

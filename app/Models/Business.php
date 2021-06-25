@@ -9,6 +9,8 @@ class Business extends Model{
 
     use HasFactory;
 
+    protected $appends = ['logo_path'];
+
 	public function activeMembers(){
 		return $this->hasMany(Student::class)->whereNotNull('validated_at');
 	}

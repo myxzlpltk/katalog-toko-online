@@ -26,7 +26,7 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-8 order-2 order-md-1">
 			<div class="card shadow mb-3">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-info-circle fa-fw"></i> Informasi Data</h6>
@@ -68,7 +68,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-4">
+		<div class="col-md-4 order-1 order-md-2">
 			<div class="card shadow mb-3">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-file-image fa-fw"></i> Logo Usaha</h6>
@@ -78,10 +78,13 @@
 					<h5 class="card-title">{{ $business->name }}</h5>
 					<p class="card-subtitle">{{ $business->tagline }}</p>
 				</div>
+				<div class="card-footer">
+					<a href="{{ route('console.businesses.feed-plans.index', $business) }}" class="btn btn-primary btn-sm btn-block"><i class="fa fa-eye fa-fw"></i> Lihat Feed Plan</a>
+				</div>
 			</div>
 		</div>
 
-		<div class="col-12">
+		<div class="col-12 order-3">
 			<div class="card shadow mb-3">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-info-circle fa-fw"></i> Informasi Anggota</h6>

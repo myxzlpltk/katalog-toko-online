@@ -60,7 +60,7 @@ class BusinessTypePolicy{
      * @return mixed
      */
     public function delete(User $user, BusinessType $businessType){
-        return $user->is_admin;
+        return $user->is_admin && $businessType->businesses_count == 0;
     }
 
     /**

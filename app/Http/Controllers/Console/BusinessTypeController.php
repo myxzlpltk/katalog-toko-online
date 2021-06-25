@@ -20,6 +20,8 @@ class BusinessTypeController extends Controller{
     public function index(BusinessField $businessField){
 		$this->authorize('view-any', BusinessType::class);
 
+		$businessField->businessTypes->loadCount('businesses');
+
 		return view('console.business-types.index', compact('businessField'));
     }
 

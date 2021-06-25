@@ -24,9 +24,18 @@ class BusinessDataTable extends DataTable{
 			->editColumn('teacher', function (Business $business){
 				return $business->teacher->user->name;
 			})
+			->editColumn('businessType', function (Business $business){
+				return $business->businessType->name;
+			})
+			->editColumn('businessField', function (Business $business){
+				return $business->businessType->businessField->name;
+			})
+			->editColumn('name', function (Business $business){
+				return view('console.businesses.name', compact('business'));
+			})
 			->addColumn('logo', 'console.businesses.logo')
 			->addColumn('action', 'console.businesses.action')
-			->rawColumns(['logo', 'action']);
+			->rawColumns(['logo', 'action', 'name']);
 	}
 
 	/**
@@ -39,8 +48,10 @@ class BusinessDataTable extends DataTable{
 		return $model->newQuery()
 			->with('owner.user')
 			->with('teacher.user')
+			->with('businessType.businessField')
 			->has('owner.user')
-			->has('teacher.user');
+			->has('teacher.user')
+			->has('businessType.businessField');
 	}
 
 	/**
@@ -74,6 +85,8 @@ class BusinessDataTable extends DataTable{
 			Column::make('owner', 'owner.user.name')->title('Direktur'),
 			Column::make('teacher', 'teacher.user.name')->title('Dosen Pembimbing'),
 			Column::computed('action')->title('Aksi'),
+			Column::make('businessType', 'businessType.name')->hidden(),
+			Column::make('businessField', 'businessType.businessField.name')->hidden(),
 		];
 	}
 

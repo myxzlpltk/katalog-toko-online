@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Console;
 
 use App\Http\Controllers\Controller;
+use App\Models\FeedPlan;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller{
@@ -14,7 +15,14 @@ class DashboardController extends Controller{
 			return view('console.admin-dashboard');
 		}
 		elseif($user->is_teacher){
-			return view('console.teacher-dashboard', compact('user'));
+        	$businessIds = $user->userable->businesses()->pluck('id');
+        	$feedPlans = FeedPlan::query()
+				->whereIn('business_id', $businessIds)
+				->orderByDesc('plan_date')
+				->limit(6)
+				->get();
+
+			return view('console.teacher-dashboard', compact('user', 'feedPlans', 'businessIds'));
 		}
 		elseif($user->is_student){
         	$feedPlans = $user->userable->business->feedPlans()

@@ -44,18 +44,20 @@
 			<div class="owl-carousel owl-theme">
 				@foreach($feedPlans as $feedPlan)
 				<div class="item">
-					<div class="card shadow-sm my-3">
-						<div class="row no-gutters">
-							<div class="col-5 background-img" style="background-image: url('{{ $feedPlan->designs->count() > 0 ? asset("storage/designs/{$feedPlan->designs->pluck('design')->first()}") : asset('img/no-photo.jpg') }}')"></div>
-							<div class="col-7">
-								<div class="card-body">
-									<h5 class="card-title text-dark headline">{{ $feedPlan->headline }}</h5>
-									<p class="caption">{!! nl2br(e($feedPlan->caption)) !!}</p>
-									<p class="card-text"><small class="text-muted">{{ $feedPlan->plan_date->translatedFormat('j F Y') }} | Feed Ke-{{ $feedPlan->feed_index }}</small></p>
+					<a href="{{ route('console.feed-plans.show', $feedPlan) }}" class="card-link">
+						<div class="card shadow-sm my-3">
+							<div class="row no-gutters">
+								<div class="col-5 background-img" style="background-image: url('{{ $feedPlan->designs->count() > 0 ? asset("storage/designs/{$feedPlan->designs->pluck('design')->first()}") : asset('img/no-photo.jpg') }}')"></div>
+								<div class="col-7">
+									<div class="card-body">
+										<h5 class="card-title text-dark headline">{{ $feedPlan->headline }}</h5>
+										<p class="caption">{!! nl2br(e($feedPlan->caption)) !!}</p>
+										<p class="card-text"><small class="text-muted">{{ $feedPlan->plan_date->translatedFormat('j F Y') }} | Feed Ke-{{ $feedPlan->feed_index }}</small></p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 				@endforeach
 			</div>

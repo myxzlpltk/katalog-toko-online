@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
 		Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+		Diglactic\Breadcrumbs\ServiceProvider::class,
 		Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*

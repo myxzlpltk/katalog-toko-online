@@ -28,7 +28,7 @@
 						</ul>
 					</nav>
 					<div class="header__menu__right">
-						<a href="@auth {{ route('dashboard') }} @else {{ route('login') }} @endauth" class="login-btn"><i class="fa fa-user"></i></a>
+						<a href="@auth {{ route('console.dashboard') }} @else {{ route('login') }} @endauth" class="login-btn"><i class="fa fa-user"></i></a>
 					</div>
 				</div>
 			</div>

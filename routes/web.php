@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', [HomeController::class, 'getCategories']);
-Route::get('toko/pencarian', [ShopController::class, 'search'])->name('businesses.search');
-Route::get('toko/{shop:slug}', [ShopController::class, 'view'])->name('businesses.view');
-Route::post('toko/{shop:slug}/add-review', [ShopController::class, 'addReview'])->name('businesses.add-review');
+Route::get('toko/pencarian', [BusinessController::class, 'search'])->name('businesses.search');
+Route::get('toko/{shop:slug}', [BusinessController::class, 'view'])->name('businesses.view');
+Route::post('toko/{shop:slug}/add-review', [BusinessController::class, 'addReview'])->name('businesses.add-review');
 
 Route::prefix('console/')->middleware(['auth', 'verified'])->group(function (){
 	Route::redirect('/', 'console/dasbor');

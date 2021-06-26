@@ -16,18 +16,15 @@
 						<div class="section-title">
 						</div>
 						<div class="section-title">
-							<h2>Temukan Toko Terbaik Disekitar Anda</h2>
-							<p>1000+ Toko dengan pelayanan terbaiknya menunggu anda </p>
+							<h2>Temukan Usaha Terbaik Disekitar Anda</h2>
+							<p>1000+ Usaha dengan pelayanan terbaiknya menunggu anda </p>
 						</div>
 						<div class="hero__search__form">
-							<form action="{{ route('shops.search') }}" method="get">
+							<form action="{{ route('businesses.search') }}" method="get">
 								<input type="text" placeholder="Pencarian..." name="query">
 								<div class="select__option">
-									<select name="category_id">
+									<select name="business_type_id">
 										<option value="">Semua Kategori</option>
-										@foreach($categories as $category)
-											<option value="{{ $category->id }}">{{ $category->name }}</option>
-										@endforeach
 									</select>
 								</div>
 								<button type="submit">Jelajah</button>
@@ -44,65 +41,18 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<h2>Toko yang Paling Populer</h2>
-						<p>Temukan toko yang ada disekitar anda dan yang mungkin anda cari!</p>
+						<h2>Usaha yang Paling Terbaru</h2>
+						<p>Temukan usaha yang ada disekitar anda dan yang mungkin menginspirasi!</p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="most__search__tab">
-						<ul class="nav nav-tabs" role="tablist">
-							@foreach($categories as $category)
-							<li class="nav-item">
-								<a class="nav-link @if($loop->first) active @endif" data-toggle="tab" href="#tabs-{{ $loop->iteration }}" role="tab">
-									{{ $category->name }}
-								</a>
-							</li>
-							@endforeach
-						</ul>
-					</div>
-					<div class="tab-content">
-						@foreach($categories as $category)
-						<div class="tab-pane @if($loop->first) active @endif" id="tabs-{{ $loop->iteration }}" role="tabpanel">
-							<div class="row">
-								@foreach($category->favoriteShops as $shop)
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg" data-setbg="{{ asset("storage/photos/{$shop->photos_max_file}") }}">
-											<img src="{{ $shop->logo_path }}" alt="" style="height: 60px;width: 60px;">
-											<div class="listing__item__pic__tag">Populer</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<a href="{{ route('shops.view', $shop) }}">
-													<h5>{{ $shop->name }}</h5>
-													<div class="listing__item__text__rating">
-														<div class="listing__item__rating__star">
-															{!! \App\Helpers\Helper::rating($shop->public_reviews_avg_rating) !!}
-														</div>
-														<h6>{{ $shop->price_range }}</h6>
-													</div>
-													<ul>
-														<li><span class="icon_pin_alt"></span> {{ $shop->address }}</li>
-														<li><span class="icon_phone"></span> {{ $shop->phone_number }}</li>
-													</ul>
-												</a>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">Jam Buka</div>
-												@if($shop->is_open)
-												<div class="listing__item__text__info__right">Buka Sekarang</div>
-												@else
-												<div class="listing__item__text__info__right text-danger">Tutup</div>
-												@endif
-											</div>
-										</div>
-									</div>
-								</div>
-								@endforeach
+					<div class="row">
+						@foreach($businesses as $business)
+							<div class="col-lg-4 col-md-6">
+								<x-business-card :business="$business"/>
 							</div>
-						</div>
 						@endforeach
 					</div>
 				</div>

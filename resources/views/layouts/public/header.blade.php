@@ -16,10 +16,10 @@
 							<li></li>
 							<li class="active"><a href="{{ route('home') }}">Home</a></li>
 							<li>
-								<a href="#">Kategori</a>
+								<a href="#">Jenis Usaha</a>
 								<ul class="dropdown">
-									@foreach(\App\Models\Category::all() as $category)
-									<li><a href="{{ route('shops.search', ['category_id' => $category->id]) }}">{{ $category->name }}</a></li>
+									@foreach($businessTypes as $businessType)
+									<li><a href="{{ route('businesses.search', ['business_type_id' => $businessType->id]) }}">{{ $businessType->name }}</a></li>
 									@endforeach
 								</ul>
 							</li>

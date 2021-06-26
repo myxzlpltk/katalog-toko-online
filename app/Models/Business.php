@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Business extends Model{
 
-    use HasFactory;
+    use HasFactory, Searchable;
 
     protected $appends = ['logo_path'];
 
@@ -46,5 +47,29 @@ class Business extends Model{
 		else{
 			return asset('img/shop-logo-default.png');
 		}
+	}
+
+	/* Scout */
+	public function searchableAs(){
+		return 'businesses_index';
+	}
+
+	protected function makeAllSearchableUsing($query){
+		return $query->with(['teacher.user', 'activeMembers.user', 'businessType.businessField']);
+	}
+
+	public function toSearchableArray(){
+		return [
+			'name' => $this->name,
+			'slug' => $this->slug,
+			'description' => $this->slug,
+			'logo' => $this->logo_path,
+			'tagline' => $this->tagline,
+			'teacher' => $this->teacher->user->name,
+			'members' => $this->activeMembers->pluck('user.name'),
+			'business_type' => $this->businessType->name,
+			'business_field' => $this->businessType->businessField->name,
+			'business_type_id' => $this->businessType->id,
+		];
 	}
 }

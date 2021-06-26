@@ -19,6 +19,7 @@ use App\Observers\TeacherObserver;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -50,6 +51,9 @@ class AppServiceProvider extends ServiceProvider
 		/* Blade */
 		Blade::directive('confirmation', function (){
 			return 'onclick="return window.confirm(\'Apakah anda yakin?\')"';
+		});
+		View::composer('layouts.public.app', function ($view){
+			$view->with('businessTypes', BusinessType::query()->orderBy('name')->get());
 		});
 
 		/* Observer */

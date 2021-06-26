@@ -15,7 +15,7 @@ class CreateBusinessFieldsTable extends Migration
     {
         Schema::create('business_fields', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name', 191)->unique();
             $table->timestamps();
         });
     }

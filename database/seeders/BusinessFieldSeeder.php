@@ -32,6 +32,8 @@ class BusinessFieldSeeder extends Seeder{
 			foreach($types as $type){
 				BusinessType::query()->create(['name' => $type, 'business_field_id' => $businessField->id]);
 			}
+
+			BusinessType::query()->create(['name' => 'Lainnya', 'business_field_id' => $businessField->id]);
 		}
     }
 }

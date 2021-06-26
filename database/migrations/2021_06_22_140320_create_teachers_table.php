@@ -15,7 +15,7 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->string('nidn')->unique();
+            $table->string('nidn', 191)->unique();
             $table->timestamps();
         });
     }

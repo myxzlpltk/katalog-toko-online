@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->id();
 			$table->foreignId('business_id')->nullable();
 			$table->timestamp('validated_at')->nullable();
-			$table->string('nim')->unique();
+			$table->string('nim', 191)->unique();
 			$table->timestamps();
         });
     }

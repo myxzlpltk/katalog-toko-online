@@ -16,8 +16,10 @@ class CreateBusinessTypesTable extends Migration
         Schema::create('business_types', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_field_id');
-            $table->string('name')->unique();
+            $table->string('name', 191);
             $table->timestamps();
+
+            $table->unique(['name', 'business_field_id']);
         });
     }
 

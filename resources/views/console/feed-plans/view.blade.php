@@ -97,7 +97,10 @@
 									@csrf
 									@method('DELETE')
 
-									<button type="submit" class="btn btn-outline-danger btn-sm btn-block" @confirmation><i class="fa fa-trash fa-fw"></i> Hapus</button>
+									<div class="btn-group btn-block">
+										<button type="submit" class="btn btn-outline-danger btn-sm" @confirmation><i class="fa fa-trash fa-fw"></i> Hapus</button>
+										<a href="{{ asset("storage/designs/{$design->design}") }}" class="btn btn-outline-success btn-sm" download="{{ $design->design }}"><i class="fa fa-download fa-fw"></i></a>
+									</div>
 								</form>
 								@endcan
 							</div>

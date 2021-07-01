@@ -92,6 +92,7 @@ class BusinessController extends Controller{
 		$business->save();
 
 		$request->user()->userable->business_id = $business->id;
+		$request->user()->userable->validated_at = now();
 		$request->user()->userable->save();
 
 		return redirect()->route('console.businesses.show', $business)->with('success', 'Data telah ditambahkan.');

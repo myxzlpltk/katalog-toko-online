@@ -3,6 +3,13 @@
 @section('title', $feedPlan->topic)
 
 @section('stylesheets')
+	<style>
+		.my-card-img {
+			width: 100%;
+			height: 10vw;
+			object-fit: cover;
+		}
+	</style>
 @endsection
 
 @section('breadcrumbs')
@@ -82,7 +89,7 @@
 						@forelse($feedPlan->designs as $design)
 							<div class="col-4 col-md-3 col-lg-2">
 								<div class="card m-2">
-									<img src="{{ asset("storage/designs/{$design->design}") }}" alt="Desain Feed Plan" class="card-img">
+									<img src="{{ asset("storage/designs/{$design->design}") }}" alt="Desain Feed Plan" class="card-img my-card-img">
 								</div>
 
 								@can('delete', $design)

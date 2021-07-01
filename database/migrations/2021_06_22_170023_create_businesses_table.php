@@ -22,6 +22,7 @@ class CreateBusinessesTable extends Migration
 			$table->string('slug', 191)->nullable()->unique();
 			$table->longText('description');
 			$table->string('logo')->nullable();
+			$table->string('background')->nullable();
 			$table->string('tagline');
 			$table->string('invitation_code', 191)->nullable()->unique();
             $table->timestamps();

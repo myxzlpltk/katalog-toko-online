@@ -45,6 +45,14 @@ class BusinessObserver{
 				Storage::delete("logos/{$oldLogo}");
 			}
 		}
+
+		if($business->wasChanged('background')){
+			$oldBackground = $business->getOriginal('background');
+
+			if(Storage::exists("backgrounds/{$oldBackground}")) {
+				Storage::delete("backgrounds/{$oldBackground}");
+			}
+		}
     }
 
     /**
@@ -56,6 +64,9 @@ class BusinessObserver{
     public function deleted(Business $business){
 		if($business->logo && Storage::exists("logos/{$business->logo}")){
 			Storage::delete("logos/{$business->logo}");
+		}
+		if($business->background && Storage::exists("backgrounds/{$business->background}")){
+			Storage::delete("backgrounds/{$business->background}");
 		}
 
 		$business->members()->update(['business_id' => null, 'validated_at' => null]);

@@ -3,6 +3,13 @@
 @section('title', $business->name)
 
 @section('stylesheets')
+	<style>
+		.background{
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	</style>
 @endsection
 
 @section('breadcrumbs')
@@ -60,7 +67,7 @@
 						<tr>
 							<th>Tautan publik</th>
 							<td>
-								<a href="{{ route('businesses.view', $business) }}">{{ route('businesses.view', $business) }} <i class="fa fa-external-link-alt fa-fw"></i></a>
+								<a href="{{ route('businesses.view', $business) }}" target="_blank">{{ route('businesses.view', $business) }} <i class="fa fa-external-link-alt fa-fw"></i></a>
 							</td>
 						</tr>
 					</table>
@@ -73,7 +80,7 @@
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-file-image fa-fw"></i> Logo Usaha</h6>
 				</div>
-				<div class="card-body text-center">
+				<div class="card-body text-center text-white background" style="background-image: url('{{ $business->background_path }}')">
 					<img src="{{ $business->logo_path }}" alt="Logo" class="img-fluid mx-auto d-block mb-3" style="max-height: 100px;">
 					<h5 class="card-title">{{ $business->name }}</h5>
 					<p class="card-subtitle">{{ $business->tagline }}</p>

@@ -8,7 +8,7 @@
 @section('header-transparent', true)
 
 @section('content')
-	<section class="listing-hero set-bg" data-setbg="{{ asset("storage/briefs/{$business->feedplans_max_brief_image}") }}">
+	<section class="listing-hero set-bg" data-setbg="{{ $business->background_path }}">
 		<div class="container">
 			<div class="listing__hero__option">
 				<div class="listing__hero__icon">

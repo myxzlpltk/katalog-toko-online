@@ -11,6 +11,9 @@ class Business extends Model{
     use HasFactory, Searchable;
 
     protected $appends = ['logo_path'];
+	/**
+	 * @var mixed
+	 */
 
 	public function activeMembers(){
 		return $this->hasMany(Student::class)->whereNotNull('validated_at');
@@ -45,7 +48,16 @@ class Business extends Model{
 			return asset("storage/logos/{$this->logo}");
 		}
 		else{
-			return asset('img/shop-logo-default.png');
+			return asset('img/business-logo-default.png');
+		}
+	}
+
+	public function getBackgroundPathAttribute(){
+		if($this->background){
+			return asset("storage/backgrounds/{$this->background}");
+		}
+		else{
+			return asset('img/business-background-default.jpg');
 		}
 	}
 

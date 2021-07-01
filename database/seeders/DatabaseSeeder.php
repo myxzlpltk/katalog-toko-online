@@ -17,9 +17,11 @@ class DatabaseSeeder extends Seeder
 		Storage::makeDirectory('logos');
 		Storage::makeDirectory('designs');
 		Storage::makeDirectory('briefs');
+		Storage::makeDirectory('backgrounds');
 		Storage::delete(Storage::allFiles('logos'));
 		Storage::delete(Storage::allFiles('designs'));
 		Storage::delete(Storage::allFiles('briefs'));
+		Storage::delete(Storage::allFiles('backgrounds'));
 
         $this->call([
         	UserSeeder::class,

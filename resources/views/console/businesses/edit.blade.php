@@ -59,6 +59,16 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
+							<label for="background">Background</label>
+							<div class="custom-file" id="background" class="form-control @error('background') is-invalid @enderror">
+								<input type="file" class="custom-file-input" name="background" accept="image/*">
+								<label class="custom-file-label" for="background">Pilih Berkas</label>
+							</div>
+							@error('background')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+						<div class="form-group">
 							<label for="logo">Logo</label>
 							<div class="custom-file" id="logo" class="form-control @error('logo') is-invalid @enderror">
 								<input type="file" class="custom-file-input" name="logo" accept="image/*">

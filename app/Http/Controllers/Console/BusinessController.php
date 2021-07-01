@@ -71,6 +71,7 @@ class BusinessController extends Controller{
 			'description' => 'required|string',
 			'tagline' => 'required|string|max:255',
 			'logo' => 'nullable|image|max:2048',
+			'background' => 'nullable|image|max:4096',
 		]);
 
 		$business = new Business();
@@ -87,6 +88,14 @@ class BusinessController extends Controller{
 
 			$business->logo = Str::random(64).'.jpg';
 			Storage::put("logos/$business->logo", $image->fit($dim)->encode('jpg', 80));
+		}
+
+		if($request->file('background')){
+			$image = Image::make($request->file('background'));
+			$dim = min($image->width(), 1280);
+
+			$business->background = Str::random(64).'.jpg';
+			Storage::put("backgrounds/$business->background", $image->fit($dim)->encode('jpg', 80));
 		}
 
 		$business->save();
@@ -166,6 +175,14 @@ class BusinessController extends Controller{
 
 			$business->logo = Str::random(64).'.jpg';
 			Storage::put("logos/$business->logo", $image->fit($dim)->encode('jpg', 80));
+		}
+
+		if($request->file('background')){
+			$image = Image::make($request->file('background'));
+			$dim = min($image->width(), 500);
+
+			$business->background = Str::random(64).'.jpg';
+			Storage::put("backgrounds/$business->background", $image->fit($dim)->encode('jpg', 80));
 		}
 
 		$business->save();

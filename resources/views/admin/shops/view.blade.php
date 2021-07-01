@@ -4,6 +4,13 @@
 
 @section('stylesheets')
 	<link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}">
+	<style>
+		.my-card-img {
+			width: 100%;
+			height: 10vw;
+			object-fit: cover;
+		}
+	</style>
 @endsection
 
 @section('actions')
@@ -106,7 +113,7 @@
 										<button type="submit" class="btn btn-outline-danger btn-sm" @confirmation><i class="fa fa-trash fa-fw"></i></button>
 									</form>
 								</div>
-								<img src="{{ asset("storage/photos/{$photo->file}") }}" alt="Photo {{ $photo->name }}" class="card-img">
+								<img src="{{ asset("storage/photos/{$photo->file}") }}" alt="Photo {{ $photo->name }}" class="card-img my-card-img">
 							</div>
 						</div>
 						@empty

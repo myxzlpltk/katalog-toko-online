@@ -74,6 +74,10 @@ class BusinessObserver{
 		foreach($business->feedplans as $feedplan){
 			$feedplan->delete();
 		}
+
+		foreach($business->photos as $photo){
+			$photo->delete();
+		}
     }
 
     /**

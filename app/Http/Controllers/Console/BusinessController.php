@@ -116,7 +116,7 @@ class BusinessController extends Controller{
 	public function show(Business $business){
 		$this->authorize('view', $business);
 
-		$business->load(['businessType.businessField', 'teacher.user', 'members.user']);
+		$business->load(['businessType.businessField', 'teacher.user', 'members.user', 'photos']);
 
 		return view('console.businesses.view', compact('business'));
 	}

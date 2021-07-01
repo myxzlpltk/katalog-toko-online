@@ -9,6 +9,11 @@
 			background-position: center;
 			background-repeat: no-repeat;
 		}
+		.my-card-img {
+			width: 100%;
+			height: 10vw;
+			object-fit: cover;
+		}
 	</style>
 @endsection
 
@@ -157,6 +162,36 @@
 							@endforeach
 							</tbody>
 						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="card shadow mb-3">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary"><i class="far fa-images fa-fw"></i> Foto Usaha</h6>
+					<a href="{{ route('console.businesses.business-photos.create', ['business' => $business]) }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
+				</div>
+				<div class="card-body">
+					<div class="row no-gutters">
+						@forelse($business->photos as $photo)
+							<div class="col-4 col-md-3 col-lg-2">
+								<div class="card m-2">
+									<div class="card-img-overlay d-flex justify-content-between align-items-center">
+										<form action="{{ route('console.business-photos.destroy', $photo) }}" class="d-inline-block mx-auto" method="POST">
+											@csrf
+											@method('DELETE')
+
+											<button type="submit" class="btn btn-outline-danger btn-sm" @confirmation><i class="fa fa-trash fa-fw"></i></button>
+										</form>
+									</div>
+									<img src="{{ asset("storage/photos/{$photo->file}") }}" alt="Foto" class="card-img my-card-img">
+								</div>
+							</div>
+						@empty
+							<div class="col-12">
+								<p class="text-muted text-center">Tidak ada data</p>
+							</div>
+						@endforelse
 					</div>
 				</div>
 			</div>

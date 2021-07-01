@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Business;
+use App\Models\BusinessPhoto;
 use App\Models\FeedPlan;
 use App\Models\FeedPlanDesign;
 use App\Models\Student;
@@ -23,6 +24,7 @@ class BusinessSeeder extends Seeder
 					FeedPlanDesign::factory()->count(5), 'designs'
 				)
 			)
+			->has(BusinessPhoto::factory()->count(10), 'photos')
 			->count(10)
 			->create(['owner_id' => 1])
 			->each(function (Business $business){

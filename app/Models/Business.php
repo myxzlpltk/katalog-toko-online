@@ -43,6 +43,10 @@ class Business extends Model{
     	return $this->belongsTo(Teacher::class);
 	}
 
+	public function photos(){
+		return $this->hasMany(BusinessPhoto::class);
+	}
+
 	public function getLogoPathAttribute(){
 		if($this->logo){
 			return asset("storage/logos/{$this->logo}");

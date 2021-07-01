@@ -33,17 +33,17 @@
 						</div>
 						<div class="listing__details__gallery">
 							<h4>Galeri</h4>
-							@if(count($business->feedplans) > 0)
+							@if(count($business->photos) > 0)
 							<div class="listing__details__gallery__pic">
 								<div class="listing__details__gallery__item">
 									<img class="listing__details__gallery__item__large"
-										 src="{{ asset("storage/briefs/{$business->feedplans->first()->brief_image}") }}" alt="">
-									<span><i class="fa fa-camera"></i> {{ $business->feedplans->count() }} Foto</span>
+										 src="{{ asset("storage/photos/{$business->photos->first()->file}") }}" alt="">
+									<span><i class="fa fa-camera"></i> {{ $business->photos->count() }} Foto</span>
 								</div>
 								<div class="listing__details__gallery__slider owl-carousel">
-									@foreach($business->feedplans as $photo)
-									<img data-imgbigurl="{{ asset("storage/briefs/{$photo->brief_image}") }}"
-										 src="{{ asset("storage/briefs/{$photo->brief_image}") }}" alt="">
+									@foreach($business->photos as $photo)
+									<img data-imgbigurl="{{ asset("storage/photos/{$photo->file}") }}"
+										 src="{{ asset("storage/photos/{$photo->file}") }}" alt="">
 									@endforeach
 								</div>
 							</div>

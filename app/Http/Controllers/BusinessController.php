@@ -11,23 +11,24 @@ use Illuminate\Http\Request;
 class BusinessController extends Controller{
 
 	public function view(Request $request, Business $business){
-		$business
-			->load('businessType.businessField')
-			->load('activeMembers.user')
-			->load('teacher.user')
-			->loadMax('feedplans', 'brief_image');
+		$business->load([
+			'businessType.businessField',
+			'activeMembers.user',
+			'teacher.user',
+			'photos'
+		]);
 
 		SEOTools::setDescription("Informasi toko {$business->name}");
 
 		SEOTools::opengraph()->addProperty('type', 'businesses');
 		SEOTools::opengraph()->setTitle($business->name);
-		SEOTools::opengraph()->addImage(asset("storage/photos/{$business->feedplans_max_brief_image}"));
+		SEOTools::opengraph()->addImage($business->background_path);
 
 		SEOTools::twitter()->setTitle($business->name);
-		SEOTools::twitter()->setImage(asset("storage/photos/{$business->feedplans_max_brief_image}"));
+		SEOTools::twitter()->setImage($business->background_path);
 
 		SEOTools::jsonLd()->setTitle($business->name);
-		SEOTools::jsonLd()->addImage(asset("storage/photos/{$business->feedplans_max_brief_image}"));
+		SEOTools::jsonLd()->addImage($business->background_path);
 
 		return view('businesses.view', compact('business'));
 	}

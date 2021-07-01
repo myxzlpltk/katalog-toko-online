@@ -42,6 +42,11 @@ Breadcrumbs::for('console.businesses.invite', function (BreadcrumbTrail $trail, 
 	$trail->parent('console.businesses.show', $business);
 	$trail->push('Terima Undangan', route('console.businesses.invite', $business));
 });
+// Data Usaha > [Usaha] > Tambah Foto
+Breadcrumbs::for('console.businesses.business-photos.create', function (BreadcrumbTrail $trail, Business $business) {
+	$trail->parent('console.businesses.show', $business);
+	$trail->push('Tambah Foto', route('console.businesses.business-photos.create', $business));
+});
 
 // Data Usaha > [Usaha] > Data Feed Plan
 Breadcrumbs::for('console.businesses.feed-plans.index', function (BreadcrumbTrail $trail, Business $business) {

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Business;
 use App\Models\BusinessField;
+use App\Models\BusinessPhoto;
 use App\Models\BusinessType;
 use App\Models\FeedPlan;
 use App\Models\FeedPlanDesign;
@@ -11,6 +12,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Observers\BusinessFieldObserver;
 use App\Observers\BusinessObserver;
+use App\Observers\BusinessPhotoObserver;
 use App\Observers\BusinessTypeObserver;
 use App\Observers\FeedPlanDesignObserver;
 use App\Observers\FeedPlanObserver;
@@ -59,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
 		/* Observer */
 		Business::observe(BusinessObserver::class);
 		BusinessField::observe(BusinessFieldObserver::class);
+		BusinessPhoto::observe(BusinessPhotoObserver::class);
 		BusinessType::observe(BusinessTypeObserver::class);
 		FeedPlan::observe(FeedPlanObserver::class);
 		FeedPlanDesign::observe(FeedPlanDesignObserver::class);

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Business;
 use App\Models\BusinessField;
+use App\Models\BusinessPhoto;
 use App\Models\BusinessType;
 use App\Models\FeedPlan;
 use App\Models\FeedPlanDesign;
@@ -11,6 +12,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
 use App\Policies\BusinessFieldPolicy;
+use App\Policies\BusinessPhotoPolicy;
 use App\Policies\BusinessPolicy;
 use App\Policies\BusinessTypePolicy;
 use App\Policies\FeedPlanDesignPolicy;
@@ -30,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
     	Business::class => BusinessPolicy::class,
     	BusinessField::class => BusinessFieldPolicy::class,
+		BusinessPhoto::class => BusinessPhotoPolicy::class,
 		BusinessType::class => BusinessTypePolicy::class,
 		FeedPlan::class => FeedPlanPolicy::class,
 		FeedPlanDesign::class => FeedPlanDesignPolicy::class,

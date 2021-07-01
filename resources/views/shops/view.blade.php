@@ -13,7 +13,7 @@
 		<div class="container">
 			<div class="listing__hero__option">
 				<div class="listing__hero__icon">
-					<img src="{{ $shop->logo_path }}" alt="" style="height: 60px;width: 60px;">
+					<img src="{{ $shop->logo_path }}" alt="" style="max-height: 60px; max-width: 60px;">
 				</div>
 				<div class="listing__hero__text">
 					<h2 class="text-light">{{ $shop->name }}</h2>

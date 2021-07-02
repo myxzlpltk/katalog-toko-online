@@ -13,8 +13,19 @@ class BusinessController extends Controller{
 	public function view(Request $request, Business $business){
 		$business->load([
 			'businessType.businessField',
-			'activeMembers.user',
-			'teacher.user',
+			'activeMembers' => function($query) use($business){
+				return $query
+					->with(['user' => function($query){
+						return $query->without('userable');
+					}])
+					->where('id', '!=', $business->owner_id);
+			},
+			'owner.user' => function($query){
+				return $query->without('userable');
+			},
+			'teacher.user' => function($query){
+				return $query->without('userable');
+			},
 			'photos'
 		]);
 

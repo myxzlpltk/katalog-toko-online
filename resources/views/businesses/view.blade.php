@@ -72,21 +72,17 @@
 								<h4>Struktur Usaha</h4>
 								<p>Direktur</p>
 								<ul>
-									@foreach($business->activeMembers as $member)
-										@if($business->owner_id == $member->id)
-											<li><span class="fa fa-user fa-fw"></span> {{ $member->user->name }}</li>
-										@endif
-									@endforeach
+									<li><span class="fa fa-user fa-fw"></span> {{ $business->owner->user->name }}</li>
 								</ul>
 
+								@if($business->activeMembers->count() > 0)
 								<p>Anggota</p>
 								<ul>
 									@foreach($business->activeMembers as $member)
-										@if($business->owner_id != $member->id)
-											<li><span class="fa fa-user fa-fw"></span> {{ $member->user->name }}</li>
-										@endif
+										<li><span class="fa fa-user fa-fw"></span> {{ $member->user->name }}</li>
 									@endforeach
 								</ul>
+								@endif
 
 								<p>Dosen Pembimbing</p>
 								<ul>

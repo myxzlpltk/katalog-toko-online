@@ -136,6 +136,38 @@ class FeedPlanController extends Controller{
 		return redirect()->route('console.feed-plans.show', $feedPlan)->with('success', 'Data telah diperbarui.');
     }
 
+	/**
+	 * Show form for updating comment in resource
+	 *
+	 * @param Business $business
+	 * @param FeedPlan $feedPlan
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+	 */
+	public function editComment(Business $business, FeedPlan $feedPlan){
+    	$this->authorize('update-comment', $feedPlan);
+
+    	return view('console.feed-plans.edit-comment', compact('feedPlan'));
+	}
+
+	/**
+	 * Update comment in resource
+	 *
+	 * @param Request $request
+	 * @param Business $business
+	 * @param FeedPlan $feedPlan
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function updateComment(Request $request, Business $business, FeedPlan $feedPlan){
+		$this->authorize('update-comment', $feedPlan);
+
+		$request->validate(['comment' => 'required|string']);
+
+		$feedPlan->comment = $request->comment;
+		$feedPlan->save();
+
+		return redirect()->route('console.feed-plans.show', $feedPlan)->with('success', 'Komentar telah diperbarui.');
+	}
+
     /**
      * Remove the specified resource from storage.
      *

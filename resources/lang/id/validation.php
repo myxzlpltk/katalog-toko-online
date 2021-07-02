@@ -154,6 +154,7 @@ return [
 		'business_id' => 'Usaha',
 		'business_type_id' => 'Jenis Usaha',
 		'caption' => 'Caption',
+		'comment' => 'Komentar',
 		'content' => 'Konten',
 		'description' => 'Deskripsi',
 		'design' => 'Gambar',

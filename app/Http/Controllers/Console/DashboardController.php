@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Console;
 
+use App\DataTables\FeedPlanMustCommentDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\FeedPlan;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class DashboardController extends Controller{
 				->limit(6)
 				->get();
 
-			return view('console.teacher-dashboard', compact('user', 'feedPlans', 'businessIds'));
+			$dataTable = new FeedPlanMustCommentDataTable();
+			return $dataTable->render('console.teacher-dashboard', compact('user', 'feedPlans', 'businessIds'));
 		}
 		elseif($user->is_student){
         	if($user->userable->business && $user->userable->validated_at){

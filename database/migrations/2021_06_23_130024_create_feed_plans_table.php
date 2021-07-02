@@ -23,6 +23,7 @@ class CreateFeedPlansTable extends Migration
             $table->string('brief_image');
             $table->text('caption');
             $table->text('headline');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

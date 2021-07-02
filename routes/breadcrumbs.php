@@ -68,6 +68,11 @@ Breadcrumbs::for('console.feed-plans.edit', function (BreadcrumbTrail $trail, Fe
 	$trail->parent('console.feed-plans.show', $feedPlan);
 	$trail->push('Edit Data', route('console.feed-plans.edit', $feedPlan));
 });
+// Data Usaha > [Usaha] > Data Feed Plan > Feed Plan Ke-[feed_index] > Beri Komentar
+Breadcrumbs::for('console.feed-plans.edit-comment', function (BreadcrumbTrail $trail, FeedPlan $feedPlan) {
+	$trail->parent('console.feed-plans.show', $feedPlan);
+	$trail->push('Beri Komentar', route('console.feed-plans.edit-comment', $feedPlan));
+});
 // Data Usaha > [Usaha] > Data Feed Plan > Feed Plan Ke-[feed_index] > Tambah Desain
 Breadcrumbs::for('console.feed-plans.feed-plan-designs.create', function (BreadcrumbTrail $trail, FeedPlan $feedPlan) {
 	$trail->parent('console.feed-plans.show', $feedPlan);

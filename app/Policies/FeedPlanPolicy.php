@@ -89,4 +89,15 @@ class FeedPlanPolicy{
     public function forceDelete(User $user, FeedPlan $feedPlan){
         //
     }
+
+	/**
+	 * Determine whether the user can update feedplan's comment
+	 *
+	 * @param  User $user
+	 * @param  FeedPlan $feedPlan
+	 * @return mixed
+	 */
+	public function updateComment(User $user, FeedPlan $feedPlan){
+    	return $user->is_teacher && $user->userable_id == $feedPlan->business->teacher_id;
+	}
 }

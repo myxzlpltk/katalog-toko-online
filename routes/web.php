@@ -33,6 +33,8 @@ Route::prefix('console/')->middleware(['auth', 'verified'])->group(function (){
 
     Route::resource('businesses.business-photos', Console\BusinessPhotoController::class, ['as' => 'console'])->shallow()->only('create', 'store', 'destroy');
 
+    Route::get('feed-plans/{feedPlan}/edit-comment', [Console\FeedPlanController::class, 'editComment'])->name('console.feed-plans.edit-comment');
+	Route::patch('feed-plans/{feedPlan}/update-comment', [Console\FeedPlanController::class, 'updateComment'])->name('console.feed-plans.update-comment');
 	Route::resource('businesses.feed-plans', Console\FeedPlanController::class, ['as' => 'console'])->shallow();
 	Route::resource('feed-plans.feed-plan-designs', Console\FeedPlanDesignController::class, ['as' => 'console'])->shallow()->only('create', 'store', 'destroy');
 

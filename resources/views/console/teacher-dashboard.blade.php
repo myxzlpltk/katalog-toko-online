@@ -3,6 +3,7 @@
 @section('title', 'Dasbor')
 
 @section('stylesheets')
+	<link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/owlcarousel/assets/owl.carousel.min.css') }}">
 	<style>
 		.background-img{
@@ -91,6 +92,15 @@
 			@endforeach
 		</div>
 	@endif
+
+	<div class="card shadow mb-3">
+		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+			<h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-info-circle fa-fw"></i> Feed Plan Yang Belum Dikomentar</h6>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">{{ $dataTable->table() }}</div>
+		</div>
+	</div>
 @endsection
 
 @section('scripts')
@@ -111,4 +121,7 @@
 			}
 		})
 	</script>
+	<script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+	{{ $dataTable->scripts() }}
 @endsection

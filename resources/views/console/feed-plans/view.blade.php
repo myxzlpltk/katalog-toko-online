@@ -17,8 +17,12 @@
 @endsection
 
 @section('actions')
+	@can('update-comment', $feedPlan)
+	<a href="{{ route('console.feed-plans.edit-comment', $feedPlan) }}" class="btn btn-primary btn-sm"><i class="fa fa-comment fa-fw"></i> Beri Komentar</a>
+	@endcan
+
 	@can('update', $feedPlan)
-	<a href="{{ route('console.feed-plans.edit', $feedPlan) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-fw"></i> Edit</a>
+		<a href="{{ route('console.feed-plans.edit', $feedPlan) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-fw"></i> Edit</a>
 	@endcan
 
 	@can('delete', $feedPlan)
@@ -60,6 +64,12 @@
 							<th>Caption</th>
 							<td>{!! nl2br(e($feedPlan->caption)) !!}</td>
 						</tr>
+						@if($feedPlan->comment)
+						<tr>
+							<th class="text-primary">Komentar Dosen Pembimbing</th>
+							<td>{!! nl2br(e($feedPlan->comment)) !!}</td>
+						</tr>
+						@endif
 					</table>
 				</div>
 			</div>

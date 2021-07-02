@@ -56,7 +56,6 @@ class BusinessController extends Controller{
 		}
 
 		$businesses = Business::with('businessType')
-			->withMax('feedplans', 'brief_image')
 			->whereIn('id', $ids)
 			->paginate(24)
 			->appends([

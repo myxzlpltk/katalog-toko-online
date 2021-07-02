@@ -56,6 +56,13 @@
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
 						</div>
+						<div class="form-group">
+							<label for="tagline">Tagline <x-required/></label>
+							<input type="text" name="tagline" id="tagline" class="form-control @error('tagline') is-invalid @enderror" value="{{ old('tagline', $business->tagline) }}" required>
+							@error('tagline')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
@@ -79,9 +86,27 @@
 							@enderror
 						</div>
 						<div class="form-group">
-							<label for="tagline">Tagline <x-required/></label>
-							<input type="text" name="tagline" id="tagline" class="form-control @error('tagline') is-invalid @enderror" value="{{ old('tagline', $business->tagline) }}" required>
-							@error('tagline')
+							<label for="website">Tautan Situs Web</label>
+							<input type="text" name="website" id="website" class="form-control @error('website') is-invalid @enderror" placeholder="http://usahasaya.com/" value="{{ old('website', $business->website) }}">
+							@error('website')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="instagram">Tautan Instagram</label>
+							<input type="text" name="instagram" id="instagram" class="form-control @error('instagram') is-invalid @enderror" placeholder="http://instagram.com/usahasaya" value="{{ old('instagram', $business->instagram) }}">
+							@error('instagram')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="facebook">Tautan Facebook</label>
+							<input type="text" name="facebook" id="facebook" class="form-control @error('facebook') is-invalid @enderror" placeholder="http://facebook.com/usahasaya" value="{{ old('facebook', $business->facebook) }}">
+							@error('facebook')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
 						</div>

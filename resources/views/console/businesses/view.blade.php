@@ -70,9 +70,27 @@
 							<td>{{ $business->tagline }}</td>
 						</tr>
 						<tr>
-							<th>Tautan publik</th>
+							<th>Tautan Publik</th>
 							<td>
 								<a href="{{ route('businesses.view', $business) }}" target="_blank">{{ route('businesses.view', $business) }} <i class="fa fa-external-link-alt fa-fw"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<th>Tautan Situs Web</th>
+							<td>
+								<a href="//{{ $business->website }}" target="_blank">{{ $business->website }} <i class="fa fa-external-link-alt fa-fw"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<th>Tautan Instagram</th>
+							<td>
+								<a href="//{{ $business->instagram }}" target="_blank">{{ $business->instagram }} <i class="fa fa-external-link-alt fa-fw"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<th>Tautan Facebook</th>
+							<td>
+								<a href="//{{ $business->facebook }}" target="_blank">{{ $business->facebook }} <i class="fa fa-external-link-alt fa-fw"></i></a>
 							</td>
 						</tr>
 					</table>

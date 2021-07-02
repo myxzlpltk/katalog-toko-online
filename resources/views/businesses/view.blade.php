@@ -30,6 +30,18 @@
 						<div class="listing__details__about">
 							<h4>Deskripsi</h4>
 							{!! nl2br(e($business->description)) !!}
+
+							<p class="mt-3 mb-2 font-weight-bolder text-dark">Media Promosi</p>
+
+							@if($business->website)
+								<a href="//{{ $business->website }}" class="mr-1"><img src="{{ asset('img/brands/website.svg') }}" alt="Website Icon" width="24"></a>
+							@endif
+							@if($business->instagram)
+								<a href="//{{ $business->instagram }}" class="mr-1"><img src="{{ asset('img/brands/instagram.svg') }}" alt="Instagram Icon" width="24"></a>
+							@endif
+							@if($business->facebook)
+								<a href="//{{ $business->facebook }}" class="mr-1"><img src="{{ asset('img/brands/facebook.svg') }}" alt="Facebook Icon" width="24"></a>
+							@endif
 						</div>
 						<div class="listing__details__gallery">
 							<h4>Galeri</h4>

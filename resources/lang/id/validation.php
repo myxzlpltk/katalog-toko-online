@@ -148,18 +148,21 @@ return [
     */
 
     'attributes' => [
+		'background' => 'Background',
 		'brief_image' => 'Gambar',
-		'business_id' => 'Usaha',
 		'business_field_id' => 'Bidang Usaha',
+		'business_id' => 'Usaha',
 		'business_type_id' => 'Jenis Usaha',
 		'caption' => 'Caption',
 		'content' => 'Konten',
 		'description' => 'Deskripsi',
 		'design' => 'Gambar',
 		'email' => 'Alamat Surel',
+		'facebook' => 'Tautan Facebook',
 		'feed_index' => 'Urutan Feed',
 		'feed_plan_id' => 'Feed Plan',
 		'headline' => 'Headline',
+		'instagram' => 'Tautan Instagram',
 		'invitation_code' => 'Kode Undangan',
 		'logo' => 'Logo',
 		'name' => 'Nama',
@@ -171,5 +174,7 @@ return [
 		'tagline' => 'Tagline',
 		'teacher_id' => 'Dosen Pembimbing',
 		'topic' => 'Topik',
+		'website' => 'Tautan Situs Web',
+    	'file' => 'Berkas',
     ],
 ];

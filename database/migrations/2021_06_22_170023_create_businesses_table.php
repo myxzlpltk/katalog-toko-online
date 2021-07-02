@@ -24,6 +24,9 @@ class CreateBusinessesTable extends Migration
 			$table->string('logo')->nullable();
 			$table->string('background')->nullable();
 			$table->string('tagline');
+			$table->string('instagram')->nullable();
+			$table->string('facebook')->nullable();
+			$table->string('website')->nullable();
 			$table->string('invitation_code', 191)->nullable()->unique();
             $table->timestamps();
         });

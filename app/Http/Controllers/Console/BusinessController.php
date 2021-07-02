@@ -81,6 +81,9 @@ class BusinessController extends Controller{
 		$business->teacher_id = $request->teacher_id;
 		$business->description = $request->description;
 		$business->tagline = $request->tagline;
+		$business->website = $request->website;
+		$business->facebook = $request->facebook;
+		$business->instagram = $request->instagram;
 
 		if($request->file('logo')){
 			$image = Image::make($request->file('logo'));
@@ -168,6 +171,9 @@ class BusinessController extends Controller{
 		$business->teacher_id = $request->teacher_id;
 		$business->description = $request->description;
 		$business->tagline = $request->tagline;
+		$business->website = $request->website;
+		$business->facebook = $request->facebook;
+		$business->instagram = $request->instagram;
 
 		if($request->file('logo')){
 			$image = Image::make($request->file('logo'));

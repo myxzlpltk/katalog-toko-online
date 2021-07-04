@@ -25,7 +25,7 @@ class StudentDataTable extends DataTable{
 				return $student->user->email;
 			})
 			->editColumn('business', function (Student $student){
-				return $student->business->name ?? "-";
+				return optional($student->business)->name ?? "-";
 			})
 			->addColumn('action', 'console.students.action');
 	}
@@ -39,7 +39,6 @@ class StudentDataTable extends DataTable{
 	public function query(Student $model){
 		return $model->newQuery()
 			->has('user')
-			->has('business')
 			->with('user')
 			->with('business');
 	}

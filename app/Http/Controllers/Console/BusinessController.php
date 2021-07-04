@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Console;
 
 use App\DataTables\BusinessDataTable;
 use App\DataTables\Scopes\TeacherFilter;
+use App\Exports\BusinessExport;
 use App\Http\Controllers\Controller;
 use App\Models\Business;
 use App\Models\BusinessField;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BusinessController extends Controller{
 
@@ -286,6 +288,12 @@ class BusinessController extends Controller{
 		return redirect()->back()->with('success', 'Anggota berhasil dihapus.');
 	}
 
+	public function exportXLSX(Request $request){
+		$this->authorize('view-any', Business::class);
+
+		return Excel::download(new BusinessExport(), "Data Usaha - ".time().".xlsx");
+	}
+
 	/**
 	 * Export PDF for specified resource
 	 *
@@ -294,6 +302,8 @@ class BusinessController extends Controller{
 	 * @return mixed
 	 */
 	public function exportPDF(Request $request, Business $business){
+		$this->authorize('view', $business);
+
 		$business->load([
 			'businessType.businessField',
 			'activeMembers' => function($query) use($business){

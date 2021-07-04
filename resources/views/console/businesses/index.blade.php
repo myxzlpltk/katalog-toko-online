@@ -7,9 +7,7 @@
 @endsection
 
 @section('actions')
-	@can('create', \App\Models\Business::class)
-	<a href="{{ route('console.businesses.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-fw"></i> Tambah Data</a>
-	@endcan
+	<a href="{{ route('console.businesses.xlsx') }}" class="btn btn-primary btn-sm"><i class="fa fa-download fa-fw"></i> Excel</a>
 @endsection
 
 @section('content')

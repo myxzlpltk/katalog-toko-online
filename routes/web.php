@@ -29,6 +29,7 @@ Route::prefix('console/')->middleware(['auth', 'verified'])->group(function (){
 	Route::get('businesses/{business}/toggle-invitation', [Console\BusinessController::class, 'toggleInvitation'])->name('console.businesses.toggle-invitation');
 	Route::patch('businesses/{business}/accept-member/{member}', [Console\BusinessController::class, 'acceptMember'])->name('console.businesses.accept-member');
     Route::delete('businesses/{business}/delete-member/{member}', [Console\BusinessController::class, 'deleteMember'])->name('console.businesses.delete-member');
+    Route::get('businesses/{business}/pdf', [Console\BusinessController::class, 'exportPDF'])->name('console.businesses.pdf');
     Route::resource('businesses', Console\BusinessController::class, ['as' => 'console']);
 
     Route::resource('businesses.business-photos', Console\BusinessPhotoController::class, ['as' => 'console'])->shallow()->only('create', 'store', 'destroy');

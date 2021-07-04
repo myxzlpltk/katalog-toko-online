@@ -10,6 +10,7 @@ use App\Models\BusinessField;
 use App\Models\BusinessType;
 use App\Models\Student;
 use App\Models\Teacher;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -283,5 +284,38 @@ class BusinessController extends Controller{
 		$student->save();
 
 		return redirect()->back()->with('success', 'Anggota berhasil dihapus.');
+	}
+
+	/**
+	 * Export PDF for specified resource
+	 *
+	 * @param Request $request
+	 * @param Business $business
+	 * @return mixed
+	 */
+	public function exportPDF(Request $request, Business $business){
+		$business->load([
+			'businessType.businessField',
+			'activeMembers' => function($query) use($business){
+				return $query
+					->with(['user' => function($query){
+						return $query->without('userable');
+					}])
+					->where('id', '!=', $business->owner_id);
+			},
+			'owner.user' => function($query){
+				return $query->without('userable');
+			},
+			'teacher.user' => function($query){
+				return $query->without('userable');
+			},
+			'feedplans' => function($query){
+				return $query->orderByDesc('feed_index');
+			},
+		]);
+
+		$pdf = PDF::loadView('console.businesses.pdf', compact('business'));
+
+		return $pdf->stream('doc.pdf', ['Attachment' => false]);
 	}
 }

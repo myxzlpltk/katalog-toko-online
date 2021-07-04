@@ -22,6 +22,8 @@
 @endsection
 
 @section('actions')
+	<a href="{{ route('console.businesses.pdf', $business) }}" class="btn btn-primary btn-sm"><i class="fa fa-download fa-fw"></i> PDF</a>
+
 	@can('update', $business)
 	<a href="{{ route('console.businesses.edit', $business) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-fw"></i> Edit</a>
 	@endcan
@@ -78,19 +80,19 @@
 						<tr>
 							<th>Tautan Situs Web</th>
 							<td>
-								<a href="//{{ $business->website }}" target="_blank">{{ $business->website }} <i class="fa fa-external-link-alt fa-fw"></i></a>
+								@if($business->website) <a href="//{{ $business->website }}" target="_blank">{{ $business->website }} <i class="fa fa-external-link-alt fa-fw"></i></a> @else - @endif
 							</td>
 						</tr>
 						<tr>
 							<th>Tautan Instagram</th>
 							<td>
-								<a href="//{{ $business->instagram }}" target="_blank">{{ $business->instagram }} <i class="fa fa-external-link-alt fa-fw"></i></a>
+								@if($business->instagram) <a href="//{{ $business->instagram }}" target="_blank">{{ $business->instagram }} <i class="fa fa-external-link-alt fa-fw"></i></a> @else - @endif
 							</td>
 						</tr>
 						<tr>
 							<th>Tautan Facebook</th>
 							<td>
-								<a href="//{{ $business->facebook }}" target="_blank">{{ $business->facebook }} <i class="fa fa-external-link-alt fa-fw"></i></a>
+								@if($business->facebook) <a href="//{{ $business->facebook }}" target="_blank">{{ $business->facebook }} <i class="fa fa-external-link-alt fa-fw"></i></a> @else - @endif
 							</td>
 						</tr>
 					</table>

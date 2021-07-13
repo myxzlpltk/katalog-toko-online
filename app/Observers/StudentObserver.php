@@ -35,7 +35,7 @@ class StudentObserver{
     public function deleted(Student $student){
 		$student->user->delete();
 
-		if($student->business->owner_id == $student->id){
+		if($student->business && $student->business->owner_id == $student->id){
 			$student->business->delete();
 		}
     }

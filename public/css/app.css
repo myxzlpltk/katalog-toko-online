@@ -5,3 +5,23 @@
 .invalid-feedback{
     display: block;
 }
+
+.bg-email-image{
+	background-image: url("/img/bg-email-image.jpg");
+}
+
+.bg-password-image{
+	background-image: url("/img/bg-password-image.jpg");
+}
+
+.bg-confirm-password{
+	background-image: url("/img/bg-confirm-password.jpg");
+}
+
+.bg-login-image{
+	background-image: url("/img/bg-login-image.jpg");
+}
+
+.bg-register-image{
+	background-image: url("/img/bg-register-image.jpg");
+}
